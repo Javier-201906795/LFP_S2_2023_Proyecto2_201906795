@@ -14,7 +14,7 @@ Button(raiz,text='Abrir', bg='#DBE6A1', fg='#000000',font=("Consolas",12)).place
 Button(raiz,text='Actualizar', bg='#DBE6A1', fg='#000000',font=("Consolas",12)).place(x=610,y=20, width=120, height= 35)
 
 
-opcionesarchivo = ['Reportes','opcion1','opcion2','opcion3', 'Salir']
+opcionesarchivo = ['Reportes','Errores','Tokens','Arbol', 'Salir']
 listaopciones = Combobox(raiz, text='Archivo', values = opcionesarchivo, font=("Consolas",11))
 listaopciones.place(x=750,y=20, width=130, height= 35)
 listaopciones.current(0)
@@ -22,12 +22,12 @@ listaopciones.current(0)
 def seleccion(event):
     print('Seleccionando ->', listaopciones.get())
     sel = listaopciones.get()
-    if sel == 'opcion1':
-        print('opcion1')
-    elif sel == 'opcion2':
-        print('opcion2')
-    elif sel == 'opcion3':
-        print('opcion3')
+    if sel == 'Errores':
+        print('Errores')
+    elif sel == 'Tokens':
+        print('Tokens')
+    elif sel == 'Arbol':
+        print('Arbol')
     elif sel == 'Salir':
         print('Salir')
 #Ejecuta la opcion cuando cambia de seleccion
