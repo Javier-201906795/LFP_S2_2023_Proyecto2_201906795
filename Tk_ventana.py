@@ -18,6 +18,20 @@ opcionesarchivo = ['Reportes','opcion1','opcion2','opcion3', 'Salir']
 listaopciones = Combobox(raiz, text='Archivo', values = opcionesarchivo, font=("Consolas",11))
 listaopciones.place(x=750,y=20, width=130, height= 35)
 listaopciones.current(0)
+#Switch case
+def seleccion(event):
+    print('Seleccionando ->', listaopciones.get())
+    sel = listaopciones.get()
+    if sel == 'opcion1':
+        print('opcion1')
+    elif sel == 'opcion2':
+        print('opcion2')
+    elif sel == 'opcion3':
+        print('opcion3')
+    elif sel == 'Salir':
+        print('Salir')
+#Ejecuta la opcion cuando cambia de seleccion
+listaopciones.bind('<<ComboboxSelected>>',seleccion)
 
 
 
