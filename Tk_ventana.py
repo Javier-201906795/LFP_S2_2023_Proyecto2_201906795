@@ -33,10 +33,11 @@ def seleccion(event):
 #Ejecuta la opcion cuando cambia de seleccion
 listaopciones.bind('<<ComboboxSelected>>',seleccion)
 
+#Input
+inputtexto = Text(raiz, padx=40, wrap='none', width=75, height=31,)
+inputtexto.place(x=10,y=80)
 
-inputtexto = Text(raiz, padx=40)
-inputtexto.place(x=10,y=80, width=650, height=500)
-
+#Etiquetas Input
 labelnumeracion = Label(raiz, pady=0,text=' 1.\n 2.\n 3.\n 4.\n 5.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=82)
 labelnumeracion = Label(raiz, pady=0,text=' 6.\n 7.\n 8.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=160)
 labelnumeracion = Label(raiz, pady=0,text=' 9.\n10.\n11.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=210)
@@ -47,6 +48,8 @@ labelnumeracion = Label(raiz, pady=0,text='22.\n23.\n24.\n25.', font=("Consolas"
 labelnumeracion = Label(raiz, pady=0,text='26.\n27.\n28.\n29.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=480)
 labelnumeracion = Label(raiz, pady=0,text='30.\n31.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=545)
 
-
+#ConsolaTkinter
+inputconsola = Text(raiz, wrap=WORD, width=55, height=31,)
+inputconsola.place(x=700,y=80)
 
 raiz.mainloop()
