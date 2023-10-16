@@ -39,8 +39,6 @@ def Abrir():
 ########################################################################
 def Analizar():
     print('\n-- [ Analizar ] --')
-    analizador.hola()
-    analizadorLexico.hola()
     analizador.Anlexico()
 
 
