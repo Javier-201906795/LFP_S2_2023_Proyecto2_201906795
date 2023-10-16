@@ -3,7 +3,8 @@ from tkinter.ttk import Combobox
 from tkinter import filedialog, messagebox
 
 from Analizador import *
-from Lexico import *
+from AnalizadorLexico import *
+
 
 
 
@@ -39,8 +40,8 @@ def Abrir():
 def Analizar():
     print('\n-- [ Analizar ] --')
     analizador.hola()
-    # analizador.lexico()
-    lexico.hola()
+    analizadorLexico.hola()
+    analizador.Anlexico()
 
 
 
