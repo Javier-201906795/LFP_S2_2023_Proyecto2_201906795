@@ -5,13 +5,44 @@ from tkinter import filedialog, messagebox
 
 
 ########################################################################
+def Abrir():
+    print('-- [ Abrir ] --')
+    #Limpiar input
+    inputtexto.delete('1.0', 'end')
+    #Obtener ruta 
+    rutaarchivo = filedialog.askopenfilename()
+    print('Ruta archivo: "',rutaarchivo,'"')
+    #Obtener Texto
+    textoarchivo = ''
+    try:
+        with open(rutaarchivo, 'r') as archivo:
+            textoarchivo = archivo.read()
+    except Exception as e:
+        print('• Error[Abrir()][Tk_ventana][CD001]: No se puede abrir el archivo \n')
+        print(e)
+    
+    #Imprimir Texto
+    if textoarchivo == '':
+        print('No hay texto que procesar...')
+    else:
+        print('-------------------------')
+        print(textoarchivo)
+        print('-------------------------')
+        #Añadir texto a input
+        inputtexto.insert('1.0', str(textoarchivo))
+    
+########################################################################
+def Analizar():
+    print('-- [ Analizar ] --')
+
+########################################################################
 raiz = Tk()
 raiz.title('LFP Proyecto 2 | 201906795')
 raiz.geometry('1150x600')
 
 Label(raiz, pady=0,text='PROYECTO 2 | 201906795', font=("Consolas",14)).place(x=50,y=20)
-Button(raiz,text='Abrir', bg='#DBE6A1', fg='#000000',font=("Consolas",12)).place(x=500,y=20, width=90, height= 35)
-Button(raiz,text='Actualizar', bg='#DBE6A1', fg='#000000',font=("Consolas",12)).place(x=610,y=20, width=120, height= 35)
+Button(raiz,text='Abrir', bg='#DBE6A1', fg='#000000',font=("Consolas",12), command=Abrir).place(x=500,y=20, width=90, height= 35)
+Button(raiz,text='Analizar', bg='#DBE6A1', fg='#000000',font=("Consolas",12), command=Analizar).place(x=610,y=20, width=120, height= 35)
 
 
 opcionesarchivo = ['Reportes','Errores','Tokens','Arbol', 'Salir']
@@ -53,3 +84,7 @@ inputconsola = Text(raiz, wrap=WORD, width=55, height=31,)
 inputconsola.place(x=700,y=80)
 
 raiz.mainloop()
+
+
+
+
