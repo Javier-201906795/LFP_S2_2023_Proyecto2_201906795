@@ -8,7 +8,7 @@ from AnalizadorLexico import *
 def analizadorBizData(texto):
     print('Analizando informacion...')
     print(texto)
-    #Pase al analizador Lexico y Obtenga Tokens
+    #Pasar al analizador Lexico y Obtenga Tokens
     tokens = analizadorLexico.GetTokens(texto)
     #Pasar al analizador Sintactico y obtener Estructuras
     estructuras = []
