@@ -51,9 +51,12 @@ def evaluartexto(texto):
             #Contador
             c += 1
             #Almacena token
-            tokens.append([caracter,linea,columna,'token'])
+            tokens.append([caracter,linea,columna,'token',linea, columna])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
         elif caracter == '"':
+            #Guardar inicio
+            templinea = linea
+            tempcolumna = columna
             #Evaluar si es un comentario multilinea
             caractersig = texto[c+1:c+2]
             if caractersig == '"':
@@ -62,12 +65,13 @@ def evaluartexto(texto):
                     print('Comentario multilinea')
                     #obtener texto entre comillas
                     textoaevaluar = texto[c+3:]
-                    string, pos = obtenercomentariomultilinea(textoaevaluar, c)
+                    string, pos, lineasextra = obtenercomentariomultilinea(textoaevaluar, c)
                     #Aumentar contador y columna
                     c = pos + 5
                     columna = len(string) + 1
+                    linea = linea + lineasextra
                     #Almacenar token
-                    tokens.append([string,linea,columna,'Comentario_multilinea'])
+                    tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
                     print('token: ', string, ' linea:', linea,' columna: ',columna)
             else:
                 #obtener texto entre comillas
@@ -77,9 +81,12 @@ def evaluartexto(texto):
                 c = pos + 2
                 columna = len(string) + 1
                 #Almacenar token
-                tokens.append([string,linea,columna,'Texto'])
+                tokens.append([string,templinea,tempcolumna,'Texto',linea, columna])
                 print('token: ', string, ' linea:', linea,' columna: ',columna)
         elif caracter == '#':
+            #Guardar inicio
+            templinea = linea
+            tempcolumna = columna
             #Si es un texto un posible token
             textoaevaluar = texto[c+1:]
             string, pos = obtenercomentario(textoaevaluar, c)
@@ -87,9 +94,12 @@ def evaluartexto(texto):
             c = pos + 1
             columna = len(string) + 1
             #Almacenar token
-            tokens.append([string,linea,columna,'Comentario_simple'])
+            tokens.append([string,templinea,tempcolumna,'Comentario_simple',linea, columna])
             print('token: ', string, ' linea:', linea,' columna: ',columna)
         elif caracter.isdigit():
+            #Guardar inicio
+            templinea = linea
+            tempcolumna = columna
             #Obtener numero
             textoaevaluar = texto[c:]
             numero, pos = obtenernumero(textoaevaluar, c)
@@ -98,7 +108,7 @@ def evaluartexto(texto):
             txtnumero = str(numero) 
             columna += len(txtnumero) + 1
             #Almacenar token
-            tokens.append([numero,linea, columna,'Numero'])
+            tokens.append([numero,templinea, tempcolumna,'Numero',linea,columna])
             print('token: ', numero, ' linea:', linea,' columna: ',columna)
         else:
             #Aumentar contador y columna
@@ -160,16 +170,19 @@ def obtenercomentario(text, a):
 def obtenercomentariomultilinea(text, a):
     #Texto
     string = ''
+    lineasextra = 0
     #Evaluar caracter por carcater
     c = 0
     for newcaracter in text:
-        if newcaracter == '"':
+        if newcaracter == "\n":
+            lineasextra +=1
+        elif newcaracter == '"':
             caractersig = text[c+1:c+2]
             if caractersig == '"':
                 caractersig2 = text[c+2:c+3]
                 if caractersig2 == '"':
                     a += 2            
-                    return [string, a]
+                    return [string, a, lineasextra]
         #Forma el texto
         string += newcaracter
         a += 1
