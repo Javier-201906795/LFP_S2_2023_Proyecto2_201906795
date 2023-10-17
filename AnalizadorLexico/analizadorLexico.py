@@ -55,15 +55,31 @@ def evaluartexto(texto):
             tokens.append(caracter)
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
         elif caracter == '"':
-            #Si es un texto un posible token
-            textoaevaluar = texto[c+1:]
-            string, pos = obtenertexto(textoaevaluar, c)
-            #Aumentar contador y columna
-            c = pos + 2
-            columna = len(string) + 1
-            #Almacenar token
-            tokens.append(string)
-            print('token: ', string, ' linea:', linea,' columna: ',columna)
+            #Evaluar si es un comentario multilinea
+            caractersig = texto[c+1:c+2]
+            if caractersig == '"':
+                caractersig2 = texto[c+2:c+3]
+                if caractersig2 == '"':
+                    print('Comentario multilinea')
+                    #obtener texto entre comillas
+                    textoaevaluar = texto[c+3:]
+                    string, pos = obtenercomentariomultilinea(textoaevaluar, c)
+                    #Aumentar contador y columna
+                    c = pos + 2
+                    columna = len(string) + 1
+                    #Almacenar token
+                    tokens.append(string)
+                    print('token: ', string, ' linea:', linea,' columna: ',columna)
+            else:
+                #obtener texto entre comillas
+                textoaevaluar = texto[c+1:]
+                string, pos = obtenertexto(textoaevaluar, c)
+                #Aumentar contador y columna
+                c = pos + 2
+                columna = len(string) + 1
+                #Almacenar token
+                tokens.append(string)
+                print('token: ', string, ' linea:', linea,' columna: ',columna)
         elif caracter == '#':
             #Si es un texto un posible token
             textoaevaluar = texto[c:]
@@ -141,7 +157,25 @@ def obtenercomentario(text, a):
         a += 1
     print("Error: No al obtenrecomentario().")
 
-
+################################################################
+def obtenercomentariomultilinea(text, a):
+    #Texto
+    string = ''
+    #Evaluar caracter por carcater
+    c = 0
+    for newcaracter in text:
+        if newcaracter == '"':
+            caractersig = text[c+1:c+2]
+            if caractersig == '"':
+                caractersig2 = text[c+2:c+3]
+                if caractersig2 == '"':
+                    a += 2            
+                    return [string, a]
+        #Forma el texto
+        string += newcaracter
+        a += 1
+        c += 1
+    print("Error: No se encontraron comillas doble que cerraran el texto.")
 
 
 
