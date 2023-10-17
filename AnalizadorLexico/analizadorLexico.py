@@ -15,38 +15,7 @@ listadocaracteresbuscados = ['{','}',':','[',']',',']
 
 
 
-################################################################
-def obtenertexto(text, a):
-    #Texto
-    string = ''
-    #Evaluar caracter por carcater
-    for newcaracter in text:
-        if newcaracter == '"':
-            #Si encuntra el cierre "
-            return [string, a]
-        #Forma el texto
-        string += newcaracter
-        a += 1
-    print("Error: No se encontraron comillas doble que cerraran el texto.")
 
-################################################################
-
-def obtenernumero(texto, a):
-    numero = ""
-    isDecimal = False
-    for newcaracter in texto:
-        if newcaracter.isdigit():
-            numero += newcaracter
-            a += 1
-        elif newcaracter == "." and not isDecimal:
-            numero += newcaracter
-            a += 1
-            isDecimal = True
-        else:
-            break
-    if isDecimal:
-        return [float(numero), a]
-    return [int(numero), a]
 
 
 ################################################################
@@ -95,6 +64,16 @@ def evaluartexto(texto):
             #Almacenar token
             tokens.append(string)
             print('token: ', string, ' linea:', linea,' columna: ',columna)
+        elif caracter == '#':
+            #Si es un texto un posible token
+            textoaevaluar = texto[c:]
+            string, pos = obtenercomentario(textoaevaluar, c)
+            #Aumentar contador y columna
+            c = pos + 1
+            columna = len(string) + 1
+            #Almacenar token
+            tokens.append(string)
+            print('token: ', string, ' linea:', linea,' columna: ',columna)
         elif caracter.isdigit():
             #Obtener numero
             textoaevaluar = texto[c:]
@@ -115,10 +94,61 @@ def evaluartexto(texto):
             #Almacenar error
             error = [caracter, linea, columna,'error lexico']
             listaerrores.append(error)
-        # print("c", c)
+
+
+################################################################
+def obtenertexto(text, a):
+    #Texto
+    string = ''
+    #Evaluar caracter por carcater
+    for newcaracter in text:
+        if newcaracter == '"':
+            #Si encuntra el cierre "
+            return [string, a]
+        #Forma el texto
+        string += newcaracter
+        a += 1
+    print("Error: No se encontraron comillas doble que cerraran el texto.")
+
+################################################################
+def obtenernumero(texto, a):
+    numero = ""
+    isDecimal = False
+    for newcaracter in texto:
+        if newcaracter.isdigit():
+            numero += newcaracter
+            a += 1
+        elif newcaracter == "." and not isDecimal:
+            numero += newcaracter
+            a += 1
+            isDecimal = True
+        else:
+            break
+    if isDecimal:
+        return [float(numero), a]
+    return [int(numero), a]
+
+################################################################
+def obtenercomentario(text, a):
+    #Texto
+    string = ''
+    #Evaluar caracter por carcater
+    for caracter in text:
+        if caracter == '\n':
+            return [string, a]
+        #Forma el texto
+        string += caracter
+        a += 1
+    print("Error: No al obtenrecomentario().")
 
 
 
+
+
+
+
+
+################################################################
 def GetTokens(texto):
     #Validar tamaño del texto
     if len(texto) < 0:
