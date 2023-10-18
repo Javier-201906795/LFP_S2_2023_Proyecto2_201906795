@@ -54,22 +54,22 @@ def evaluartexto(texto):
             tokens.append([caracter,linea,columna,'token',linea, columna])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
         #//////////////////////////////////////////////////////////////////////////////////
-        elif caracter == '"':
+        elif caracter == '"' or caracter == "'":
             #Guardar inicio
             templinea = linea
             tempcolumna = columna
             #Evaluar si es un comentario multilinea
             caractersig = texto[c+1:c+2]
-            if caractersig == '"':
+            if caractersig == '"' or caractersig == "'":
                 caractersig2 = texto[c+2:c+3]
-                if caractersig2 == '"':
+                if caractersig2 == '"' or caractersig2 == "'":
                     print('Comentario multilinea')
                     #obtener texto entre comillas
                     textoaevaluar = texto[c+3:]
-                    string, pos, lineasextra = obtenercomentariomultilinea(textoaevaluar, c)
+                    string, pos, lineasextra, columnastring = obtenercomentariomultilinea(textoaevaluar, c,columna)
                     #Aumentar contador y columna
-                    c = pos + 5
-                    columna = len(string) + 1
+                    c = pos + 4
+                    columna = columnastring
                     linea = linea + lineasextra
                     #Almacenar token
                     tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
@@ -172,22 +172,25 @@ def obtenercomentario(text, a):
     print("Error: No al obtenrecomentario().")
 
 ################################################################
-def obtenercomentariomultilinea(text, a):
+def obtenercomentariomultilinea(text, a, columna):
     #Texto
     string = ''
     lineasextra = 0
     #Evaluar caracter por carcater
     c = 0
     for newcaracter in text:
+        columna += 1
         if newcaracter == "\n":
             lineasextra +=1
-        elif newcaracter == '"':
+            columna = 1
+        elif newcaracter == '"' or newcaracter == "'":
             caractersig = text[c+1:c+2]
-            if caractersig == '"':
+            if caractersig == '"' or caractersig == "'":
                 caractersig2 = text[c+2:c+3]
-                if caractersig2 == '"':
+                if caractersig2 == '"' or caractersig2 == "'":
+                    columna += 1
                     a += 2            
-                    return [string, a, lineasextra]
+                    return [string, a, lineasextra, columna]
         #Forma el texto
         string += newcaracter
         a += 1
@@ -218,4 +221,4 @@ def GetTokens(texto):
     for i in tokens:
         print(i)
     
-    return [1,'hola','}']
+    return tokens
