@@ -14,7 +14,8 @@ def analizadorBizData(texto):
     estructuras = []
     #[A]Obtener Errores
     #[A1]Obtener Errores Lexicos
-    erroresLexicos = []
+    erroresLexicos = analizadorLexico.GetErrores()
+    print(erroresLexicos)
     #[A2]Obtener Errores Sintacticos
     erroresSintactico = []
     #[A3]Unir Errores

@@ -132,8 +132,7 @@ def evaluartexto(texto):
             #Caracter Desconocido
             print("\033[1;31;40m Error: caracter desconocido:", caracter," |Linea:",linea," |Columna:",columna,"\033[0m")
             #Almacenar error
-            error = [caracter, linea, columna,'error lexico']
-            listaerrores.append([error,linea,columna])
+            listaerrores.append([caracter, linea, columna,'error lexico'])
 
 
 ################################################################
@@ -209,6 +208,10 @@ def obtenercomentariomultilinea(text, a, columna):
 
 
 
+
+################################################################
+def GetErrores():
+    return listaerrores
 
 
 
