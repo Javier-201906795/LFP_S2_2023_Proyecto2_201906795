@@ -11,6 +11,7 @@ linea = 1
 columna = 1
 listaerrores = []
 listadocaracteresbuscados = ['{','}',':','[',']',',']
+listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 
 
 
@@ -46,6 +47,15 @@ def evaluartexto(texto):
             c += 1
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listadocaracteresbuscados:
+            #Aumenta columna
+            columna += 1
+            #Contador
+            c += 1
+            #Almacena token
+            tokens.append([caracter,linea,columna,'token',linea, columna])
+            print('token: ', caracter, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
+        elif caracter in listaabecedario:
             #Aumenta columna
             columna += 1
             #Contador
