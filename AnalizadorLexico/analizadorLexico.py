@@ -126,13 +126,13 @@ def evaluartexto(texto):
             print('token: ', numero, ' linea:', linea,' columna: ',columna)
         #//////////////////////////////////////////////////////////////////////////////////
         else:
-            #Aumentar contador y columna
-            c += 1
-            columna += 1
             #Caracter Desconocido
             print("\033[1;31;40m Error: caracter desconocido:", caracter," |Linea:",linea," |Columna:",columna,"\033[0m")
             #Almacenar error
             listaerrores.append([caracter, linea, columna,'error lexico'])
+            #Aumentar contador y columna
+            c += 1
+            columna += 1
 
 
 ################################################################
@@ -206,14 +206,20 @@ def obtenercomentariomultilinea(text, a, columna):
         c += 1
     print("Error: No se encontraron comillas doble que cerraran el texto.")
 
+################################################################
+def imprimirerroreslexicos():
+    print('######### [ ERRORES LEXICOS ] #########\n')
+    for i in listaerrores:
+        print(i)
 
-
-
+################################################################
+def imprimirlistatokens():
+    print('######### [ TOKENS ] ##########\n')
+    for i in tokens:
+        print(i)
 ################################################################
 def GetErrores():
     return listaerrores
-
-
 
 ################################################################
 def GetTokens(texto):
@@ -229,9 +235,6 @@ def GetTokens(texto):
     listaerrores = []
     #Analizar Texto
     evaluartexto(texto)
-    #Imprimir tokens
-    print('##########################\n')
-    for i in tokens:
-        print(i)
+    
     
     return tokens
