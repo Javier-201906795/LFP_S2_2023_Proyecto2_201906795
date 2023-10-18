@@ -29,12 +29,12 @@ def evaluartexto(texto):
         #Obtener caracter
         caracter = texto[c]
         #Evaluar
+        #//////////////////////////////////////////////////////////////////////////////////
         if caracter.isspace():
             #Si es algun tipo de espacio
             if caracter == '\n':
-                #Si es un Salto de linea | Aumenta la linea
+                #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
                 linea += 1
-                #Reinicia columnas
                 columna = 1
             elif caracter == '\t':
                 #Si es un Tabulador | Aumenta la columna en 4
@@ -42,9 +42,9 @@ def evaluartexto(texto):
             else:
                 #Si es un espacio | Aumenta la columna
                 columna += 1
-            # print('Caracter: ', caracter, ' Linea: ', linea, ' Columna: ',columna)
             #Contador
             c += 1
+        #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listadocaracteresbuscados:
             #Aumenta columna
             columna += 1
@@ -53,6 +53,7 @@ def evaluartexto(texto):
             #Almacena token
             tokens.append([caracter,linea,columna,'token',linea, columna])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '"':
             #Guardar inicio
             templinea = linea
@@ -73,6 +74,7 @@ def evaluartexto(texto):
                     #Almacenar token
                     tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
                     print('token: ', string, ' linea:', linea,' columna: ',columna)
+            #//////////////////////////////////////////////////////////////////////////////////
             else:
                 #obtener texto entre comillas
                 textoaevaluar = texto[c+1:]
@@ -83,6 +85,7 @@ def evaluartexto(texto):
                 #Almacenar token
                 tokens.append([string,templinea,tempcolumna,'Texto',linea, columna])
                 print('token: ', string, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '#':
             #Guardar inicio
             templinea = linea
@@ -96,6 +99,7 @@ def evaluartexto(texto):
             #Almacenar token
             tokens.append([string,templinea,tempcolumna,'Comentario_simple',linea, columna])
             print('token: ', string, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
         elif caracter.isdigit():
             #Guardar inicio
             templinea = linea
@@ -110,6 +114,7 @@ def evaluartexto(texto):
             #Almacenar token
             tokens.append([numero,templinea, tempcolumna,'Numero',linea,columna])
             print('token: ', numero, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
         else:
             #Aumentar contador y columna
             c += 1
