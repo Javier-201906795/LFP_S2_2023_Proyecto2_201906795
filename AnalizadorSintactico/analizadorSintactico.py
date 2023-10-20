@@ -80,14 +80,14 @@ def evaluartokens(tokens):
                                                 c = a 
                                                 print('new c:', c,'token:',tokens[c][0], 'next:',c+1,'tokennext:',tokens[c+1][0])
                                                 if tokens[c][0] == ')':
-                                                    print(tokens[c][0], tokens[c+1][0])
+                                                    sig = tokens[c+1][0]
                                                     if tokens[c+1][0] == ';':
-                                                        print(tokens[c][0], tokens[c+1][0])
+                                                        sig = tokens[c+2][0]
                                                         c += 2
                                                         listaSintactico.append(['imprimir',texto])
                                                     else:
-                                                        a = fininstruccion(c)
-                                                        listaErroresSintactico.append([tokens[c+1][0],')',tokens[c+1][1],tokens[c+1][2],'error Sintactico',tokens[c+1][1],a])
+                                                        a = fininstruccion(c+1)
+                                                        listaErroresSintactico.append([tokens[c+1][0],';',tokens[c+1][1],tokens[c+1][2],'error Sintactico',tokens[c+1][1],a])
                                                         c = a + 1
                                                 else:
                                                     a = fininstruccion(c)
