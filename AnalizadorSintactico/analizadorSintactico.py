@@ -36,7 +36,7 @@ def obtenertexto(a):
 
 
 
-
+################################################################
 def evaluartokens(tokens):
     global listaSintactico, listatokens
     listatokens = tokens
@@ -67,11 +67,15 @@ def evaluartokens(tokens):
                                                 c = a 
                                                 print('new c:', c,'token:',tokens[c][0], 'next:',c+1,'tokennext:',tokens[c+1][0])
                                                 if tokens[c][0] == ')':
-                                                    c += 11
-                                                    listaSintactico.append(['imprimir',texto])
+                                                    if tokens[c+1][0] == ';':
+                                                        c += 2
+                                                        listaSintactico.append(['imprimir',texto])
+                                                    else:
+                                                        listaErroresSintactico.append([tokens[c+1][0],')',tokens[c+1][1],tokens[c+1][2],'error Sintactico'])
+                                                        c += 2    
                                                 else:
                                                     listaErroresSintactico.append([tokens[c][0],')',tokens[c][1],tokens[c][2],'error Sintactico'])
-                                                    c += 10
+                                                    c += 1
                                             else:
                                                 listaErroresSintactico.append([tokens[c+9][0],'"',tokens[c+9][1],tokens[c+9][2],'error Sintactico'])
                                                 c += 9
