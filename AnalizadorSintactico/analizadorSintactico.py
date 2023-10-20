@@ -11,22 +11,28 @@ def imprimirErrores():
     print('\n############[ Errores | Sintactico]#################\n')
     for i in listaErroresSintactico: 
         print(i)
-    print('\n################################################################\n')
 
 ################################################################
 def imprimirlistaSintactico():
     print('\n############[ Lista Sintactico | Instrucciones]#################\n')
     for i in listaSintactico:
         print(i)
-    print('\n################################################################\n')
 
 ################################################################
-def obtenertexto(c):
+def obtenertexto(a):
     global listatokens
+    inicio = a
+    texto = ''
+    #-----
     maxiteraciones = len(listatokens)
-    while c < maxiteraciones:
-        c += 1
-        pass
+    while a < maxiteraciones:
+        token = listatokens[a][0]
+        if token == '"' or token == "'":
+            a += 1
+            return [texto,a]
+        else:
+            texto += token
+            a += 1
 
 
 
@@ -34,7 +40,7 @@ def obtenertexto(c):
 def evaluartokens(tokens):
     global listaSintactico, listatokens
     listatokens = tokens
-    print('\n ####### [ EVALUAR TOKENS ] #######')
+    print('\n####### [ EVALUAR TOKENS ] #######')
     #Iterador
     c = 0
     maxiteraciones = len(tokens)
@@ -55,16 +61,19 @@ def evaluartokens(tokens):
                                         if tokens[c+8][0] == '(':
                                             if tokens[c+9][0] == '"':
                                                 #ObtenerTexto
-                                                texto = obtenertexto(c)
-                                                if tokens[c+10][0] == ')':
-                                                    texto = tokens[c+9][0]
+                                                texto, a = obtenertexto(c+10)
+                                                print('TEXTO: ', texto, ' A:',a)
+                                                #cambiar numero iteracion
+                                                c = a 
+                                                print('new c:', c,'token:',tokens[c][0], 'next:',c+1,'tokennext:',tokens[c+1][0])
+                                                if tokens[c][0] == ')':
                                                     c += 11
                                                     listaSintactico.append(['imprimir',texto])
                                                 else:
-                                                    listaErroresSintactico.append([tokens[c+10][0],')',tokens[c+10][1],tokens[c+10][2],'error Sintactico'])
+                                                    listaErroresSintactico.append([tokens[c][0],')',tokens[c][1],tokens[c][2],'error Sintactico'])
                                                     c += 10
                                             else:
-                                                listaErroresSintactico.append([tokens[c+9][0],'Texto',tokens[c+9][1],tokens[c+9][2],'error Sintactico'])
+                                                listaErroresSintactico.append([tokens[c+9][0],'"',tokens[c+9][1],tokens[c+9][2],'error Sintactico'])
                                                 c += 9
                                         else:
                                             listaErroresSintactico.append([tokens[c+8][0],'(',tokens[c+8][1],tokens[c+8][2],'error Sintactico'])
