@@ -10,7 +10,7 @@ tokens = []
 linea = 1
 columna = 1
 listaerrores = []
-listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=']
+listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#']
 listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 
 
@@ -63,52 +63,6 @@ def evaluartexto(texto):
             columna += 1
             #Contador
             c += 1
-        #//////////////////////////////////////////////////////////////////////////////////
-        elif caracter == '"' or caracter == "'":
-            #Guardar inicio
-            templinea = linea
-            tempcolumna = columna
-            #Evaluar si es un comentario multilinea
-            caractersig = texto[c+1:c+2]
-            if caractersig == '"' or caractersig == "'":
-                caractersig2 = texto[c+2:c+3]
-                if caractersig2 == '"' or caractersig2 == "'":
-                    print('Comentario multilinea')
-                    #obtener texto entre comillas
-                    textoaevaluar = texto[c+3:]
-                    string, pos, lineasextra, columnastring = obtenercomentariomultilinea(textoaevaluar, c,columna)
-                    #Aumentar contador y columna
-                    c = pos + 4
-                    columna = columnastring
-                    linea = linea + lineasextra
-                    #Almacenar token
-                    tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
-                    print('token: ', string, ' linea:', linea,' columna: ',columna)
-            #//////////////////////////////////////////////////////////////////////////////////
-            else:
-                #obtener texto entre comillas
-                textoaevaluar = texto[c+1:]
-                string, pos = obtenertexto(textoaevaluar, c)
-                #Aumentar contador y columna
-                c = pos + 2
-                columna = len(string) + 1
-                #Almacenar token
-                tokens.append([string,templinea,tempcolumna,'Texto',linea, columna])
-                print('token: ', string, ' linea:', linea,' columna: ',columna)
-        #//////////////////////////////////////////////////////////////////////////////////
-        elif caracter == '#':
-            #Guardar inicio
-            templinea = linea
-            tempcolumna = columna
-            #Si es un texto un posible token
-            textoaevaluar = texto[c+1:]
-            string, pos = obtenercomentario(textoaevaluar, c)
-            #Aumentar contador y columna
-            c = pos + 1
-            columna = len(string) + 1
-            #Almacenar token
-            tokens.append([string,templinea,tempcolumna,'Comentario_simple',linea, columna])
-            print('token: ', string, ' linea:', linea,' columna: ',columna)
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter.isdigit():
             #Guardar inicio
