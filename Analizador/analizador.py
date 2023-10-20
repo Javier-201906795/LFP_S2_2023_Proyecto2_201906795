@@ -28,7 +28,6 @@ def analizadorBizData(texto):
         #[A2]Obtener Errores Sintacticos
         erroresSintactico = analizadorSintactico.GetErrores()
         #[A3]Unir Errores
-        erroresAnalizador = []
         erroresAnalizador.append(erroresLexicos)
         erroresAnalizador.append(erroresSintactico)
         imprimirErrores()
