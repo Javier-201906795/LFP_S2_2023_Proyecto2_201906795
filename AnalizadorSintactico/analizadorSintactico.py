@@ -1,10 +1,19 @@
 
 
 ################################################################
+listaSintactico = []
 
 
 ################################################################
+def imprimirlistaSintactico():
+    print('\n############[ Lista Sintactico | Instrucciones]#################\n')
+    for i in listaSintactico:
+        print(i)
+    print('\n################################################################\n')
+
+################################################################
 def evaluartokens(tokens):
+    global listaSintactico
     print('\n ####### [ EVALUAR TOKENS ] #######')
     #Iterador
     c = 0
@@ -31,6 +40,7 @@ def evaluartokens(tokens):
                                                     print('\n//////////////////\n')
                                                     print(texto)
                                                     print('\n//////////////////')
+                                                    listaSintactico.append(['imprimir',texto])
                                                 else:
                                                     c += 10
                                             else:
@@ -55,12 +65,15 @@ def evaluartokens(tokens):
         else:
             print(tokens[c])
             c += 1
+    
+        
 
 ################################################################
 def GetInstrucciones(tokens):
+    global listaSintactico
 
     #Evaluar tokens
     evaluartokens(tokens)
 
-    return None
+    return listaSintactico
 
