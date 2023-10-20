@@ -52,7 +52,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listadocaracteresbuscados:
             #Almacena token
-            tokens.append([caracter,linea,columna,'token',linea, columna])
+            tokens.append([caracter,linea,columna,'token'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Aumenta columna
             columna += 1
@@ -61,7 +61,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listaabecedario:
             #Almacena token
-            tokens.append([caracter,linea,columna,'token',linea, columna])
+            tokens.append([caracter,linea,columna,'token'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Aumenta columna
             columna += 1
@@ -69,19 +69,13 @@ def evaluartexto(texto):
             c += 1
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter.isdigit():
-            #Guardar inicio
-            templinea = linea
-            tempcolumna = columna
-            #Obtener numero
-            textoaevaluar = texto[c:]
-            numero, pos = obtenernumero(textoaevaluar, c)
-            #Aumentar contador y columna
-            c = pos
-            txtnumero = str(numero) 
-            columna += len(txtnumero) + 1
             #Almacenar token
-            tokens.append([numero,templinea, tempcolumna,'Numero',linea,columna])
-            print('token: ', numero, ' linea:', linea,' columna: ',columna)
+            tokens.append([caracter,linea, columna,'Numero'])
+            print('token: ', caracter, ' linea:', linea,' columna: ',columna)
+            #Aumenta columnas
+            columna += 1
+            #Contador
+            c += 1
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             #Caracter Desconocido
