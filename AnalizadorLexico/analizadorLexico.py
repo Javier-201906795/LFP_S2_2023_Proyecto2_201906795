@@ -10,7 +10,7 @@ tokens = []
 linea = 1
 columna = 1
 listaerrores = []
-listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#']
+listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-']
 listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 
 
@@ -89,19 +89,7 @@ def evaluartexto(texto):
             columna += 1
 
 
-################################################################
-def obtenertexto(text, a):
-    #Texto
-    string = ''
-    #Evaluar caracter por carcater
-    for newcaracter in text:
-        if newcaracter == '"':
-            #Si encuntra el cierre "
-            return [string, a]
-        #Forma el texto
-        string += newcaracter
-        a += 1
-    print("Error: No se encontraron comillas doble que cerraran el texto.")
+
 
 ################################################################
 def obtenernumero(texto, a):
@@ -121,44 +109,7 @@ def obtenernumero(texto, a):
         return [float(numero), a]
     return [int(numero), a]
 
-################################################################
-def obtenercomentario(text, a):
-    #Texto
-    string = ''
-    #Evaluar caracter por carcater
-    for caracter in text:
-        if caracter == '\n':
-            return [string, a]
-        #Forma el texto
-        string += caracter
-        a += 1
-    print("Error: No al obtenrecomentario().")
 
-################################################################
-def obtenercomentariomultilinea(text, a, columna):
-    #Texto
-    string = ''
-    lineasextra = 0
-    #Evaluar caracter por carcater
-    c = 0
-    for newcaracter in text:
-        columna += 1
-        if newcaracter == "\n":
-            lineasextra +=1
-            columna = 1
-        elif newcaracter == '"' or newcaracter == "'":
-            caractersig = text[c+1:c+2]
-            if caractersig == '"' or caractersig == "'":
-                caractersig2 = text[c+2:c+3]
-                if caractersig2 == '"' or caractersig2 == "'":
-                    columna += 1
-                    a += 2            
-                    return [string, a, lineasextra, columna]
-        #Forma el texto
-        string += newcaracter
-        a += 1
-        c += 1
-    print("Error: No se encontraron comillas doble que cerraran el texto.")
 
 ################################################################
 def imprimirerroreslexicos():
