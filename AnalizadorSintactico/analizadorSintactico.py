@@ -3,6 +3,7 @@
 ################################################################
 listaSintactico = []
 listaErroresSintactico = []
+listatokens = []
 
 
 ################################################################
@@ -20,8 +21,19 @@ def imprimirlistaSintactico():
     print('\n################################################################\n')
 
 ################################################################
+def obtenertexto(c):
+    global listatokens
+    maxiteraciones = len(listatokens)
+    while c < maxiteraciones:
+        c += 1
+        pass
+
+
+
+
 def evaluartokens(tokens):
-    global listaSintactico
+    global listaSintactico, listatokens
+    listatokens = tokens
     print('\n ####### [ EVALUAR TOKENS ] #######')
     #Iterador
     c = 0
@@ -41,7 +53,9 @@ def evaluartokens(tokens):
                                 if tokens[c+6][0] == 'i' or tokens[c+6][0] == 'I':
                                     if tokens[c+7][0] == 'r' or tokens[c+7][0] == 'R':
                                         if tokens[c+8][0] == '(':
-                                            if tokens[c+9][3] == 'Texto':
+                                            if tokens[c+9][0] == '"':
+                                                #ObtenerTexto
+                                                texto = obtenertexto(c)
                                                 if tokens[c+10][0] == ')':
                                                     texto = tokens[c+9][0]
                                                     c += 11
