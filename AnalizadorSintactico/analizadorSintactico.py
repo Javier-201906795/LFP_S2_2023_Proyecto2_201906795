@@ -2,7 +2,15 @@
 
 ################################################################
 listaSintactico = []
+listaErroresSintactico = []
 
+
+################################################################
+def imprimirErrores():
+    print('\n############[ Errores | Sintactico]#################\n')
+    for i in listaErroresSintactico: 
+        print(i)
+    print('\n################################################################\n')
 
 ################################################################
 def imprimirlistaSintactico():
@@ -42,35 +50,50 @@ def evaluartokens(tokens):
                                                     print('\n//////////////////')
                                                     listaSintactico.append(['imprimir',texto])
                                                 else:
+                                                    listaErroresSintactico.append([tokens[c+10][0],')',tokens[c+10][1],tokens[c+10][2],'error Sintactico',tokens[c+10][4], tokens[c+10][5]])
                                                     c += 10
                                             else:
+                                                listaErroresSintactico.append([tokens[c+9][0],'Texto',tokens[c+9][1],tokens[c+9][2],'error Sintactico',tokens[c+9][4], tokens[c+9][5]])
                                                 c += 9
                                         else:
+                                            listaErroresSintactico.append([tokens[c+8][0],'(',tokens[c+8][1],tokens[c+8][2],'error Sintactico',tokens[c+8][4], tokens[c+8][5]])
                                             c += 8
                                     else:
+                                        listaErroresSintactico.append([tokens[c+7][0],'r',tokens[c+7][1],tokens[c+7][2],'error Sintactico',tokens[c+7][4], tokens[c+7][5]])
                                         c += 7
                                 else:
+                                    listaErroresSintactico.append([tokens[c+6][0],'i',tokens[c+6][1],tokens[c+6][2],'error Sintactico',tokens[c+6][4], tokens[c+6][5]])
                                     c += 6
                             else:
+                                listaErroresSintactico.append([tokens[c+5][0],'m',tokens[c+5][1],tokens[c+5][2],'error Sintactico',tokens[c+5][4], tokens[c+5][5]])
                                 c += 5
                         else:
+                            listaErroresSintactico.append([tokens[c+4][0],'i'], tokens[c+4][1],tokens[c+4][2],'error Sintactico',tokens[c+4][4], tokens[c+4][5])
                             c += 4
                     else:
+                        listaErroresSintactico.append([tokens[c+3][0],'r'],tokens[c+3][1],tokens[c+3][2],'error Sintactico',tokens[c+3][4], tokens[c+3][5])
                         c += 3
                 else:
+                    listaErroresSintactico.append([tokens[c+2][0],'p'],tokens[c+2][1],tokens[c+2][2],'error Sintactico',tokens[c+2][4], tokens[c+2][5])
                     c += 2
             else:
+                listaErroresSintactico.append([tokens[c+1][0],'m',tokens[c+1][1],tokens[c+1][2],'error Sintactico',tokens[c+1][4], tokens[c+1][5]])
                 c += 1
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             print(tokens[c])
             c += 1
     
-        
+################################################################
+def GetErrores():
+    return listaErroresSintactico
+
 
 ################################################################
 def GetInstrucciones(tokens):
-    global listaSintactico
+    global listaSintactico, listaErroresSintactico
+    listaSintactico = []
+    listaErroresSintactico = []
 
     #Evaluar tokens
     evaluartokens(tokens)
