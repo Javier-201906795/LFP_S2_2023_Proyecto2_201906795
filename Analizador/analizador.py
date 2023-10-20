@@ -8,7 +8,7 @@ from AnalizadorSintactico import *
 erroresAnalizador = []
 
 
-
+################################################################
 def analizadorBizData(texto):
     global erroresAnalizador
     print('Analizando informacion...')
@@ -28,17 +28,25 @@ def analizadorBizData(texto):
         #[A2]Obtener Errores Sintacticos
         erroresSintactico = analizadorSintactico.GetErrores()
         #[A3]Unir Errores
-        erroresAnalizador.append(erroresLexicos)
-        erroresAnalizador.append(erroresSintactico)
+        nuevalista = unirdoslistas(erroresLexicos, erroresSintactico) 
+        erroresAnalizador = nuevalista
         imprimirErrores()
 
 
-
+################################################################
 def imprimirErrores():
     global erroresAnalizador
-    print('\n---------------------------------------')
+    print('\n------------[ ERRORES ]----------------')
     for i in erroresAnalizador:
-        print(i,'\n')
+        print(i)
     print('\n---------------------------------------')
 
+################################################################
+def unirdoslistas(lista1, lista2):
+    newlist = []
+    for i in lista1:
+        newlist.append(i)
+    for j in lista2:
+        newlist.append(j)
 
+    return newlist
