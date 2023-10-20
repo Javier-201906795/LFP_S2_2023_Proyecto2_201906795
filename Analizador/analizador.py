@@ -2,6 +2,7 @@
 
 from AnalizadorLexico import *
 from AnalizadorSintactico import *
+from Funciones import *
 
 
 
@@ -19,7 +20,7 @@ def analizadorBizData(texto):
     analizadorLexico.imprimirerroreslexicos()
     if len(tokens) > 0:
         #Pasar al analizador Sintactico y obtener Estructuras
-        estructuras = analizadorSintactico.GetInstrucciones(tokens)
+        instrucciones = analizadorSintactico.GetInstrucciones(tokens)
         analizadorSintactico.imprimirErrores()
         analizadorSintactico.imprimirlistaSintactico()
         #[A]Obtener Errores
@@ -31,6 +32,10 @@ def analizadorBizData(texto):
         nuevalista = unirdoslistas(erroresLexicos, erroresSintactico) 
         erroresAnalizador = nuevalista
         # imprimirErrores()
+        #Ejecutar instrucciones
+        funciones.ejecutar(instrucciones)
+        funciones.imprimirInstrucciones()
+        
 
 
 ################################################################
