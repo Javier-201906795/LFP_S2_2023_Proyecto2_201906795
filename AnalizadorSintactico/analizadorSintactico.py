@@ -45,9 +45,6 @@ def evaluartokens(tokens):
                                                 if tokens[c+10][0] == ')':
                                                     texto = tokens[c+9][0]
                                                     c += 11
-                                                    print('\n//////////////////\n')
-                                                    print(texto)
-                                                    print('\n//////////////////')
                                                     listaSintactico.append(['imprimir',texto])
                                                 else:
                                                     listaErroresSintactico.append([tokens[c+10][0],')',tokens[c+10][1],tokens[c+10][2],'error Sintactico'])
