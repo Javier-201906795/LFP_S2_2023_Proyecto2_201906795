@@ -31,13 +31,17 @@ def evaluartexto(texto):
         caracter = texto[c]
         #Evaluar
         #//////////////////////////////////////////////////////////////////////////////////
+        if caracter == '\n':
+            #Almacena token
+            tokens.append([caracter,linea,columna,'espacio'])
+            print('token: ', caracter, ' linea:', linea,' columna: ',columna)
+            #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
+            linea += 1
+            columna = 1
+        #//////////////////////////////////////////////////////////////////////////////////
         if caracter.isspace():
             #Si es algun tipo de espacio
-            if caracter == '\n':
-                #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
-                linea += 1
-                columna = 1
-            elif caracter == '\t':
+            if caracter == '\t':
                 #Si es un Tabulador | Aumenta la columna en 4
                 columna += 4
             else:
