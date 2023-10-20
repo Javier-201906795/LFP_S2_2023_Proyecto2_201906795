@@ -36,7 +36,7 @@ def analizadorBizData(texto):
 ################################################################
 def imprimirErrores():
     global erroresAnalizador
-    print('\n------------[ ERRORES ]----------------')
+    print('\n------------[ ERRORES ]----------------\n')
     for i in erroresAnalizador:
         print(i)
     print('\n---------------------------------------')
