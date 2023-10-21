@@ -107,6 +107,14 @@ def evaluartokens(tokens):
                                                                 if tokens[c+1][0] == ';':
                                                                     print('imprimirln: ', texto)
                                                                     listaSintactico.append(['imprimirln',texto])
+                                                                else:
+                                                                    c = fininstruccion(c+1,';')
+                                                            else:
+                                                                c = fininstruccion(c,')')
+                                                        else:
+                                                            c = fininstruccion(c+11,'"')
+                                                    else:
+                                                        c = fininstruccion(c+10,'(')
                                                 else:
                                                     c = fininstruccion(c+9,'n | N')
                                             else:
