@@ -35,17 +35,20 @@ def obtenertexto(a):
             a += 1
 
 ################################################################
-def fininstruccion(a):
-    global listatokens
+def fininstruccion(a,tokenesperado):
+    global listatokens, listaErroresSintactico
     inicio = a
     maxiteraciones = len(listatokens)
     while a < maxiteraciones:
         token = listatokens[a][0]
         if token == ';' or token == '\n':
             a += 1
+            #Agregar a errores
+            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],a])
             return a
         else:
             a += 1
+    
 
 
 
@@ -86,16 +89,13 @@ def evaluartokens(tokens):
                                                         c += 2
                                                         listaSintactico.append(['imprimir',texto])
                                                     else:
-                                                        a = fininstruccion(c+1)
-                                                        listaErroresSintactico.append([tokens[c+1][0],';',tokens[c+1][1],tokens[c+1][2],'error Sintactico',tokens[c+1][1],a])
+                                                        a = fininstruccion(c+1,';')
                                                         c = a + 1
                                                 else:
-                                                    a = fininstruccion(c)
-                                                    listaErroresSintactico.append([tokens[c][0],')',tokens[c][1],tokens[c][2],'error Sintactico',tokens[c][1],a])
+                                                    a = fininstruccion(c, ')')
                                                     c = a + 1
                                             else:
-                                                a = fininstruccion(c+9)
-                                                listaErroresSintactico.append([tokens[c+9][0],'"',tokens[c+9][1],tokens[c+9][2],'error Sintactico',tokens[c+9][1],a])
+                                                a = fininstruccion(c+9,'"')
                                                 c = a + 1
                                         else:
                                             if tokens[c+8][0] == 'l' or tokens[c+8][0] == 'L':
@@ -111,40 +111,31 @@ def evaluartokens(tokens):
                                                                     print('imprimirln: ', texto)
                                                                     listaSintactico.append(['imprimirln',texto])
                                                 else:
-                                                    a = fininstruccion(c+9)
-                                                    listaErroresSintactico.append([tokens[c+9][0],'n',tokens[c+9][1],tokens[c+9][2],'error Sintactico',tokens[c+9][1],a])
+                                                    a = fininstruccion(c+9, 'n | N')
                                                     c = a + 1
                                             else:
-                                                a = fininstruccion(c+8)
-                                                listaErroresSintactico.append([tokens[c+8][0],'( | l',tokens[c+8][1],tokens[c+8][2],'error Sintactico',tokens[c+8][1],a])
+                                                a = fininstruccion(c+8,'( | l | L')
                                                 c = a + 1
                                     else:
-                                        a = fininstruccion(c+7)
-                                        listaErroresSintactico.append([tokens[c+7][0],'r',tokens[c+7][1],tokens[c+7][2],'error Sintactico',tokens[c+7][1],a])
+                                        a = fininstruccion(c+7, 'r | R')
                                         c = a + 1
                                 else:
-                                    a = fininstruccion(c+6)
-                                    listaErroresSintactico.append([tokens[c+6][0],'i',tokens[c+6][1],tokens[c+6][2],'error Sintactico',tokens[c+6][1],a])
+                                    a = fininstruccion(c+6,'i | I')
                                     c = a + 1
                             else:
-                                a = fininstruccion(c+5)
-                                listaErroresSintactico.append([tokens[c+5][0],'m',tokens[c+5][1],tokens[c+5][2],'error Sintactico',tokens[c+5][1],a])
+                                a = fininstruccion(c+5,'m | M')
                                 c = a + 1
                         else:
-                            a = fininstruccion(c+4)
-                            listaErroresSintactico.append([tokens[c+4][0],'i', tokens[c+4][1],tokens[c+4][2],'error Sintactico',tokens[c+4][1],a])
+                            a = fininstruccion(c+4,'i | I')
                             c = a + 1
                     else:
-                        a = fininstruccion(c+3)
-                        listaErroresSintactico.append([tokens[c+3][0],'r',tokens[c+3][1],tokens[c+3][2],'error Sintactico',tokens[c+3][1],a])
+                        a = fininstruccion(c+3, 'r | R')
                         c = a + 1
                 else:
-                    a = fininstruccion(c+2)
-                    listaErroresSintactico.append([tokens[c+2][0],'m',tokens[c+2][1],tokens[c+2][2],'error Sintactico',tokens[c+2][1],a])
+                    a = fininstruccion(c+2, 'p | P')
                     c = a + 1
             else:
-                a = fininstruccion(c+1)
-                listaErroresSintactico.append([tokens[c+1][0],'m',tokens[c+1][1],tokens[c+1][2],'error Sintactico',tokens[c+1][1],a])
+                a = fininstruccion(c+1,'m | M')
                 c = a + 1
         #//////////////////////////////////////////////////////////////////////////////////
         else:
