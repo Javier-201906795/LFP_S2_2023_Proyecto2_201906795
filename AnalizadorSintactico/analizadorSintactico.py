@@ -65,15 +65,15 @@ def evaluartokens(tokens):
         #Ignorar Comentarios
         if tokens[c][3] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
-        #//////////////////////////////////////////////////////////////////////////////////
-        elif tokens[c][0] == 'i' or tokens[c][0] == 'I':
-            if tokens[c+1][0] == 'm' or tokens[c+1][0] == 'M':
-                if tokens[c+2][0] == 'p' or tokens[c+2][0] == 'P':
-                    if tokens[c+3][0] == 'r' or tokens[c+3][0] == 'R':
-                        if tokens[c+4][0] == 'i' or tokens[c+4][0] == 'I':
-                            if tokens[c+5][0] == 'm' or tokens[c+5][0] == 'M':
-                                if tokens[c+6][0] == 'i' or tokens[c+6][0] == 'I':
-                                    if tokens[c+7][0] == 'r' or tokens[c+7][0] == 'R':
+        #[ i ] ///////////////////////////////////////////////////////////////////////////////
+        elif tokens[c][0] == 'i':
+            if tokens[c+1][0] == 'm':
+                if tokens[c+2][0] == 'p':
+                    if tokens[c+3][0] == 'r':
+                        if tokens[c+4][0] == 'i':
+                            if tokens[c+5][0] == 'm':
+                                if tokens[c+6][0] == 'i':
+                                    if tokens[c+7][0] == 'r':
                                         if tokens[c+8][0] == '(':
                                             if tokens[c+9][0] == '"':
                                                 #ObtenerTexto
@@ -95,8 +95,8 @@ def evaluartokens(tokens):
                                             else:
                                                 c = fininstruccion(c+9,'"')
                                         else:
-                                            if tokens[c+8][0] == 'l' or tokens[c+8][0] == 'L':
-                                                if tokens[c+9][0] == 'n' or tokens[c+9][0] == 'N':
+                                            if tokens[c+8][0] == 'l':
+                                                if tokens[c+9][0] == 'n':
                                                     if tokens[c+10][0] == '(':
                                                         if tokens[c+11][0] == '"':
                                                             #ObtenerTexto
@@ -116,23 +116,23 @@ def evaluartokens(tokens):
                                                     else:
                                                         c = fininstruccion(c+10,'(')
                                                 else:
-                                                    c = fininstruccion(c+9,'n | N')
+                                                    c = fininstruccion(c+9,'n')
                                             else:
-                                                c = fininstruccion(c+8,'( | l | L')
+                                                c = fininstruccion(c+8,'( | l ')
                                     else:
-                                        c = fininstruccion(c+7,'r | R')
+                                        c = fininstruccion(c+7,'r')
                                 else:
-                                    c = fininstruccion(c+6,'i | I')
+                                    c = fininstruccion(c+6,'i')
                             else:
-                                c = fininstruccion(c+5,'m | M')
+                                c = fininstruccion(c+5,'m')
                         else:
-                            c = fininstruccion(c+4,'i | I')
+                            c = fininstruccion(c+4,'i')
                     else:
-                        c = fininstruccion(c+3,'r | R')
+                        c = fininstruccion(c+3,'r')
                 else:
-                    c = fininstruccion(c+2,'p | P')
+                    c = fininstruccion(c+2,'p')
             else:
-                c = fininstruccion(c+1,'m | M')
+                c = fininstruccion(c+1,'m')
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             print(tokens[c])
