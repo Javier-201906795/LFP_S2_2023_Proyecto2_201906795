@@ -98,9 +98,26 @@ def evaluartokens(tokens):
                                                 listaErroresSintactico.append([tokens[c+9][0],'"',tokens[c+9][1],tokens[c+9][2],'error Sintactico',tokens[c+9][1],a])
                                                 c = a + 1
                                         else:
-                                            a = fininstruccion(c+8)
-                                            listaErroresSintactico.append([tokens[c+8][0],'(',tokens[c+8][1],tokens[c+8][2],'error Sintactico',tokens[c+8][1],a])
-                                            c = a + 1
+                                            if tokens[c+8][0] == 'l' or tokens[c+8][0] == 'L':
+                                                if tokens[c+9][0] == 'n' or tokens[c+9][0] == 'N':
+                                                    if tokens[c+10][0] == '(':
+                                                        if tokens[c+11][0] == '"':
+                                                            #ObtenerTexto
+                                                            texto, a = obtenertexto(c+12)
+                                                            print('TEXTO: ', texto, ' A:',a)
+                                                            c = a
+                                                            if tokens[c][0] == ')':
+                                                                if tokens[c+1][0] == ';':
+                                                                    print('imprimirln: ', texto)
+                                                                    listaSintactico.append(['imprimirln',texto])
+                                                else:
+                                                    a = fininstruccion(c+9)
+                                                    listaErroresSintactico.append([tokens[c+9][0],'n',tokens[c+9][1],tokens[c+9][2],'error Sintactico',tokens[c+9][1],a])
+                                                    c = a + 1
+                                            else:
+                                                a = fininstruccion(c+8)
+                                                listaErroresSintactico.append([tokens[c+8][0],'( | l',tokens[c+8][1],tokens[c+8][2],'error Sintactico',tokens[c+8][1],a])
+                                                c = a + 1
                                     else:
                                         a = fininstruccion(c+7)
                                         listaErroresSintactico.append([tokens[c+7][0],'r',tokens[c+7][1],tokens[c+7][2],'error Sintactico',tokens[c+7][1],a])
