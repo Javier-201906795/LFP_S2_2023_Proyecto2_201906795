@@ -31,7 +31,7 @@ def evaluarinstrucciones():
         print('Instruccion: ',instruccion[0], 'Contenido: ', instruccion[1])
         if instruccion[0] == 'imprimir':
             print('♦ Imprimir: ', instruccion[1])
-            txtresultado += '>>> '+ instruccion[1]
+            txtresultado += '>>> '+ instruccion[1]+'\n'
         c += 1
 
 

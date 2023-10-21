@@ -41,9 +41,13 @@ def Analizar():
     print('\n-- [ Analizar ] --')
     texto = str(inputtexto.get("1.0",END))
     txtconsola = analizador.analizadorBizData(texto)
+
     print('\n-------------[ CONSOLA ]------------')
     print(txtconsola)
-
+    #Limpiar consola
+    inputconsola.delete('1.0', 'end')
+    #Agregar Texto
+    inputconsola.insert('1.0', str(txtconsola))
 
 
 ########################################################################
