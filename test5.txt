@@ -1,0 +1,4 @@
+imprimir("Abarroteria");
+imprimirln("la Poderosa.");
+imprimirf("error1");
+imprimirln("error2")#;

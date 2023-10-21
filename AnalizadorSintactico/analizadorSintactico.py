@@ -44,7 +44,7 @@ def fininstruccion(a,tokenesperado):
         if token == ';' or token == '\n':
             a += 2
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],a])
+            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-2][2]])
             return a
         else:
             a += 1
