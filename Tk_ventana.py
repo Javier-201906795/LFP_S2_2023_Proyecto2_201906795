@@ -40,7 +40,9 @@ def Abrir():
 def Analizar():
     print('\n-- [ Analizar ] --')
     texto = str(inputtexto.get("1.0",END))
-    analizador.analizadorBizData(texto)
+    txtconsola = analizador.analizadorBizData(texto)
+    print('\n-------------[ CONSOLA ]------------')
+    print(txtconsola)
 
 
 

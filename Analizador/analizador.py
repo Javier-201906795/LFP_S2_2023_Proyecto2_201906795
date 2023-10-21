@@ -32,9 +32,12 @@ def analizadorBizData(texto):
         nuevalista = unirdoslistas(erroresLexicos, erroresSintactico) 
         erroresAnalizador = nuevalista
         # imprimirErrores()
+
         #Ejecutar instrucciones
-        funciones.ejecutar(instrucciones)
-        funciones.imprimirInstrucciones()
+        txtconsola = funciones.ejecutar(instrucciones)
+        #funciones.imprimirInstrucciones()
+        #Retornar informacion consola
+        return txtconsola
         
 
 
