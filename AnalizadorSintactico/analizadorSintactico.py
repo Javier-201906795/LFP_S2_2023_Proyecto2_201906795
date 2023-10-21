@@ -42,7 +42,7 @@ def fininstruccion(a,tokenesperado):
     while a < maxiteraciones:
         token = listatokens[a][0]
         if token == ';' or token == '\n':
-            a += 1
+            a += 2
             #Agregar a errores
             listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],a])
             return a
@@ -89,14 +89,11 @@ def evaluartokens(tokens):
                                                         c += 2
                                                         listaSintactico.append(['imprimir',texto])
                                                     else:
-                                                        a = fininstruccion(c+1,';')
-                                                        c = a + 1
+                                                        c = fininstruccion(c+1,';')
                                                 else:
-                                                    a = fininstruccion(c, ')')
-                                                    c = a + 1
+                                                    c = fininstruccion(c,')')
                                             else:
-                                                a = fininstruccion(c+9,'"')
-                                                c = a + 1
+                                                c = fininstruccion(c+9,'"')
                                         else:
                                             if tokens[c+8][0] == 'l' or tokens[c+8][0] == 'L':
                                                 if tokens[c+9][0] == 'n' or tokens[c+9][0] == 'N':
@@ -111,32 +108,23 @@ def evaluartokens(tokens):
                                                                     print('imprimirln: ', texto)
                                                                     listaSintactico.append(['imprimirln',texto])
                                                 else:
-                                                    a = fininstruccion(c+9, 'n | N')
-                                                    c = a + 1
+                                                    c = fininstruccion(c+9,'n | N')
                                             else:
-                                                a = fininstruccion(c+8,'( | l | L')
-                                                c = a + 1
+                                                c = fininstruccion(c+8,'( | l | L')
                                     else:
-                                        a = fininstruccion(c+7, 'r | R')
-                                        c = a + 1
+                                        c = fininstruccion(c+7,'r | R')
                                 else:
-                                    a = fininstruccion(c+6,'i | I')
-                                    c = a + 1
+                                    c = fininstruccion(c+6,'i | I')
                             else:
-                                a = fininstruccion(c+5,'m | M')
-                                c = a + 1
+                                c = fininstruccion(c+5,'m | M')
                         else:
-                            a = fininstruccion(c+4,'i | I')
-                            c = a + 1
+                            c = fininstruccion(c+4,'i | I')
                     else:
-                        a = fininstruccion(c+3, 'r | R')
-                        c = a + 1
+                        c = fininstruccion(c+3,'r | R')
                 else:
-                    a = fininstruccion(c+2, 'p | P')
-                    c = a + 1
+                    c = fininstruccion(c+2,'p | P')
             else:
-                a = fininstruccion(c+1,'m | M')
-                c = a + 1
+                c = fininstruccion(c+1,'m | M')
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             print(tokens[c])
