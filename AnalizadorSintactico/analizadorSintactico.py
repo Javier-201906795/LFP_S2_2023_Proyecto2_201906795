@@ -137,12 +137,13 @@ def evaluartokens(tokens):
     c = 0
     maxiteraciones = len(tokens)
     while c < maxiteraciones:
+        Token = tokens[c][0]
         #//////////////////////////////////////////////////////////////////////////////////
         #Ignorar Comentarios
         if tokens[c][3] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
-        elif tokens[c][0] == 'i':
+        elif Token == 'i':
             if tokens[c+1][0] == 'm':
                 if tokens[c+2][0] == 'p':
                     if tokens[c+3][0] == 'r':
