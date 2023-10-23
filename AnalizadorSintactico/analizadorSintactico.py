@@ -44,9 +44,9 @@ def fininstruccion(a,tokenesperado):
     while a < maxiteraciones:
         token = listatokens[a][0]
         if token == ';' or token == '\n':
-            a += 2
+            a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-2][2]])
+            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-1][2]])
             return a
         else:
             a += 1
