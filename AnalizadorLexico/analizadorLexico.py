@@ -22,11 +22,14 @@ listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','
 ################################################################
 def evaluartexto(texto):
     global tokens, linea, columna, listaerrores, listadocaracteresbuscados
+    #IDtoken
+    id = -1
     #Iterador
     c=0
     #Numero maximo de iteraciones
     maxiter = len(texto)
     while c < maxiter:
+        id += 1
         #Obtener caracter
         caracter = texto[c]
         #Evaluar
@@ -49,11 +52,11 @@ def evaluartexto(texto):
                     columna = columnastring
                     linea = linea + lineasextra
                     #Almacenar token
-                    tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
+                    tokens.append([id,string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
                     print('token: ', string, ' linea:', linea,' columna: ',columna)
             else:
                 #Almacena token
-                tokens.append([caracter,linea,columna,'token'])
+                tokens.append([id,caracter,linea,columna,'token'])
                 print('token: ', caracter, ' linea:', linea,' columna: ',columna)
                 columna += 1
                 c += 1
@@ -69,12 +72,12 @@ def evaluartexto(texto):
             c = pos + 1
             columna = len(string) + 1
             #Almacenar token
-            tokens.append([string,templinea,tempcolumna,'Comentario_simple',linea, columna])
+            tokens.append([id,string,templinea,tempcolumna,'Comentario_simple',linea, columna])
             print('token: ', string, ' linea:', linea,' columna: ',columna)
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '\n':
             #Almacena token
-            tokens.append([caracter,linea,columna,'espacio'])
+            tokens.append([id,caracter,linea,columna,'espacio'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
             linea += 1
@@ -94,7 +97,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listadocaracteresbuscados:
             #Almacena token
-            tokens.append([caracter,linea,columna,'token'])
+            tokens.append([id,caracter,linea,columna,'token'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Aumenta columna
             columna += 1
@@ -103,7 +106,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter in listaabecedario:
             #Almacena token
-            tokens.append([caracter,linea,columna,'token'])
+            tokens.append([id,caracter,linea,columna,'token'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Aumenta columna
             columna += 1
@@ -112,7 +115,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter.isdigit():
             #Almacenar token
-            tokens.append([caracter,linea, columna,'Numero'])
+            tokens.append([id,caracter,linea, columna,'Numero'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Aumenta columnas
             columna += 1
