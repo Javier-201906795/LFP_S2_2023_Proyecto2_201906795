@@ -104,7 +104,7 @@ def AFDTextoentrecomillas(c):
         
         return False
 ################################################################
-def AFDTextoentrecomillas2(c):
+def getTextoentrecomillas(c):
     global listatokens
     #iterador
     maxiteraciones = len(listatokens)
@@ -153,7 +153,7 @@ def evaluartokens(tokens):
                                                 AFDTexto = AFDTextoentrecomillas(c+9)
                                                 print("AFD:", AFDTexto)
                                                 if AFDTexto == True:
-                                                    # texto, a =AFDTextoentrecomillas2(c+9)
+                                                    # texto, a =getTextoentrecomillas(c+9)
                                                     #ObtenerTexto
                                                     texto, a = obtenertexto(c+10)
                                                     print('TEXTO: ', texto, ' A:',a)
