@@ -179,17 +179,23 @@ def evaluartokens(tokens):
                                                 if tokens[c+9][0] == 'n':
                                                     if tokens[c+10][0] == '(':
                                                         if tokens[c+11][0] == '"':
-                                                            #ObtenerTexto
-                                                            texto, a = obtenertexto(c+12)
-                                                            print('TEXTO: ', texto, ' A:',a)
-                                                            c = a
-                                                            if tokens[c][0] == ')':
-                                                                if tokens[c+1][0] == ';':
-                                                                    print('imprimirln: ', texto)
-                                                                    listaSintactico.append(['imprimirln',texto])
+                                                            AFDTexto = AFDTextoentrecomillas(c+11)
+                                                            print("AFD:", AFDTexto)
+                                                            if AFDTexto == True:
+                                                                #ObtenerTexto
+                                                                texto, a = obtenertexto(c+12)
+                                                                print('TEXTO: ', texto, ' A:',a)
+                                                                c = a
+                                                                if tokens[c][0] == ')':
+                                                                    if tokens[c+1][0] == ';':
+                                                                        print('imprimirln: ', texto)
+                                                                        listaSintactico.append(['imprimirln',texto])
+                                                                    else:
+                                                                        c = fininstruccion(c+1,';')
                                                                 else:
-                                                                    c = fininstruccion(c+1,';')
+                                                                    c = fininstruccion(c,')')
                                                             else:
+                                                                c = ErrorAFDTextoentrecomillas(c+10,'"')
                                                                 c = fininstruccion(c,')')
                                                         else:
                                                             c = fininstruccion(c+11,'"')
