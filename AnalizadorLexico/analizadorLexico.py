@@ -52,6 +52,20 @@ def evaluartexto(texto):
                     tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
                     print('token: ', string, ' linea:', linea,' columna: ',columna)
         #//////////////////////////////////////////////////////////////////////////////////
+        elif caracter == '#':
+            #Guardar inicio
+            templinea = linea
+            tempcolumna = columna
+            #Si es un texto un posible token
+            textoaevaluar = texto[c+1:]
+            string, pos = obtenercomentario(textoaevaluar, c)
+            #Aumentar contador y columna
+            c = pos + 1
+            columna = len(string) + 1
+            #Almacenar token
+            tokens.append([string,templinea,tempcolumna,'Comentario_simple',linea, columna])
+            print('token: ', string, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '\n':
             #Almacena token
             tokens.append([caracter,linea,columna,'espacio'])
@@ -135,6 +149,19 @@ def obtenercomentariomultilinea(text, a, columna):
         c += 1
     print("Error: No se encontraron comillas doble que cerraran el texto.")
 
+
+################################################################
+def obtenercomentario(text, a):
+    #Texto
+    string = ''
+    #Evaluar caracter por carcater
+    for caracter in text:
+        if caracter == '\n':
+            return [string, a]
+        #Forma el texto
+        string += caracter
+        a += 1
+    print("Error: No al obtenrecomentario().")
 
 
 ################################################################
