@@ -59,9 +59,9 @@ def ErrorAFDTextoentrecomillas(a,tokenesperado):
     while a < maxiteraciones:
         token = listatokens[a][0]
         if token == ')' or token == ';' or token == '\n':
-            a += 2
+            a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[a-2][0],str(tokenesperado),listatokens[a-2][1],listatokens[a-2][2],'error Sintactico',listatokens[a-2][1],listatokens[a-2][2]])
+            listaErroresSintactico.append([listatokens[a-1][0],str(tokenesperado),listatokens[a-1][1],listatokens[a-2][2],'error Sintactico',listatokens[a-1][1],listatokens[a-1][2]])
             return a
         else:
             a += 1
@@ -159,11 +159,8 @@ def evaluartokens(tokens):
                                                     print('TEXTO: ', texto, ' A:',a)
                                                     #cambiar numero iteracion
                                                     c = a 
-                                                    print('new c:', c,'token:',tokens[c][0], 'next:',c+1,'tokennext:',tokens[c+1][0])
                                                     if tokens[c][0] == ')':
-                                                        sig = tokens[c+1][0]
                                                         if tokens[c+1][0] == ';':
-                                                            sig = tokens[c+2][0]
                                                             c += 2
                                                             listaSintactico.append(['imprimir',texto])
                                                         else:
@@ -172,7 +169,7 @@ def evaluartokens(tokens):
                                                         c = fininstruccion(c,')')
                                                 else:
                                                     c = ErrorAFDTextoentrecomillas(c+10,'"')
-                                                    # c = fininstruccion(c+10,'"')
+                                                    c = fininstruccion(c,')')
                                             else:
                                                 c = fininstruccion(c+9,'"')
                                         else:
