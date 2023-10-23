@@ -14,4 +14,5 @@ Apartir de la siguiente imagen dependiendo del primer caracter apunta a un grama
 ![ventana](/1_Arbol_JFLAP/Arbol_1_Central.PNG)
 
 
-##
+# Caracter i
+### Arbol
