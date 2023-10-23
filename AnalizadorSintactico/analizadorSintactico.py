@@ -4,6 +4,8 @@
 listaSintactico = []
 listaErroresSintactico = []
 listatokens = []
+listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-']
+listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 
 
 ################################################################
@@ -48,7 +50,27 @@ def fininstruccion(a,tokenesperado):
             return a
         else:
             a += 1
-    
+
+
+################################################################
+def AFDTextoentrecomillas(c):
+    global listatokens
+    #iterador
+    maxiteraciones = len(listatokens)
+    #TEXTO
+    texto = ''
+    if listatokens[c][0] == '"':
+        c+=1
+        while c < maxiteraciones:
+            #Token
+            token = listatokens[c][0]
+            if token == '"':
+                c+=1
+                return texto, c
+            elif token in listaletras or token in listasimbolos:
+                #Añadir token
+                texto += token
+                c+=1
 
 
 
@@ -76,8 +98,9 @@ def evaluartokens(tokens):
                                     if tokens[c+7][0] == 'r':
                                         if tokens[c+8][0] == '(':
                                             if tokens[c+9][0] == '"':
+                                                texto, a =AFDTextoentrecomillas(c+9)
                                                 #ObtenerTexto
-                                                texto, a = obtenertexto(c+10)
+                                                # texto, a = obtenertexto(c+10)
                                                 print('TEXTO: ', texto, ' A:',a)
                                                 #cambiar numero iteracion
                                                 c = a 
