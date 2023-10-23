@@ -31,15 +31,37 @@ def evaluartexto(texto):
         caracter = texto[c]
         #Evaluar
         #//////////////////////////////////////////////////////////////////////////////////
-        if caracter == '\n':
+        if caracter == '"' or caracter == "'":
+            #Guardar inicio
+            templinea = linea
+            tempcolumna = columna
+            #Evaluar si es un comentario multilinea
+            caractersig = texto[c+1:c+2]
+            if caractersig == '"' or caractersig == "'":
+                caractersig2 = texto[c+2:c+3]
+                if caractersig2 == '"' or caractersig2 == "'":
+                    print('Comentario multilinea')
+                    #obtener texto entre comillas
+                    textoaevaluar = texto[c+3:]
+                    string, pos, lineasextra, columnastring = obtenercomentariomultilinea(textoaevaluar, c,columna)
+                    #Aumentar contador y columna
+                    c = pos + 4
+                    columna = columnastring
+                    linea = linea + lineasextra
+                    #Almacenar token
+                    tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
+                    print('token: ', string, ' linea:', linea,' columna: ',columna)
+        #//////////////////////////////////////////////////////////////////////////////////
+        elif caracter == '\n':
             #Almacena token
             tokens.append([caracter,linea,columna,'espacio'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
             linea += 1
             columna = 1
+            c += 1
         #//////////////////////////////////////////////////////////////////////////////////
-        if caracter.isspace():
+        elif caracter.isspace():
             #Si es algun tipo de espacio
             if caracter == '\t':
                 #Si es un Tabulador | Aumenta la columna en 4
@@ -86,6 +108,32 @@ def evaluartexto(texto):
             c += 1
             columna += 1
 
+
+################################################################
+def obtenercomentariomultilinea(text, a, columna):
+    #Texto
+    string = ''
+    lineasextra = 0
+    #Evaluar caracter por carcater
+    c = 0
+    for newcaracter in text:
+        columna += 1
+        if newcaracter == "\n":
+            lineasextra +=1
+            columna = 1
+        elif newcaracter == '"' or newcaracter == "'":
+            caractersig = text[c+1:c+2]
+            if caractersig == '"' or caractersig == "'":
+                caractersig2 = text[c+2:c+3]
+                if caractersig2 == '"' or caractersig2 == "'":
+                    columna += 1
+                    a += 2            
+                    return [string, a, lineasextra, columna]
+        #Forma el texto
+        string += newcaracter
+        a += 1
+        c += 1
+    print("Error: No se encontraron comillas doble que cerraran el texto.")
 
 
 
