@@ -86,7 +86,9 @@ def AFDTextoentrecomillas(c):
         while c < maxiteraciones:
             #Token
             token = listatokens[c][0]
-            if token == '"':
+            if token == ')' or token == ';' or token == '\n':
+                return False
+            elif token == '"':
                 estado = 5
                 c+=1
                 return True

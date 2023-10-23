@@ -1,4 +1,6 @@
-Gramatica Identificador de TEXTO
+#Gramatica [ TEXTO ]
+Gramatica Identificadora de TEXTO
+
 
 SIMBOLOS = {{,},:,[,],",",(,),;,=,",',#,_,-}
 NUMEROS ={0,1,2,3...9}
