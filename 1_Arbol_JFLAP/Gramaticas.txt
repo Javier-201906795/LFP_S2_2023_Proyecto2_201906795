@@ -1,0 +1,34 @@
+Gramatica Identificador de TEXTO
+
+SIMBOLOS = {{,},:,[,],",",(,),;,=,",',#,_,-}
+NUMEROS ={0,1,2,3...9}
+LETRAS = {A,a,B,b,C,c...Z,z}
+TEXTO = {LETRAS, NUMEROS, SIMBOLOS}
+
+Gramatica:
+LETRAS+•NUMEROS*•SIMBOLOS*
+
+
+Gramatica Identificadora de Variables Texto entre parentesis
+
+SIMBOLOS = {{,},:,[,],",",(,),;,=,",',#,_,-}
+NUMEROS ={0,1,2,3...9}
+LETRAS = {A,a,B,b,C,c...Z,z}
+TEXTO = {LETRAS, NUMEROS, SIMBOLOS}
+
+Gramatica:
+"•TEXTO•"
+
+
+
+
+
+Gramatica Letra i
+
+SIMBOLOS = {{,},:,[,],",",(,),;,=,",',#,_,-}
+NUMEROS ={0,1,2,3...9}
+LETRAS = {A,a,B,b,C,c...Z,z}
+TEXTO = {LETRAS, NUMEROS, SIMBOLOS}
+
+Gramatica:
+i•m•p•r•i•m•i•r•(•"•TEXTO•"•)•;
