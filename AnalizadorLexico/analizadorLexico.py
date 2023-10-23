@@ -51,6 +51,12 @@ def evaluartexto(texto):
                     #Almacenar token
                     tokens.append([string,templinea,tempcolumna,'Comentario_multilinea',linea, columna])
                     print('token: ', string, ' linea:', linea,' columna: ',columna)
+            else:
+                #Almacena token
+                tokens.append([caracter,linea,columna,'token'])
+                print('token: ', caracter, ' linea:', linea,' columna: ',columna)
+                columna += 1
+                c += 1
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '#':
             #Guardar inicio
