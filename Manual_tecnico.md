@@ -13,6 +13,10 @@ Apartir de la siguiente imagen dependiendo del primer caracter apunta a un grama
 
 ![ventana](/1_Arbol_JFLAP/Arbol_1_Central.PNG)
 
+# Caracter c
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_c2.png)
+
 
 # Caracter i
 ### Gramatica:
