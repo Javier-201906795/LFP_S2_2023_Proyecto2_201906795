@@ -28,7 +28,7 @@ def obtenertexto(a):
     #-----
     maxiteraciones = len(listatokens)
     while a < maxiteraciones:
-        token = listatokens[a][0]
+        token = listatokens[a][1]
         if token == '"' or token == "'":
             a += 1
             return [texto,a]
@@ -42,11 +42,11 @@ def fininstruccion(a,tokenesperado):
     inicio = a
     maxiteraciones = len(listatokens)
     while a < maxiteraciones:
-        token = listatokens[a][0]
+        token = listatokens[a][1]
         if token == ';' or token == '\n':
             a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][0],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-1][2]])
+            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-1][2]])
             return a
         else:
             a += 1
@@ -57,11 +57,11 @@ def ErrorAFDTextoentrecomillas(a,tokenesperado):
     inicio = a
     maxiteraciones = len(listatokens)
     while a < maxiteraciones:
-        token = listatokens[a][0]
+        token = listatokens[a][1]
         if token == ')' or token == ';' or token == '\n':
             a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[a-1][0],str(tokenesperado),listatokens[a-1][1],listatokens[a-2][2],'error Sintactico',listatokens[a-1][1],listatokens[a-1][2]])
+            listaErroresSintactico.append([listatokens[a-1][1],str(tokenesperado),listatokens[a-1][1],listatokens[a-2][2],'error Sintactico',listatokens[a-1][1],listatokens[a-1][2]])
             return a
         else:
             a += 1
@@ -80,12 +80,12 @@ def AFDTextoentrecomillas(c):
     final = 5
     estado = inicio
 
-    if listatokens[c][0] == '"':
+    if listatokens[c][1] == '"':
         estado = 1
         c+=1
         while c < maxiteraciones:
             #Token
-            token = listatokens[c][0]
+            token = listatokens[c][1]
             if token == ')' or token == ';' or token == '\n':
                 return False
             elif token == '"':
@@ -112,11 +112,11 @@ def getTextoentrecomillas(c):
     maxiteraciones = len(listatokens)
     #TEXTO
     texto = ''
-    if listatokens[c][0] == '"':
+    if listatokens[c][1] == '"':
         c+=1
         while c < maxiteraciones:
             #Token
-            token = listatokens[c][0]
+            token = listatokens[c][1]
             if token == '"':
                 c+=1
                 return texto, c
@@ -137,22 +137,22 @@ def evaluartokens(tokens):
     c = 0
     maxiteraciones = len(tokens)
     while c < maxiteraciones:
-        Token = tokens[c][0]
+        Token = tokens[c][1]
         #//////////////////////////////////////////////////////////////////////////////////
         #Ignorar Comentarios
-        if tokens[c][3] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
+        if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
-            if tokens[c+1][0] == 'm':
-                if tokens[c+2][0] == 'p':
-                    if tokens[c+3][0] == 'r':
-                        if tokens[c+4][0] == 'i':
-                            if tokens[c+5][0] == 'm':
-                                if tokens[c+6][0] == 'i':
-                                    if tokens[c+7][0] == 'r':
-                                        if tokens[c+8][0] == '(':
-                                            if tokens[c+9][0] == '"':
+            if tokens[c+1][1] == 'm':
+                if tokens[c+2][1] == 'p':
+                    if tokens[c+3][1] == 'r':
+                        if tokens[c+4][1] == 'i':
+                            if tokens[c+5][1] == 'm':
+                                if tokens[c+6][1] == 'i':
+                                    if tokens[c+7][1] == 'r':
+                                        if tokens[c+8][1] == '(':
+                                            if tokens[c+9][1] == '"':
                                                 AFDTexto = AFDTextoentrecomillas(c+9)
                                                 print("AFD:", AFDTexto)
                                                 if AFDTexto == True:
@@ -162,8 +162,8 @@ def evaluartokens(tokens):
                                                     print('TEXTO: ', texto, ' A:',a)
                                                     #cambiar numero iteracion
                                                     c = a 
-                                                    if tokens[c][0] == ')':
-                                                        if tokens[c+1][0] == ';':
+                                                    if tokens[c][1] == ')':
+                                                        if tokens[c+1][1] == ';':
                                                             c += 2
                                                             listaSintactico.append(['imprimir',texto])
                                                         else:
@@ -176,10 +176,10 @@ def evaluartokens(tokens):
                                             else:
                                                 c = fininstruccion(c+9,'"')
                                         else:
-                                            if tokens[c+8][0] == 'l':
-                                                if tokens[c+9][0] == 'n':
-                                                    if tokens[c+10][0] == '(':
-                                                        if tokens[c+11][0] == '"':
+                                            if tokens[c+8][1] == 'l':
+                                                if tokens[c+9][1] == 'n':
+                                                    if tokens[c+10][1] == '(':
+                                                        if tokens[c+11][1] == '"':
                                                             AFDTexto = AFDTextoentrecomillas(c+11)
                                                             print("AFD:", AFDTexto)
                                                             if AFDTexto == True:
@@ -187,8 +187,8 @@ def evaluartokens(tokens):
                                                                 texto, a = obtenertexto(c+12)
                                                                 print('TEXTO: ', texto, ' A:',a)
                                                                 c = a
-                                                                if tokens[c][0] == ')':
-                                                                    if tokens[c+1][0] == ';':
+                                                                if tokens[c][1] == ')':
+                                                                    if tokens[c+1][1] == ';':
                                                                         print('imprimirln: ', texto)
                                                                         listaSintactico.append(['imprimirln',texto])
                                                                     else:
