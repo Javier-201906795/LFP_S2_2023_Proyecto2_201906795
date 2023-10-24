@@ -6,26 +6,39 @@ Una experesion regular, representa unos patrones que son utilizados para encontr
 ### Metodo del arbol
 Es una forma de represtar una gramatica. Sirven para genera automatas para resolver la gramatica de una manera efectiva.
 
+## Gramatica
+Es una estrucutra logica-matematica con un cojunto de reglas de formacion que definan las cadenas de caracteres admisibles en un determinado lenguaje formal.
 ---
-## Arbol central
-Apartir de la siguiente imagen dependiendo del primer caracter apunta a un gramatica | Arbol diferente.
+## Gramatica central
+Apartir de la siguiente imagen dependiendo del primer caracter apunta a un gramatica diferente.
 
 
 ![ventana](/1_Arbol_JFLAP/Arbol_1_Central.PNG)
 
-# Caracter C (mayuscula)
+# Token C (mayuscula)
 ### Gramatica:
 ![ventana](/1_Arbol_JFLAP/Arbol_Letra_C.png)
 
-# Caracter c (minuscula)
+# Token c (minuscula)
 ### Gramatica:
 ![ventana](/1_Arbol_JFLAP/Arbol_Letra_c2.png)
 
+# Token d 
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_d.PNG)
 
-# Caracter i
+# Token e
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_e.png)
+
+# Token i
 ### Gramatica:
 i•m•p•r•i•m•i•r•('('•"•Letra+|Numero*|simbolo*)|l•n•'('•")•')'•;
 ![ventana](/1_Arbol_JFLAP/Arbol_Letra_i.PNG)
+
+# Token m
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_m.PNG)
 
 # Automata Finito Determinsta (AFD)
 ## AFD Texto entre comillas
