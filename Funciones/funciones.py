@@ -35,7 +35,7 @@ def evaluarinstrucciones():
         elif instruccion[0] == 'imprimirln':
             print('♦ Imprimirln: ', instruccion[1])
             txtresultado +=  instruccion[1]+' \n'
-        elif instruccion[0] == 'mostrardatos':
+        elif instruccion[0] == 'datos':
             print('♦ Mostrar Datos:')
             txtresultado += '\n' + '-- [ datos(); ] --\n'
             txtresultado += '''

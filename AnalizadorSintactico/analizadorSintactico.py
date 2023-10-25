@@ -181,7 +181,7 @@ def Gramaticatokend(c):
                             if listatokens[c+6][1] == ')':
                                 if listatokens[c+7][1] == ';':
                                     c = c+8
-                                    listaSintactico.append(['mostrardatos',None])
+                                    listaSintactico.append(['datos',None])
                                 else:
                                     c = fininstruccion(c+7,';')
                             else:
