@@ -40,6 +40,19 @@ i•m•p•r•i•m•i•r•('('•"•Letra+|Numero*|simbolo*)|l•n•'('�
 ### Gramatica:
 ![ventana](/1_Arbol_JFLAP/Arbol_Letra_m.PNG)
 
+# Token p
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_p.PNG)
+
+# Token R (mayuscula)
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_R.png)
+
+# Token s
+### Gramatica:
+![ventana](/1_Arbol_JFLAP/Arbol_Letra_s.png)
+
+
 # Automata Finito Determinsta (AFD)
 ## AFD Texto entre comillas
 
