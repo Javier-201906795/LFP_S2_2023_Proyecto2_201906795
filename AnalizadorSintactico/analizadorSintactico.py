@@ -221,6 +221,36 @@ def Gramaticatokens(c):
     return c
 
 ################################################################################################################################
+def Gramaticatokenp(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'p':
+        if listatokens[c+1][1] == 'r':
+            if listatokens[c+2][1] == 'o':
+                if listatokens[c+3][1] == 'm':
+                    if listatokens[c+4][1] == 'e':
+                        if listatokens[c+5][1] == 'd':
+                            if listatokens[c+6][1] == 'i':
+                                if listatokens[c+7][1] == 'o':
+                                    if listatokens[c+8][1] == '(':
+                                        c = GramaticaEspecialtextoentreparentesisycomillas(c+8,'promedio')
+                                    else:
+                                        c = fininstruccion(c+8,'(')
+                                else:
+                                    c = fininstruccion(c+7,'o')
+                            else:
+                                c = fininstruccion(c+6,'i')
+                        else:
+                            c = fininstruccion(c+5,'d')
+                    else:
+                        c = fininstruccion(c+4,'e')
+                else:
+                    c = fininstruccion(c+3,'m')
+            else:
+                c = fininstruccion(c+2,'o')
+        else:
+            c = fininstruccion(c+1,'r')
+    return c
+################################################################################################################################
 def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
     global listaSintactico, listatokens
     if listatokens[c][1] == '(':
@@ -272,6 +302,9 @@ def evaluartokens(tokens):
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
             c = Gramaticatokeni(c)
+        #[ p ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'p':
+            c = Gramaticatokenp(c)
         #[ s ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 's':
             c = Gramaticatokens(c)
