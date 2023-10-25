@@ -43,6 +43,10 @@ codigo  producto precio_compra precio_venta stock\n
 1       Salsa    10.5          20.0         7
 '''
             txtresultado += '\n------------------------\n'
+        elif instruccion[0] == 'promedio':
+            print('♦ Promedio("'+instruccion[1]+'")')
+            txtresultado += 'promedio("'+instruccion[1]+'");\n'
+            txtresultado += '5.5\n'
         elif instruccion[0] == 'sumar':
             print('♦ Sumar("'+instruccion[1]+'")')
             txtresultado += 'sumar("'+instruccion[1]+'");\n'
