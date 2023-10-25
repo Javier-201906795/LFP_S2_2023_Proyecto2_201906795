@@ -248,25 +248,7 @@ def Gramaticatokens(c):
                 if listatokens[c+3][1] == 'a':
                     if listatokens[c+4][1] == 'r':
                         if listatokens[c+5][1] == '(':
-                            if listatokens[c+6][1] == '"':
-                                AFDTexto = AFDTextoentrecomillas(c+6)
-                                if AFDTexto == True:
-                                    texto, a = obtenertexto(c+7)
-                                    print('TEXTO: ', texto, ' A:',a)
-                                    c = a
-                                    if listatokens[c][1] == ')':
-                                        if listatokens[c+1][1] == ';':
-                                            c += 2
-                                            listaSintactico.append(['sumar',texto])
-                                        else:
-                                            c = fininstruccion(c+1,';')
-                                    else:
-                                        c = fininstruccion(c,')')
-                                else:
-                                    c = ErrorAFDTextoentrecomillas(c+6,'"')
-                                    c = fininstruccion(c,')')  
-                            else:
-                                c = fininstruccion(c+6,'"')
+                            c = GramaticaEspecialtextoentreparentesisycomillas(c+5,'sumar')
                         else:
                             c = fininstruccion(c+5,'(')
                     else:
@@ -286,7 +268,7 @@ def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
         if listatokens[c+1][1] == '"':
             AFDTexto = AFDTextoentrecomillas(c+1)
             if AFDTexto == True:
-                texto, a = obtenertexto(c+1)
+                texto, a = obtenertexto(c+2)
                 c = a
                 if listatokens[c][1] == ')':
                     if listatokens[c+1][1] == ';':
