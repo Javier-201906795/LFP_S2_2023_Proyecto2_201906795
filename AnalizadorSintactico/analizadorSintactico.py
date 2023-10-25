@@ -169,6 +169,30 @@ def Gramaticatokeni(c):
     
     return c
 
+################################################################################################################################
+def Gramaticatokenc(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'c':
+        if listatokens[c+1][1] == 'o':
+            if listatokens[c+2][1] == 'n':
+                if listatokens[c+3][1] == 't':
+                    if listatokens[c+4][1] == 'e':
+                        if listatokens[c+5][1] == 'o':
+                            if listatokens[c+6][1] == '(':
+                                c = GramaticaEspecialtextoentreparentesisycomillas(c+6,'conteo')
+                            else:
+                                c = fininstruccion(c+6,'(')
+                        else:
+                            c = fininstruccion(c+5,'d')
+                    else:
+                        c = fininstruccion(c+4,'e')
+                else:
+                    c = fininstruccion(c+3,'m')
+            else:
+                c = fininstruccion(c+2,'o')
+        else:
+            c = fininstruccion(c+1,'r')
+    return c
 
 ################################################################################################################################
 def Gramaticatokend(c):
@@ -375,6 +399,9 @@ def evaluartokens(tokens):
         #Ignorar Comentarios
         if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
+        #[ c ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'c':
+            c = Gramaticatokenc(c)
         #[ m ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'm':
             c = Gramaticatokenm(c)
