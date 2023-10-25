@@ -77,7 +77,7 @@ def evaluartexto(texto):
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '\n':
             #Almacena token
-            tokens.append([id,caracter,linea,columna,'espacio'])
+            tokens.append([id,caracter,linea,columna,'salto_linea'])
             print('token: ', caracter, ' linea:', linea,' columna: ',columna)
             #Si es un Salto de linea | Aumenta la linea | Reinicia columnas
             linea += 1
@@ -91,6 +91,8 @@ def evaluartexto(texto):
                 columna += 4
             else:
                 #Si es un espacio | Aumenta la columna
+                #Almacena token
+                tokens.append([id,caracter,linea,columna,'espacio'])
                 columna += 1
             #Contador
             c += 1
