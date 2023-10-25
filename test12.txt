@@ -1,0 +1,2 @@
+max("stock");
+min("precio_und");

@@ -1,0 +1,23 @@
+#COMENTARIO
+"""    
+COMENTARIO MULTILINEA 
+
+ """
+'''   
+ COMENTARIO MULTILINEA 
+ 
+  '''
+
+
+imprimir("Abarroteria");
+imprimirln("la Poderosa.");
+
+datos();
+imprimir("error1);
+imprimirln("error2");
+
+
+max("stock");
+min("precio_und");
+
+promedio("stock");

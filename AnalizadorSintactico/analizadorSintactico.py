@@ -221,6 +221,31 @@ def Gramaticatokens(c):
     return c
 
 ################################################################################################################################
+def Gramaticatokenm(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'm':
+        if listatokens[c+1][1] == 'a':
+            if listatokens[c+2][1] == 'x':
+                if listatokens[c+3][1] == '(':
+                    c = GramaticaEspecialtextoentreparentesisycomillas(c+3,'maximo')
+                else:
+                    c = fininstruccion(c+3,'(')
+            else:
+                c = fininstruccion(c+2,'x')
+        else:
+            if listatokens[c+1][1] == 'i':
+                if listatokens[c+2][1] == 'n':
+                    if listatokens[c+3][1] == '(':
+                        c = GramaticaEspecialtextoentreparentesisycomillas(c+3,'minimo')
+                    else:
+                        c = fininstruccion(c+3,'(')
+                else:
+                    c = fininstruccion(c+2,'n')
+            else:
+                c = fininstruccion(c+1,'a|i')
+    return c
+
+################################################################################################################################
 def Gramaticatokenp(c):
     global listaSintactico, listatokens
     if listatokens[c][1] == 'p':
@@ -250,6 +275,7 @@ def Gramaticatokenp(c):
         else:
             c = fininstruccion(c+1,'r')
     return c
+
 ################################################################################################################################
 def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
     global listaSintactico, listatokens
@@ -296,6 +322,9 @@ def evaluartokens(tokens):
         #Ignorar Comentarios
         if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
+        #[ m ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'm':
+            c = Gramaticatokenm(c)
         #[ d ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'd':
             c = Gramaticatokend(c)
