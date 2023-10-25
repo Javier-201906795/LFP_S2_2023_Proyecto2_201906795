@@ -169,6 +169,7 @@ def Gramaticatokeni(c):
     
     return c
 
+
 ################################################################################################################################
 def Gramaticatokend(c):
     global listaSintactico, listatokens
@@ -196,6 +197,58 @@ def Gramaticatokend(c):
                 c = fininstruccion(c+2,'t')
         else:
             c = fininstruccion(c+1,'a')
+    return c
+
+################################################################################################################################
+def Gramaticatokene(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'e':
+        if listatokens[c+1][1] == 'x':
+            if listatokens[c+2][1] == 'p':
+                if listatokens[c+3][1] == 'o':
+                    if listatokens[c+4][1] == 'r':
+                        if listatokens[c+5][1] == 't':
+                            if listatokens[c+6][1] == 'a':
+                                if listatokens[c+7][1] == 'r':
+                                    if listatokens[c+8][1] == 'R':
+                                        if listatokens[c+9][1] == 'e':
+                                            if listatokens[c+10][1] == 'p':
+                                                if listatokens[c+11][1] == 'o':
+                                                    if listatokens[c+12][1] == 'r':
+                                                        if listatokens[c+13][1] == 't':
+                                                            if listatokens[c+14][1] == 'e':
+                                                                if listatokens[c+15][1] == '(':
+                                                                    c = GramaticaEspecialtextoentreparentesisycomillas(c+15,'exportarReporte')
+                                                                else:
+                                                                    c = fininstruccion(c+8,'(')
+                                                            else:
+                                                                c = fininstruccion(c+14,'e')
+                                                        else:
+                                                            c = fininstruccion(c+13,'t')
+                                                    else:
+                                                        c = fininstruccion(c+12,'r')
+                                                else:
+                                                    c = fininstruccion(c+11,'o')
+                                            else:
+                                                c = fininstruccion(c+10,'p')
+                                        else:
+                                            c = fininstruccion(c+9,'e')
+                                    else:
+                                        c = fininstruccion(c+8,'R')
+                                else:
+                                    c = fininstruccion(c+7,'r')
+                            else:
+                                c = fininstruccion(c+6,'a')
+                        else:
+                            c = fininstruccion(c+5,'t')
+                    else:
+                        c = fininstruccion(c+4,'r')
+                else:
+                    c = fininstruccion(c+3,'o')
+            else:
+                c = fininstruccion(c+2,'p')
+        else:
+            c = fininstruccion(c+1,'x')
     return c
 
 ################################################################################################################################
@@ -328,6 +381,9 @@ def evaluartokens(tokens):
         #[ d ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'd':
             c = Gramaticatokend(c)
+        #[ e ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'e':
+            c = Gramaticatokene(c)
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
             c = Gramaticatokeni(c)
