@@ -52,6 +52,11 @@ i•m•p•r•i•m•i•r•('('•"•Letra+|Numero*|simbolo*)|l•n•'('�
 ### Gramatica:
 ![ventana](/1_Arbol_JFLAP/Arbol_Letra_s.png)
 
+---
+# Gramatica Especiales
+### Gramatica Texto entre parentesis y comillas dobles:
+![ventana](/1_Arbol_JFLAP/Gramatica_Especial_Textoentreparentesisycomillas.PNG)
+
 
 # Automata Finito Determinsta (AFD)
 ## AFD Texto entre comillas
