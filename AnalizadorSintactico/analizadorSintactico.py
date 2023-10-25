@@ -46,11 +46,12 @@ def fininstruccion(a,tokenesperado):
         if token == ';' or token == '\n':
             a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][1],listatokens[inicio][2],'error Sintactico',listatokens[inicio][1],listatokens[a-1][2]])
+            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
             return a
         else:
             a += 1
-
+################################################################################################################################
+################################################################################################################################
 ################################################################
 def ErrorAFDTextoentrecomillas(a,tokenesperado):
     global listatokens, listaErroresSintactico
@@ -61,7 +62,7 @@ def ErrorAFDTextoentrecomillas(a,tokenesperado):
         if token == ')' or token == ';' or token == '\n':
             a += 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[a-1][1],str(tokenesperado),listatokens[a-1][1],listatokens[a-2][2],'error Sintactico',listatokens[a-1][1],listatokens[a-1][2]])
+            listaErroresSintactico.append([listatokens[a-1][1],str(tokenesperado),listatokens[a-1][2],listatokens[a-2][3],'error Sintactico',listatokens[a-1][2],listatokens[a-1][3]])
             return a
         else:
             a += 1
@@ -126,9 +127,96 @@ def getTextoentrecomillas(c):
                 c+=1
             else:
                 c+=1
+################################################################################################################################
+################################################################################################################################
+def Gramaticatokeni(c):
+    global listaSintactico, listatokens
+    
+    if listatokens[c+1][1] == 'm':
+        if listatokens[c+2][1] == 'p':
+            if listatokens[c+3][1] == 'r':
+                if listatokens[c+4][1] == 'i':
+                    if listatokens[c+5][1] == 'm':
+                        if listatokens[c+6][1] == 'i':
+                            if listatokens[c+7][1] == 'r':
+                                if listatokens[c+8][1] == '(':
+                                    if listatokens[c+9][1] == '"':
+                                        AFDTexto = AFDTextoentrecomillas(c+9)
+                                        print("AFD:", AFDTexto)
+                                        if AFDTexto == True:
+                                            #ObtenerTexto
+                                            texto, a = obtenertexto(c+10)
+                                            print('TEXTO: ', texto, ' A:',a)
+                                            #cambiar numero iteracion
+                                            c = a 
+                                            if listatokens[c][1] == ')':
+                                                if listatokens[c+1][1] == ';':
+                                                    c += 2
+                                                    listaSintactico.append(['imprimir',texto])
+                                                else:
+                                                    c = fininstruccion(c+1,';')
+                                            else:
+                                                c = fininstruccion(c,')')
+                                        else:
+                                            c = ErrorAFDTextoentrecomillas(c+10,'"')
+                                            c = fininstruccion(c,')')
+                                    else:
+                                        c = fininstruccion(c+9,'"')
+                                else:
+                                    if listatokens[c+8][1] == 'l':
+                                        if listatokens[c+9][1] == 'n':
+                                            if listatokens[c+10][1] == '(':
+                                                if listatokens[c+11][1] == '"':
+                                                    AFDTexto = AFDTextoentrecomillas(c+11)
+                                                    print("AFD:", AFDTexto)
+                                                    if AFDTexto == True:
+                                                        #ObtenerTexto
+                                                        texto, a = obtenertexto(c+12)
+                                                        print('TEXTO: ', texto, ' A:',a)
+                                                        c = a
+                                                        if listatokens[c][1] == ')':
+                                                            if listatokens[c+1][1] == ';':
+                                                                print('imprimirln: ', texto)
+                                                                listaSintactico.append(['imprimirln',texto])
+                                                            else:
+                                                                c = fininstruccion(c+1,';')
+                                                        else:
+                                                            c = fininstruccion(c,')')
+                                                    else:
+                                                        c = ErrorAFDTextoentrecomillas(c+10,'"')
+                                                        c = fininstruccion(c,')')
+                                                else:
+                                                    c = fininstruccion(c+11,'"')
+                                            else:
+                                                c = fininstruccion(c+10,'(')
+                                        else:
+                                            c = fininstruccion(c+9,'n')
+                                    else:
+                                        c = fininstruccion(c+8,'( | l ')
+                            else:
+                                c = fininstruccion(c+7,'r')
+                        else:
+                            c = fininstruccion(c+6,'i')
+                    else:
+                        c = fininstruccion(c+5,'m')
+                else:
+                    c = fininstruccion(c+4,'i')
+            else:
+                c = fininstruccion(c+3,'r')
+        else:
+            c = fininstruccion(c+2,'p')
+    else:
+        c = fininstruccion(c+1,'m')
+    
+    return c
+
+
+################################################################################################################################
+################################################################################################################################
 
 
 ################################################################
+
 def evaluartokens(tokens):
     global listaSintactico, listatokens
     listatokens = tokens
@@ -144,82 +232,7 @@ def evaluartokens(tokens):
             c += 1    
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
-            if tokens[c+1][1] == 'm':
-                if tokens[c+2][1] == 'p':
-                    if tokens[c+3][1] == 'r':
-                        if tokens[c+4][1] == 'i':
-                            if tokens[c+5][1] == 'm':
-                                if tokens[c+6][1] == 'i':
-                                    if tokens[c+7][1] == 'r':
-                                        if tokens[c+8][1] == '(':
-                                            if tokens[c+9][1] == '"':
-                                                AFDTexto = AFDTextoentrecomillas(c+9)
-                                                print("AFD:", AFDTexto)
-                                                if AFDTexto == True:
-                                                    # texto, a =getTextoentrecomillas(c+9)
-                                                    #ObtenerTexto
-                                                    texto, a = obtenertexto(c+10)
-                                                    print('TEXTO: ', texto, ' A:',a)
-                                                    #cambiar numero iteracion
-                                                    c = a 
-                                                    if tokens[c][1] == ')':
-                                                        if tokens[c+1][1] == ';':
-                                                            c += 2
-                                                            listaSintactico.append(['imprimir',texto])
-                                                        else:
-                                                            c = fininstruccion(c+1,';')
-                                                    else:
-                                                        c = fininstruccion(c,')')
-                                                else:
-                                                    c = ErrorAFDTextoentrecomillas(c+10,'"')
-                                                    c = fininstruccion(c,')')
-                                            else:
-                                                c = fininstruccion(c+9,'"')
-                                        else:
-                                            if tokens[c+8][1] == 'l':
-                                                if tokens[c+9][1] == 'n':
-                                                    if tokens[c+10][1] == '(':
-                                                        if tokens[c+11][1] == '"':
-                                                            AFDTexto = AFDTextoentrecomillas(c+11)
-                                                            print("AFD:", AFDTexto)
-                                                            if AFDTexto == True:
-                                                                #ObtenerTexto
-                                                                texto, a = obtenertexto(c+12)
-                                                                print('TEXTO: ', texto, ' A:',a)
-                                                                c = a
-                                                                if tokens[c][1] == ')':
-                                                                    if tokens[c+1][1] == ';':
-                                                                        print('imprimirln: ', texto)
-                                                                        listaSintactico.append(['imprimirln',texto])
-                                                                    else:
-                                                                        c = fininstruccion(c+1,';')
-                                                                else:
-                                                                    c = fininstruccion(c,')')
-                                                            else:
-                                                                c = ErrorAFDTextoentrecomillas(c+10,'"')
-                                                                c = fininstruccion(c,')')
-                                                        else:
-                                                            c = fininstruccion(c+11,'"')
-                                                    else:
-                                                        c = fininstruccion(c+10,'(')
-                                                else:
-                                                    c = fininstruccion(c+9,'n')
-                                            else:
-                                                c = fininstruccion(c+8,'( | l ')
-                                    else:
-                                        c = fininstruccion(c+7,'r')
-                                else:
-                                    c = fininstruccion(c+6,'i')
-                            else:
-                                c = fininstruccion(c+5,'m')
-                        else:
-                            c = fininstruccion(c+4,'i')
-                    else:
-                        c = fininstruccion(c+3,'r')
-                else:
-                    c = fininstruccion(c+2,'p')
-            else:
-                c = fininstruccion(c+1,'m')
+            c = Gramaticatokeni(c)
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             print(tokens[c])
