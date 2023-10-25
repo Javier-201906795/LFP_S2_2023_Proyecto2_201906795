@@ -1,0 +1,17 @@
+#COMENTARIO
+"""    
+COMENTARIO MULTILINEA 
+
+ """
+'''   
+ COMENTARIO MULTILINEA 
+ 
+  '''
+
+
+imprimir("Abarroteria");
+imprimirln("la Poderosa.");
+
+datos();
+imprimir("error1);
+imprimirln("error2");

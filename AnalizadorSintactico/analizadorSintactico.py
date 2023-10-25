@@ -142,7 +142,7 @@ def Gramaticatokeni(c):
                                     if listatokens[c+8][1] == '(':
                                         if listatokens[c+9][1] == '"':
                                             AFDTexto = AFDTextoentrecomillas(c+9)
-                                            print("AFD:", AFDTexto)
+                                            print("AFDTEXTO:", AFDTexto)
                                             if AFDTexto == True:
                                                 #ObtenerTexto
                                                 texto, a = obtenertexto(c+10)
@@ -240,6 +240,47 @@ def Gramaticatokend(c):
     return c
 
 ################################################################################################################################
+def Gramaticatokens(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 's':
+        if listatokens[c+1][1] == 'u':
+            if listatokens[c+2][1] == 'm':
+                if listatokens[c+3][1] == 'a':
+                    if listatokens[c+4][1] == 'r':
+                        if listatokens[c+5][1] == '(':
+                            if listatokens[c+6][1] == '"':
+                                AFDTexto = AFDTextoentrecomillas(c+6)
+                                if AFDTexto == True:
+                                    texto, a = obtenertexto(c+7)
+                                    print('TEXTO: ', texto, ' A:',a)
+                                    c = a
+                                    if listatokens[c][1] == ')':
+                                        if listatokens[c+1][1] == ';':
+                                            c += 2
+                                            listaSintactico.append(['sumar',texto])
+                                        else:
+                                            c = fininstruccion(c+1,';')
+                                    else:
+                                        c = fininstruccion(c,')')
+                                else:
+                                    c = ErrorAFDTextoentrecomillas(c+6,'"')
+                                    c = fininstruccion(c,')')  
+                            else:
+                                c = fininstruccion(c+6,'"')
+                        else:
+                            c = fininstruccion(c+5,'(')
+                    else:
+                        c = fininstruccion(c+4,'r')
+                else:
+                    c = fininstruccion(c+3,'a')
+            else:
+                c = fininstruccion(c+2,'m')
+        else:
+            c = fininstruccion(c+1,'u')
+    return c
+
+
+################################################################################################################################
 ################################################################################################################################
 
 
@@ -264,6 +305,9 @@ def evaluartokens(tokens):
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
             c = Gramaticatokeni(c)
+        #[ s ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 's':
+            c = Gramaticatokens(c)
         #//////////////////////////////////////////////////////////////////////////////////
         else:
             print(tokens[c])
