@@ -210,6 +210,34 @@ def Gramaticatokeni(c):
     
     return c
 
+################################################################################################################################
+def Gramaticatokend(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'd':
+        if listatokens[c+1][1] == 'a':
+            if listatokens[c+2][1] == 't':
+                if listatokens[c+3][1] == 'o':
+                    if listatokens[c+4][1] == 's':
+                        if listatokens[c+5][1] == '(':
+                            if listatokens[c+6][1] == ')':
+                                if listatokens[c+7][1] == ';':
+                                    c = c+8
+                                    listaSintactico.append(['mostrardatos',None])
+                                else:
+                                    c = fininstruccion(c+7,';')
+                            else:
+                                c = fininstruccion(c+6,')')
+                        else:
+                            c = fininstruccion(c+5,'(')
+                    else:
+                        c = fininstruccion(c+4,'s')
+                else:
+                    c = fininstruccion(c+3,'o')
+            else:
+                c = fininstruccion(c+2,'t')
+        else:
+            c = fininstruccion(c+1,'a')
+    return c
 
 ################################################################################################################################
 ################################################################################################################################
@@ -230,6 +258,9 @@ def evaluartokens(tokens):
         #Ignorar Comentarios
         if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
+        #[ d ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'd':
+            c = Gramaticatokend(c)
         #[ i ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'i':
             c = Gramaticatokeni(c)
