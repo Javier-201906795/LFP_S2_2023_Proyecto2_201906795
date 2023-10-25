@@ -35,6 +35,14 @@ def evaluarinstrucciones():
         elif instruccion[0] == 'imprimirln':
             print('♦ Imprimirln: ', instruccion[1])
             txtresultado +=  instruccion[1]+' \n'
+        elif instruccion[0] == 'mostrardatos':
+            print('♦ Mostrar Datos:')
+            txtresultado += '\n' + '-- [ datos(); ] --\n'
+            txtresultado += '''
+codigo  producto precio_compra precio_venta stock\n
+1       Salsa    10.5          20.0         7
+'''
+            txtresultado += '\n------------------------\n'
         c += 1
 
 
