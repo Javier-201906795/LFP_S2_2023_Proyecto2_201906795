@@ -43,6 +43,9 @@ codigo  producto precio_compra precio_venta stock\n
 1       Salsa    10.5          20.0         7
 '''
             txtresultado += '\n------------------------\n'
+        elif instruccion[0] == 'exportarReporte':
+            print('♦ ExportarReporte("'+instruccion[1]+'")')
+            txtresultado += 'Reporte Exportado: '+instruccion[1]+'.html\n'
         elif instruccion[0] == 'maximo':
             print('♦ Maximo("'+instruccion[1]+'")')
             txtresultado += 'max("'+instruccion[1]+'");\n'
