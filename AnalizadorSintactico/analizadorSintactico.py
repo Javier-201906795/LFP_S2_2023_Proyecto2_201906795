@@ -279,6 +279,32 @@ def Gramaticatokens(c):
             c = fininstruccion(c+1,'u')
     return c
 
+################################################################################################################################
+def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == '(':
+        if listatokens[c+1][1] == '"':
+            AFDTexto = AFDTextoentrecomillas(c+1)
+            if AFDTexto == True:
+                texto, a = obtenertexto(c+1)
+                c = a
+                if listatokens[c][1] == ')':
+                    if listatokens[c+1][1] == ';':
+                        c += 2
+                        listaSintactico.append([funcion,texto])
+                    else:
+                        c = fininstruccion(c+1,';')
+                else:
+                    c = fininstruccion(c,')')
+            else:
+                c = ErrorAFDTextoentrecomillas(c+6,'"')
+                c = fininstruccion(c,')')  
+        else:
+            c = fininstruccion(c+1,'"')
+    else:
+        c = fininstruccion(c,'(')
+    
+    return c
 
 ################################################################################################################################
 ################################################################################################################################
