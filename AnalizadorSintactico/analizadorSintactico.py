@@ -140,53 +140,12 @@ def Gramaticatokeni(c):
                             if listatokens[c+6][1] == 'i':
                                 if listatokens[c+7][1] == 'r':
                                     if listatokens[c+8][1] == '(':
-                                        if listatokens[c+9][1] == '"':
-                                            AFDTexto = AFDTextoentrecomillas(c+9)
-                                            print("AFDTEXTO:", AFDTexto)
-                                            if AFDTexto == True:
-                                                #ObtenerTexto
-                                                texto, a = obtenertexto(c+10)
-                                                print('TEXTO: ', texto, ' A:',a)
-                                                #cambiar numero iteracion
-                                                c = a 
-                                                if listatokens[c][1] == ')':
-                                                    if listatokens[c+1][1] == ';':
-                                                        c += 2
-                                                        listaSintactico.append(['imprimir',texto])
-                                                    else:
-                                                        c = fininstruccion(c+1,';')
-                                                else:
-                                                    c = fininstruccion(c,')')
-                                            else:
-                                                c = ErrorAFDTextoentrecomillas(c+10,'"')
-                                                c = fininstruccion(c,')')
-                                        else:
-                                            c = fininstruccion(c+9,'"')
+                                        c = GramaticaEspecialtextoentreparentesisycomillas(c+8,'imprimir')
                                     else:
                                         if listatokens[c+8][1] == 'l':
                                             if listatokens[c+9][1] == 'n':
                                                 if listatokens[c+10][1] == '(':
-                                                    if listatokens[c+11][1] == '"':
-                                                        AFDTexto = AFDTextoentrecomillas(c+11)
-                                                        print("AFD:", AFDTexto)
-                                                        if AFDTexto == True:
-                                                            #ObtenerTexto
-                                                            texto, a = obtenertexto(c+12)
-                                                            print('TEXTO: ', texto, ' A:',a)
-                                                            c = a
-                                                            if listatokens[c][1] == ')':
-                                                                if listatokens[c+1][1] == ';':
-                                                                    print('imprimirln: ', texto)
-                                                                    listaSintactico.append(['imprimirln',texto])
-                                                                else:
-                                                                    c = fininstruccion(c+1,';')
-                                                            else:
-                                                                c = fininstruccion(c,')')
-                                                        else:
-                                                            c = ErrorAFDTextoentrecomillas(c+10,'"')
-                                                            c = fininstruccion(c,')')
-                                                    else:
-                                                        c = fininstruccion(c+11,'"')
+                                                    c = GramaticaEspecialtextoentreparentesisycomillas(c+10,'imprimirln')
                                                 else:
                                                     c = fininstruccion(c+10,'(')
                                             else:
