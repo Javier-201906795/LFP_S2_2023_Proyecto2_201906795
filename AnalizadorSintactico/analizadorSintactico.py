@@ -6,7 +6,7 @@ listaErroresSintactico = []
 listatokens = []
 listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
-
+listanumeros = ['0','1','2','3','4','5','6','7','8','9','.']
 
 ################################################################
 def imprimirErrores():
@@ -19,6 +19,34 @@ def imprimirlistaSintactico():
     print('\n############[ Lista Sintactico | Instrucciones]#################\n')
     for i in listaSintactico:
         print(i)
+
+################################################################
+def obtenernumero(a):
+    global listatokens, listanumeros
+    fin = a
+    txtnumero = ''
+    #-----
+    maxiteraciones = len(listatokens)
+    while a < maxiteraciones:
+        token = listatokens[a][1]
+        #Buscar si esta en el listado de numeros
+        if token in listanumeros:
+            txtnumero += token
+            a += 1
+            fin = a
+        else:
+            a = maxiteraciones 
+    #-----
+    #Convertir txtnumero
+    if len(txtnumero) <= 0:
+        return None
+    else:
+        try:
+            numero = float(txtnumero)
+            return [numero, fin]
+        except:
+            return None
+
 
 ################################################################
 def obtenertexto(a):
@@ -185,7 +213,47 @@ def Gramaticatokenc(c):
                         else:
                             c = fininstruccion(c+5,'d')
                     else:
-                        c = fininstruccion(c+4,'e')
+                        if listatokens[c+4][1] == 'a':
+                            if listatokens[c+5][1] == 'r':
+                                if listatokens[c+6][1] == 's':
+                                    if listatokens[c+7][1] == 'i':
+                                        if listatokens[c+8][1] == '(':
+                                            if listatokens[c+9][1] == '"':
+                                                AFDTexto = AFDTextoentrecomillas(c+9)
+                                                if AFDTexto == True:
+                                                    texto, a = obtenertexto(c+10)
+                                                    c = a
+                                                    if listatokens[c][1] == ',':
+                                                        numero, a = obtenernumero(c+1)
+                                                        c = a
+                                                        if numero != None:  
+                                                            if listatokens[c][1] == ')':
+                                                                if listatokens[c+1][1] == ';':
+                                                                    print('\nexportarsi○\n')
+                                                                    listaSintactico.append(['contarsi',[texto, numero]])
+                                                                else:
+                                                                    c = fininstruccion(c+1,';')    
+                                                            else:
+                                                                c = fininstruccion(c,')')    
+                                                        else:
+                                                            c = fininstruccion(c+1,'NUMERO[0,1..9]')    
+                                                    else:
+                                                        c = fininstruccion(c,',')
+                                                else:
+                                                    c = ErrorAFDTextoentrecomillas(c+9,'"')
+                                                    c = fininstruccion(c,')')
+                                            else:
+                                                c = fininstruccion(c+9,'"')
+                                        else:
+                                            c = fininstruccion(c+8,'(')
+                                    else:
+                                        c = fininstruccion(c+7,'i')
+                                else:
+                                    c = fininstruccion(c+6,'s')
+                            else:
+                                c = fininstruccion(c+5,'r')
+                        else:
+                            c = fininstruccion(c+4,'e|a')
                 else:
                     c = fininstruccion(c+3,'m')
             else:
