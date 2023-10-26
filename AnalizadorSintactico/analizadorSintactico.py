@@ -4,6 +4,8 @@
 listaSintactico = []
 listaErroresSintactico = []
 listatokens = []
+listaClaves = []
+templistaClaves = []
 listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 listanumeros = ['0','1','2','3','4','5','6','7','8','9','.']
@@ -100,6 +102,33 @@ def fininstruccionPornumero(start,a,tokenesperado,fin):
             return a
         else:
             a += 1
+
+################################################################################################################################
+def obtenertextoentrecomillasLista(c):
+    global templistaClaves
+    Token = listatokens[c][1]
+    if Token == '"':
+        AFDTexto = AFDTextoentrecomillas(c)
+        if AFDTexto == True:
+            texto, a = obtenertexto(c+1)
+            c = a
+            templistaClaves.append(texto)
+            if listatokens[c][1] == ']':
+                return c
+            elif listatokens[c][1] == ',':
+                if listatokens[c+1][1] == '"':
+                    c = obtenertextoentrecomillasLista(c+1)
+            else:
+                c = fininstruccion(c,',')
+        else:
+            c = ErrorAFDTextoentrecomillas(c+1,'"')
+            c = fininstruccion(c,',|]')  
+    # elif Token == ']':
+    #     return c
+    else:
+        c = fininstruccion(c,'"')
+    return c
+
 ################################################################################################################################
 ################################################################################################################################
 ################################################################
@@ -219,7 +248,38 @@ def Gramaticatokeni(c):
     
     return c
 
-
+################################################################################################################################
+def GramaticatokenC(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 'C':
+        if listatokens[c+1][1] == 'l':
+            if listatokens[c+2][1] == 'a':
+                if listatokens[c+3][1] == 'v':
+                    if listatokens[c+4][1] == 'e':
+                        if listatokens[c+5][1] == 's':
+                            if listatokens[c+6][1] == '=':
+                                if listatokens[c+7][1] == '[':
+                                    if listatokens[c+8][1] == '"':
+                                        c = obtenertextoentrecomillasLista(c+8)
+                                        if listatokens[c][1] == ']':
+                                            print('\n Claves',templistaClaves)
+                                    else:
+                                        c = fininstruccion(c+8,'"')
+                                else:
+                                    c = fininstruccion(c+7,'[')
+                            else:
+                                c = fininstruccion(c+6,'s')
+                        else:
+                            c = fininstruccion(c+5,'e')
+                    else:
+                        c = fininstruccion(c+4,'v')
+                else:
+                    c = fininstruccion(c+3,'a')
+            else:
+                c = fininstruccion(c+2,'l')
+        else:
+            c = fininstruccion(c+1,'C')
+    return c
 
 ################################################################################################################################
 def Gramaticatokenc(c):
@@ -494,6 +554,9 @@ def evaluartokens(tokens):
         #Ignorar Comentarios
         if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
             c += 1    
+        #[ c ] ///////////////////////////////////////////////////////////////////////////////
+        elif Token == 'C':
+            c = GramaticatokenC(c)
         #[ c ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'c':
             c = Gramaticatokenc(c)
