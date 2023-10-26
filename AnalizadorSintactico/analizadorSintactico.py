@@ -219,6 +219,8 @@ def Gramaticatokeni(c):
     
     return c
 
+
+
 ################################################################################################################################
 def Gramaticatokenc(c):
     global listaSintactico, listatokens
