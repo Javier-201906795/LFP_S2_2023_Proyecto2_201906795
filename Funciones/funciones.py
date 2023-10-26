@@ -35,6 +35,10 @@ def evaluarinstrucciones():
         elif instruccion[0] == 'imprimirln':
             print('♦ Imprimirln: ', instruccion[1])
             txtresultado +=  instruccion[1]+' \n'
+        elif instruccion[0] == 'contarsi':
+            print('♦ Contarsi: '+instruccion[1][0]+' valor:'+str(instruccion[1][1]))
+            txtresultado += 'contarsi("'+instruccion[1][0]+'",'+str(instruccion[1][1])+');\n'
+            txtresultado += '2\n'
         elif instruccion[0] == 'conteo':
             print('♦ Conteo: '+instruccion[1])
             txtresultado += 'conteo("'+instruccion[1]+'");\n'
