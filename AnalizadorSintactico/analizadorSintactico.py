@@ -123,8 +123,6 @@ def obtenertextoentrecomillasLista(c):
         else:
             c = ErrorAFDTextoentrecomillas(c+1,'"')
             c = fininstruccion(c,',|]')  
-    # elif Token == ']':
-    #     return c
     else:
         c = fininstruccion(c,'"')
     return c
