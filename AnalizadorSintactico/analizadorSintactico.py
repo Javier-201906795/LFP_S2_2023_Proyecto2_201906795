@@ -23,6 +23,7 @@ def imprimirlistaSintactico():
 ################################################################
 def obtenernumero(a):
     global listatokens, listanumeros
+    inicio = a
     fin = a
     txtnumero = ''
     #-----
@@ -35,17 +36,18 @@ def obtenernumero(a):
             a += 1
             fin = a
         else:
+            fin = a
             a = maxiteraciones 
     #-----
     #Convertir txtnumero
     if len(txtnumero) <= 0:
-        return None
+        return [None,fin]
     else:
         try:
             numero = float(txtnumero)
             return [numero, fin]
         except:
-            return None
+            return [None, fin]
 
 
 ################################################################
@@ -75,6 +77,26 @@ def fininstruccion(a,tokenesperado):
             a += 1
             #Agregar a errores
             listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
+            return a
+        else:
+            a += 1
+################################################################
+def fininstruccionPornumero(start,a,tokenesperado,fin):
+    global listatokens, listaErroresSintactico
+    inicio = start
+    #Obtener numero
+    txtnumero=''
+    for i in range(start,fin,1):
+        txtnumero += listatokens[i][1]
+    
+
+    maxiteraciones = len(listatokens)
+    while a < maxiteraciones:
+        token = listatokens[a][1]
+        if token == ';' or token == '\n':
+            a += 1
+            #Agregar a errores
+            listaErroresSintactico.append([str(txtnumero),str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
             return a
         else:
             a += 1
@@ -225,6 +247,7 @@ def Gramaticatokenc(c):
                                                     c = a
                                                     if listatokens[c][1] == ',':
                                                         numero, a = obtenernumero(c+1)
+                                                        inicio = c
                                                         c = a
                                                         if numero != None:  
                                                             if listatokens[c][1] == ')':
@@ -236,7 +259,8 @@ def Gramaticatokenc(c):
                                                             else:
                                                                 c = fininstruccion(c,')')    
                                                         else:
-                                                            c = fininstruccion(c+1,'NUMERO[0,1..9]')    
+                                                            c = fininstruccionPornumero(inicio+1,c,'NUMERO_INVALIDO',c)
+                                                            # c = fininstruccion(c,'NUMEROINVALIDO')    
                                                     else:
                                                         c = fininstruccion(c,',')
                                                 else:
