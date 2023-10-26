@@ -260,7 +260,6 @@ def Gramaticatokenc(c):
                                                                 c = fininstruccion(c,')')    
                                                         else:
                                                             c = fininstruccionPornumero(inicio+1,c,'NUMERO_INVALIDO',c)
-                                                            # c = fininstruccion(c,'NUMEROINVALIDO')    
                                                     else:
                                                         c = fininstruccion(c,',')
                                                 else:
@@ -368,28 +367,6 @@ def Gramaticatokene(c):
     return c
 
 ################################################################################################################################
-def Gramaticatokens(c):
-    global listaSintactico, listatokens
-    if listatokens[c][1] == 's':
-        if listatokens[c+1][1] == 'u':
-            if listatokens[c+2][1] == 'm':
-                if listatokens[c+3][1] == 'a':
-                    if listatokens[c+4][1] == 'r':
-                        if listatokens[c+5][1] == '(':
-                            c = GramaticaEspecialtextoentreparentesisycomillas(c+5,'sumar')
-                        else:
-                            c = fininstruccion(c+5,'(')
-                    else:
-                        c = fininstruccion(c+4,'r')
-                else:
-                    c = fininstruccion(c+3,'a')
-            else:
-                c = fininstruccion(c+2,'m')
-        else:
-            c = fininstruccion(c+1,'u')
-    return c
-
-################################################################################################################################
 def Gramaticatokenm(c):
     global listaSintactico, listatokens
     if listatokens[c][1] == 'm':
@@ -444,6 +421,30 @@ def Gramaticatokenp(c):
         else:
             c = fininstruccion(c+1,'r')
     return c
+
+################################################################################################################################
+def Gramaticatokens(c):
+    global listaSintactico, listatokens
+    if listatokens[c][1] == 's':
+        if listatokens[c+1][1] == 'u':
+            if listatokens[c+2][1] == 'm':
+                if listatokens[c+3][1] == 'a':
+                    if listatokens[c+4][1] == 'r':
+                        if listatokens[c+5][1] == '(':
+                            c = GramaticaEspecialtextoentreparentesisycomillas(c+5,'sumar')
+                        else:
+                            c = fininstruccion(c+5,'(')
+                    else:
+                        c = fininstruccion(c+4,'r')
+                else:
+                    c = fininstruccion(c+3,'a')
+            else:
+                c = fininstruccion(c+2,'m')
+        else:
+            c = fininstruccion(c+1,'u')
+    return c
+
+
 
 ################################################################################################################################
 def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
