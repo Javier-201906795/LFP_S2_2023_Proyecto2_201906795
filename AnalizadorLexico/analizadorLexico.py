@@ -13,7 +13,7 @@ listaerrores = []
 listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 
-
+flagcomillas = False
 
 
 
@@ -21,7 +21,7 @@ listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','
 
 ################################################################
 def evaluartexto(texto):
-    global tokens, linea, columna, listaerrores, listadocaracteresbuscados
+    global tokens, linea, columna, listaerrores, listadocaracteresbuscados, flagcomillas
     #IDtoken
     id = -1
     #Iterador
@@ -60,6 +60,11 @@ def evaluartexto(texto):
                 print('token: ', caracter, ' linea:', linea,' columna: ',columna)
                 columna += 1
                 c += 1
+                #Activar bandera
+                if flagcomillas == False:
+                    flagcomillas = True
+                else:
+                    flagcomillas = False
         #//////////////////////////////////////////////////////////////////////////////////
         elif caracter == '#':
             #Guardar inicio
@@ -91,8 +96,10 @@ def evaluartexto(texto):
                 columna += 4
             else:
                 #Si es un espacio | Aumenta la columna
-                #Almacena token
-                tokens.append([id,caracter,linea,columna,'espacio'])
+                #Validar si esta dentro de comillas
+                if flagcomillas == True:
+                    #Almacena token
+                    tokens.append([id,caracter,linea,columna,'espacio'])
                 columna += 1
             #Contador
             c += 1
@@ -217,11 +224,12 @@ def GetTokens(texto):
         MessageBox.showerror('Error - lexico()','No hay informacion necesarioa para procesarlo')
         return
     #Reiniciar valores
-    global tokens, linea, columna, listaerrores
+    global tokens, linea, columna, listaerrores, flagcomillas
     tokens = []
     linea = 1
     columna = 1
     listaerrores = []
+    flagcomillas = False
     #Analizar Texto
     evaluartexto(texto)
     
