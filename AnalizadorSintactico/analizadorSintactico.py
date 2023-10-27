@@ -24,6 +24,15 @@ def imprimirlistaSintactico():
         print(i)
 
 ################################################################
+def enumerarlistatokens():
+    global listatokens
+    for i in range(0,len(listatokens)):
+        Token = listatokens[i]
+        #Cambiar ID
+        listatokens[i][0] = i
+        Token = listatokens[i]
+
+################################################################
 def obtenernumero(a):
     global listatokens, listanumeros
     inicio = a
@@ -282,11 +291,14 @@ def GramaticatokenC(c):
     flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
     #Nueva lista
     if flagsinespacios == True:
-        #Remplazar lista sin espacios y saltos de linea pra la gramatica C
+        #Remplazar lista sin espacios y saltos de linea para la gramatica C
         listatokens = templistatokens
+        #Cambiar id listas
+        enumerarlistatokens()
     else:
         print('Falta token simbolo "]"')
         print(fin)
+        c = fininstruccion(fin-1,']')
     #Evaluar
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
@@ -305,6 +317,8 @@ def GramaticatokenC(c):
                                             listaClaves = templistaClaves
                                             #Agregar a lista instrucciones
                                             listaSintactico.append(['Claves',listaClaves])
+                                        else:
+                                            c = fininstruccion(c,']')
                                     else:
                                         c = fininstruccion(c+8,'"')
                                 else:
