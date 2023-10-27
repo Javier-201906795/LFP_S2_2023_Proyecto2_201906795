@@ -203,6 +203,15 @@ def obtenernumero(texto, a):
 
 
 ################################################################
+def enumerartokens():
+    global tokens
+    for i in range(0,len(tokens)):
+        Token = tokens[i]
+        #Cambiar ID
+        tokens[i][0] = i
+        Token = tokens[i]
+
+################################################################
 def imprimirerroreslexicos():
     print('######### [ ERRORES LEXICOS ] #########\n')
     for i in listaerrores:
@@ -234,6 +243,6 @@ def GetTokens(texto):
     evaluartexto(texto)
     
     #Poner un ID CORRECTO
-    
+    enumerartokens()
     
     return tokens
