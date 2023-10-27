@@ -222,6 +222,80 @@ def AFDTextoentrecomillas(c):
         
         return False
 ################################################################
+def AFDListaTexto(c):
+    global listatokens
+    #iterador
+    maxiteraciones = len(listatokens)
+    #TEXTO
+    texto = ''
+    #Estados
+    #q1,q2,q3,q4,q5,q6,q7,q8,q9
+    inicio = 1
+    final = 7
+    estado = inicio
+
+    if listatokens[c][1] == '[':
+        estado = 2
+        texto += '['
+        c+=1
+        if listatokens[c][1] == '"':
+            estado = 3
+            texto += '"'
+            c+=1
+            while c < maxiteraciones:
+                #Token
+                token = listatokens[c][1]
+                if token == ')' or token == ';' or token == '\n':
+                    return False
+                elif token == '"':
+                    estado = 5
+                    texto += '"'
+                    c+=1
+                    break
+                elif token in listaletras or token in listasimbolos or token in listanumeros:
+                    estado = 4
+                    texto += token
+                    c+=1
+                else:
+                    c+=1
+        
+        token2 = listatokens[c][1]
+        if token2 == ']':
+            estado = 7
+            texto += ']'
+            c+=1
+            return True
+        elif listatokens[c][1] == ',':
+            estado = 6
+            texto += ','
+            c+=1
+            if listatokens[c][1] == '"':
+                estado = 8
+                texto += '"'
+                c+=1
+                while c < maxiteraciones:
+                    token = listatokens[c][1]
+                    if token == '"':
+                        estado = 5
+                        texto += '"'
+                        c+=1
+                        break
+                    elif token in listaletras or token in listasimbolos or token in listanumeros:
+                        estado = 9
+                        texto += token
+                        c+=1
+                    else:
+                        c+=1
+                        
+        token2 = listatokens[c][1]
+        if token2 == ']':
+            estado = 7
+            texto += ']'
+            c+=1
+            return True 
+        
+    return False
+################################################################
 def getTextoentrecomillas(c):
     global listatokens
     #iterador
@@ -287,6 +361,11 @@ def Gramaticatokeni(c):
 ################################################################################################################################
 def GramaticatokenC(c):
     global listaSintactico, listatokens, listaClaves, templistaClaves
+
+    #AFD
+    bandera = AFDListaTexto(c+7)
+
+
     #Remover espacios y saltos de linea
     flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
     #Nueva lista
