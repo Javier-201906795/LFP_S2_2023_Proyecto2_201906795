@@ -46,7 +46,7 @@ def evaluarinstrucciones():
                     txtlista += str(i)
                 contador += 1
 
-            txtlista += ']'
+            txtlista += ']\n'
             txtresultado += 'Claves=' + txtlista
         elif instruccion[0] == 'contarsi':
             print('♦ Contarsi: '+instruccion[1][0]+' valor:'+str(instruccion[1][1]))
