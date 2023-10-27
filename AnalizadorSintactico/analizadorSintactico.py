@@ -6,6 +6,7 @@ listaErroresSintactico = []
 listatokens = []
 listaClaves = []
 templistaClaves = []
+templistatokens = []
 listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 listanumeros = ['0','1','2','3','4','5','6','7','8','9','.']
@@ -126,6 +127,34 @@ def obtenertextoentrecomillasLista(c):
     else:
         c = fininstruccion(c,'"')
     return c
+
+################################################################################################################################
+def quitarespaciosysaltosdelinea(c,tokenabuscarparaparar):
+    global listatokens, templistatokens
+    templistatokens = listatokens
+    inicio = c
+    fin = 0
+    maxiteraciones = len(templistatokens)
+    while c < maxiteraciones:
+        token = templistatokens[c][1]
+        #Break
+        if token == tokenabuscarparaparar:
+            fin = c
+            c = maxiteraciones
+        elif token.isspace():
+            #Remover
+            templistatokens.pop(c)
+            maxiteraciones -= 1
+        else:
+            #Aumentar contador
+            c += 1
+
+
+    #Validar
+    if fin <= 0:
+        return False
+    else:
+        return True
 
 ################################################################################################################################
 ################################################################################################################################
@@ -249,6 +278,15 @@ def Gramaticatokeni(c):
 ################################################################################################################################
 def GramaticatokenC(c):
     global listaSintactico, listatokens, listaClaves, templistaClaves
+    #Remover espacios y saltos de linea
+    flagsinespacios = quitarespaciosysaltosdelinea(c,']')
+    #Nueva lista
+    if flagsinespacios == True:
+        #Remplazar lista sin espacios y saltos de linea pra la gramatica C
+        listatokens = templistatokens
+    else:
+        print('Falta token simbolo "]"')
+    #Evaluar
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
             if listatokens[c+2][1] == 'a':
@@ -261,7 +299,8 @@ def GramaticatokenC(c):
                                         c = obtenertextoentrecomillasLista(c+8)
                                         if listatokens[c][1] == ']':
                                             c +=1
-                                            print('\n Claves',templistaClaves)
+                                            print('\n Claves',templistaClaves,'\n')
+                                            #Almacenar Claves
                                             listaClaves = templistaClaves
                                     else:
                                         c = fininstruccion(c+8,'"')
@@ -543,20 +582,23 @@ def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
 
 def evaluartokens(tokens):
     global listaSintactico, listatokens
+    #Almacenar Tokens
     listatokens = tokens
     print('\n####### [ EVALUAR TOKENS ] #######')
     #Iterador
     c = 0
-    maxiteraciones = len(tokens)
+    maxiteraciones = len(listatokens)
     while c < maxiteraciones:
-        Token = tokens[c][1]
+        Token = listatokens[c][1]
         #//////////////////////////////////////////////////////////////////////////////////
         #Ignorar Comentarios
-        if tokens[c][4] == 'Comentario_multilinea' or tokens[c][3] == 'Comentario_simple':
+        if listatokens[c][4] == 'Comentario_multilinea' or listatokens[c][3] == 'Comentario_simple':
             c += 1    
         #[ c ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'C':
             c = GramaticatokenC(c)
+            #Se actualizo la lista quitando algunos espacios y saltos de linea
+            maxiteraciones = len(listatokens)
         #[ c ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'c':
             c = Gramaticatokenc(c)
@@ -580,7 +622,7 @@ def evaluartokens(tokens):
             c = Gramaticatokens(c)
         #//////////////////////////////////////////////////////////////////////////////////
         else:
-            print(tokens[c])
+            print(listatokens[c])
             c += 1
     
 ################################################################
