@@ -152,9 +152,9 @@ def quitarespaciosysaltosdelinea(c,tokenabuscarparaparar):
 
     #Validar
     if fin <= 0:
-        return False
+        return [False, fin]
     else:
-        return True
+        return [True, fin]
 
 ################################################################################################################################
 ################################################################################################################################
@@ -279,13 +279,14 @@ def Gramaticatokeni(c):
 def GramaticatokenC(c):
     global listaSintactico, listatokens, listaClaves, templistaClaves
     #Remover espacios y saltos de linea
-    flagsinespacios = quitarespaciosysaltosdelinea(c,']')
+    flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
     #Nueva lista
     if flagsinespacios == True:
         #Remplazar lista sin espacios y saltos de linea pra la gramatica C
         listatokens = templistatokens
     else:
         print('Falta token simbolo "]"')
+        print(fin)
     #Evaluar
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
