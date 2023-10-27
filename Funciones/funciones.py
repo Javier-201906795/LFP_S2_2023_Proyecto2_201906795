@@ -35,6 +35,19 @@ def evaluarinstrucciones():
         elif instruccion[0] == 'imprimirln':
             print('♦ Imprimirln: ', instruccion[1])
             txtresultado +=  instruccion[1]+' \n'
+        elif instruccion[0] == 'Claves':
+            print('♦ Claves=', instruccion[1])
+            txtlista = '['
+            contador = 0
+            for i in instruccion[1]:
+                if contador < len(instruccion[1]) - 1:
+                    txtlista += str(i)+', '
+                else:
+                    txtlista += str(i)
+                contador += 1
+
+            txtlista += ']'
+            txtresultado += 'Claves=' + txtlista
         elif instruccion[0] == 'contarsi':
             print('♦ Contarsi: '+instruccion[1][0]+' valor:'+str(instruccion[1][1]))
             txtresultado += 'contarsi("'+instruccion[1][0]+'",'+str(instruccion[1][1])+');\n'

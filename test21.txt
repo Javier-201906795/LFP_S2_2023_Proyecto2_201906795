@@ -1,0 +1,24 @@
+Claves = [ 
+		"codigo1",
+		"produc1to",
+		"precio2_compra",
+		"precio_venta",
+		"stockw"
+	  ]
+#COMENTARIO
+"""    
+COMENTARIO MULTILINEA 
+
+ """
+'''   
+ COMENTARIO MULTILINEA 
+ 
+  '''
+
+
+imprimir("Abarroteria");
+imprimirln("la Poderosa.");
+
+datos();
+imprimir("error1");
+imprimirln("error2");

@@ -302,6 +302,8 @@ def GramaticatokenC(c):
                                             print('\n Claves',templistaClaves,'\n')
                                             #Almacenar Claves
                                             listaClaves = templistaClaves
+                                            #Agregar a lista instrucciones
+                                            listaSintactico.append(['Claves',listaClaves])
                                     else:
                                         c = fininstruccion(c+8,'"')
                                 else:
