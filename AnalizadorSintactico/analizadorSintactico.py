@@ -248,7 +248,7 @@ def Gramaticatokeni(c):
 
 ################################################################################################################################
 def GramaticatokenC(c):
-    global listaSintactico, listatokens
+    global listaSintactico, listatokens, listaClaves, templistaClaves
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
             if listatokens[c+2][1] == 'a':
@@ -260,7 +260,9 @@ def GramaticatokenC(c):
                                     if listatokens[c+8][1] == '"':
                                         c = obtenertextoentrecomillasLista(c+8)
                                         if listatokens[c][1] == ']':
+                                            c +=1
                                             print('\n Claves',templistaClaves)
+                                            listaClaves = templistaClaves
                                     else:
                                         c = fininstruccion(c+8,'"')
                                 else:
@@ -588,9 +590,11 @@ def GetErrores():
 
 ################################################################
 def GetInstrucciones(tokens):
-    global listaSintactico, listaErroresSintactico
+    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves
     listaSintactico = []
     listaErroresSintactico = []
+    listaClaves = []
+    templistaClaves = []
 
     #Evaluar tokens
     evaluartokens(tokens)
