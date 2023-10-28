@@ -435,7 +435,14 @@ def Gramaticatokenc(c):
                     if listatokens[c+4][1] == 'e':
                         if listatokens[c+5][1] == 'o':
                             if listatokens[c+6][1] == '(':
-                                c = GramaticaEspecialtextoentreparentesisycomillas(c+6,'conteo')
+                                if listatokens[c+7][1] == ')':
+                                    if listatokens[c+8][1] == ';':
+                                        c = c+9
+                                        listaSintactico.append(['conteo',None])
+                                    else:
+                                        c = fininstruccion(c+7,')')
+                                else:
+                                    c = fininstruccion(c+7,')')
                             else:
                                 c = fininstruccion(c+6,'(')
                         else:
@@ -458,6 +465,7 @@ def Gramaticatokenc(c):
                                                         if numero != None:  
                                                             if listatokens[c][1] == ')':
                                                                 if listatokens[c+1][1] == ';':
+                                                                    c=c+2
                                                                     print('\nexportarsi○\n')
                                                                     listaSintactico.append(['contarsi',[texto, numero]])
                                                                 else:

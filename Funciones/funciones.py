@@ -53,8 +53,8 @@ def evaluarinstrucciones():
             txtresultado += 'contarsi("'+instruccion[1][0]+'",'+str(instruccion[1][1])+');\n'
             txtresultado += '2\n'
         elif instruccion[0] == 'conteo':
-            print('♦ Conteo: '+instruccion[1])
-            txtresultado += 'conteo("'+instruccion[1]+'");\n'
+            print('♦ Conteo')
+            txtresultado += 'conteo();\n'
             txtresultado += '15.0\n'
         elif instruccion[0] == 'datos':
             print('♦ Mostrar Datos:')

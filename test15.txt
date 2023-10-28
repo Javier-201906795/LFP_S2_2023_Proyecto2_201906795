@@ -1,1 +1,1 @@
-conteo("Reporte");
+conteo();
