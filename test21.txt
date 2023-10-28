@@ -1,9 +1,9 @@
 Claves = [ 
-		"codigo1",
-		"produc1to",
-		"precio2_compra",
-		"precio_venta",
-		"stockw"
+		"codigo3",
+		"produc1to3",
+		"precio2_compra3",
+		"precio_venta3",
+		"stockw3"
 	  ]
 #COMENTARIO
 """    
