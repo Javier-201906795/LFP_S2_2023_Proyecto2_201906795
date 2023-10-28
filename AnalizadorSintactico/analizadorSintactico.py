@@ -873,6 +873,8 @@ def evaluartokens(tokens):
         #[ p ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'R':
             c = GramaticatokenR(c)
+            #Se actualizo la lista quitando algunos espacios y saltos de linea
+            maxiteraciones = len(listatokens)
         #[ s ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 's':
             c = Gramaticatokens(c)
