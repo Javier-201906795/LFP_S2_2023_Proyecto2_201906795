@@ -10,6 +10,7 @@ templistatokens = []
 listaRegistros = []
 templistaRegistros = []
 templista = []
+frenogramaticaR = False
 listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 listanumeros = ['0','1','2','3','4','5','6','7','8','9','.']
@@ -93,11 +94,12 @@ def fininstruccion(a,tokenesperado):
         token = listatokens[a][1]
         if token == ';' or token == '\n':
             a += 1
-            #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
             #Validador para que no se salga de lista 
             if a >= maxiteraciones:
                 a -= 1
+            #Agregar a errores
+            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
+            
     
             return a
         else:
@@ -635,8 +637,9 @@ def Gramaticatokenp(c):
 
 ################################################################################################################################
 def GramaticatokenR(c):
-    global listaSintactico, listatokens, listaClaves, templistaClaves, templistaRegistros, listaRegistros
-
+    global listaSintactico, listatokens, listaClaves, templistaClaves, templistaRegistros, listaRegistros, frenogramaticaR
+    #Reiniciar Valor
+    frenogramaticaR = False
     #Remover espacios, tabulaciones y saltos de linea
     flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
     #Nueva lista
@@ -659,6 +662,9 @@ def GramaticatokenR(c):
                                         if listatokens[c+9][1] == '=':
                                             if listatokens[c+10][1] == '[':
                                                 c = Gramaticallaves(c+11)
+                                                #Salida
+                                                if frenogramaticaR == True:
+                                                    return c
                                                 if listatokens[c][1] == ']':
                                                     c += 1
                                                     print('OK')
@@ -781,6 +787,9 @@ def GramaticaEspecialListadeTextoentrecorchetes(c,funcion):
 def Gramaticallaves(c):
     if listatokens[c][1] == '{':
         c = GramaticaEspecialListadeRegistro(c+1)
+        #Salida
+        if frenogramaticaR == True:
+            return c
         if listatokens[c][1] == '}':
             if listatokens[c+1][1] == '{':
                 c=c+1
@@ -801,6 +810,7 @@ def Gramaticallaves(c):
     return c
 ################################################################################################################################
 def obtenertextoentrecomillasRegistro(c):
+    global frenogramaticaR
     Token = listatokens[c][1]
     texto, a = ['',c]
     if Token == '"':
@@ -815,6 +825,7 @@ def obtenertextoentrecomillasRegistro(c):
             token = listatokens[c-1][1]
             token2 = listatokens[c][1]
             c = fininstruccion(c,'"')
+            frenogramaticaR = True
     else:
         c = fininstruccion(c,'"')
     
@@ -824,7 +835,7 @@ def obtenertextoentrecomillasRegistro(c):
 
 ################################################################################################################################
 def GramaticaEspecialListadeRegistro(c):
-    global templista, templistaRegistros
+    global templista, templistaRegistros, frenogramaticaR
     Token = listatokens[c][1]
     #[ CASO 1] [TEXTO ENTRE COMILLAS]##############################################
     if Token == '"':
@@ -834,6 +845,8 @@ def GramaticaEspecialListadeRegistro(c):
         c = a
         token3 = listatokens[c][1]
         #Salida
+        if frenogramaticaR == True:
+            return c
         if token3 == '}':   
             #Añadir registro
             templistaRegistros.append(templista)
