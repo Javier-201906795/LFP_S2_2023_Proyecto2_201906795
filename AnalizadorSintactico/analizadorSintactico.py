@@ -406,19 +406,20 @@ def GramaticatokenC(c):
                         if listatokens[c+5][1] == 's':
                             if listatokens[c+6][1] == '=':
                                 if listatokens[c+7][1] == '[':
-                                    if listatokens[c+8][1] == '"':
-                                        c = obtenertextoentrecomillasLista(c+8)
-                                        if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
-                                            c +=1
-                                            print('\n Claves',templistaClaves,'\n')
-                                            #Almacenar Claves
-                                            listaClaves = templistaClaves
-                                            #Agregar a lista instrucciones
-                                            listaSintactico.append(['Claves',listaClaves])
-                                        else:
-                                            c = fininstruccion(c,']')
-                                    else:
-                                        c = fininstruccion(c+8,'"')
+                                    c = GramaticaEspecialListadeTextoentrecorchetes(c+7,'Claves')
+                                    # if listatokens[c+8][1] == '"':
+                                    #     c = obtenertextoentrecomillasLista(c+8)
+                                    #     if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
+                                    #         c +=1
+                                    #         print('\n Claves',templistaClaves,'\n')
+                                    #         #Almacenar Claves
+                                    #         listaClaves = templistaClaves
+                                    #         #Agregar a lista instrucciones
+                                    #         listaSintactico.append(['Claves',listaClaves])
+                                    #     else:
+                                    #         c = fininstruccion(c,']')
+                                    # else:
+                                    #     c = fininstruccion(c+8,'"')
                                 else:
                                     c = fininstruccion(c+7,'[')
                             else:
@@ -697,6 +698,26 @@ def GramaticaEspecialtextoentreparentesisycomillas(c,funcion):
     
     return c
 
+################################################################################################################################
+def GramaticaEspecialListadeTextoentrecorchetes(c,funcion):
+    if listatokens[c][1] == '[':
+        if listatokens[c+1][1] == '"':
+            c = obtenertextoentrecomillasLista(c+1)
+            if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
+                c +=1
+                print('\n Claves',templistaClaves,'\n')
+                #Almacenar Claves
+                listaClaves = templistaClaves
+                #Agregar a lista instrucciones
+                listaSintactico.append([funcion,listaClaves])
+            else:
+                c = fininstruccion(c,']')
+        else:
+            c = fininstruccion(c+1,'"')
+    else:
+        c = fininstruccion(c,'[')
+    
+    return c
 ################################################################################################################################
 ################################################################################################################################
 
