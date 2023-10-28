@@ -635,7 +635,7 @@ def Gramaticatokenp(c):
 
 ################################################################################################################################
 def GramaticatokenR(c):
-    global listaSintactico, listatokens, listaClaves, templistaClaves
+    global listaSintactico, listatokens, listaClaves, templistaClaves, templistaRegistros, listaRegistros
 
     #Remover espacios, tabulaciones y saltos de linea
     flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
@@ -663,6 +663,11 @@ def GramaticatokenR(c):
                                                     c += 1
                                                     print('OK')
                                                     print('Registros: ', templistaRegistros)
+                                                    #Añadir registros
+                                                    for i in templistaRegistros:
+                                                        listaRegistros.append(i)
+                                                    #Guardar instruccion
+                                                    listaSintactico.append(['Registros',listaRegistros])
                                                 else:
                                                     c = fininstruccion(c,']')
                                                 # if listatokens[c+11][1] == '{':

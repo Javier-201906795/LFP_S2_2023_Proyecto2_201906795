@@ -79,6 +79,12 @@ codigo  producto precio_compra precio_venta stock\n
             print('♦ Promedio("'+instruccion[1]+'")')
             txtresultado += 'promedio("'+instruccion[1]+'");\n'
             txtresultado += '5.5\n'
+        elif instruccion[0] == 'Registros':
+            print('♦Registros=',instruccion[1])
+            txtresultado += '\n----[ Registros ]----\n'
+            for i in instruccion[1]:
+                txtresultado += str(i)+'\n'
+            txtresultado += '\n---------------------\n'
         elif instruccion[0] == 'sumar':
             print('♦ Sumar("'+instruccion[1]+'")')
             txtresultado += 'sumar("'+instruccion[1]+'");\n'
