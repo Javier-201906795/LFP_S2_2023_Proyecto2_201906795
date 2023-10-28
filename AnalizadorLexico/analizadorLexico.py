@@ -73,6 +73,7 @@ def evaluartexto(texto):
             #Si es un texto un posible token
             textoaevaluar = texto[c+1:]
             string, pos = obtenercomentario(textoaevaluar, c)
+            string = '#'+string
             #Aumentar contador y columna
             c = pos + 1
             columna = len(string) + 1
