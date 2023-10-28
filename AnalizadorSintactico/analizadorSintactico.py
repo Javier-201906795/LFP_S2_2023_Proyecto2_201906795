@@ -9,6 +9,7 @@ templistaClaves = []
 templistatokens = []
 listaRegistros = []
 templistaRegistros = []
+templista = []
 listasimbolos = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
 listaletras = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
 listanumeros = ['0','1','2','3','4','5','6','7','8','9','.']
@@ -657,19 +658,26 @@ def GramaticatokenR(c):
                                     if listatokens[c+8][1] == 's':
                                         if listatokens[c+9][1] == '=':
                                             if listatokens[c+10][1] == '[':
-                                                if listatokens[c+11][1] == '{':
-                                                    c = GramaticaEspecialListadeRegistro(c+12)
-                                                    if listatokens[c][1] == '}':
-                                                        if listatokens[c+1][1] == '{':
-                                                            print('recursividad')
-                                                        elif listatokens[c+1][1] == ']':
-                                                            c=c+2
-                                                        else:
-                                                            c = fininstruccion(c,'{|]')             
-                                                    else:
-                                                        c = fininstruccion(c,'}')        
+                                                c = Gramaticallaves(c+11)
+                                                if listatokens[c][1] == ']':
+                                                    c += 1
+                                                    print('OK')
+                                                    print('Registros: ', templistaRegistros)
                                                 else:
-                                                    c = fininstruccion(c+11,'{')
+                                                    c = fininstruccion(c,']')
+                                                # if listatokens[c+11][1] == '{':
+                                                #     c = GramaticaEspecialListadeRegistro(c+12)
+                                                #     if listatokens[c][1] == '}':
+                                                #         if listatokens[c+1][1] == '{':
+                                                #             print('recursividad')
+                                                #         elif listatokens[c+1][1] == ']':
+                                                #             c=c+2
+                                                #         else:
+                                                #             c = fininstruccion(c,'{|]')             
+                                                #     else:
+                                                #         c = fininstruccion(c,'}')        
+                                                # else:
+                                                #     c = fininstruccion(c+11,'{')
                                             else:
                                                 c = fininstruccion(c+10,'[')
                                         else:
@@ -764,7 +772,29 @@ def GramaticaEspecialListadeTextoentrecorchetes(c,funcion):
     
     return c
 
-
+################################################################################################################################
+def Gramaticallaves(c):
+    if listatokens[c][1] == '{':
+        c = GramaticaEspecialListadeRegistro(c+1)
+        if listatokens[c][1] == '}':
+            if listatokens[c+1][1] == '{':
+                c=c+1
+                c = Gramaticallaves(c)
+            elif listatokens[c+1][1] == ']':
+                #Salida
+                c=c+1
+            else:
+                c = fininstruccion(c,'{|]')             
+        else:
+            c = fininstruccion(c,'}')        
+    
+    # elif listatokens[c][1]=='}':
+    #     #Salida
+    #     c += 1
+    else:
+        c = fininstruccion(c,'{')
+    return c
+################################################################################################################################
 def obtenertextoentrecomillasRegistro(c):
     global templistaRegistros
     Token = listatokens[c][1]
@@ -790,7 +820,7 @@ def obtenertextoentrecomillasRegistro(c):
 
 ################################################################################################################################
 def GramaticaEspecialListadeRegistro(c):
-    global templistaRegistros
+    global templista, templistaRegistros
     Token = listatokens[c][1]
     #[ CASO 1] [TEXTO ENTRE COMILLAS]##############################################
     if Token == '"':
@@ -810,12 +840,15 @@ def GramaticaEspecialListadeRegistro(c):
         token2 = listatokens[c][1]
         numero, a = obtenernumero(c)
         #Añadir registro
-        templistaRegistros.append(numero)
+        templista.append(numero)
         c = a
         token3 = listatokens[c][1]
         #Salida
         if token3 == '}':   
-            pass
+            #Añadir registro
+            templistaRegistros.append(templista)
+            #Limpiar
+            templista = []
         elif token3 == ',':
             token4 = listatokens[c+1][1]
             if token4 == '"' or token4 in listanumeros:
@@ -880,7 +913,7 @@ def evaluartokens(tokens):
             c = Gramaticatokens(c)
         #//////////////////////////////////////////////////////////////////////////////////
         else:
-            print(listatokens[c])
+            print('Token:', listatokens[c])
             c += 1
     
 ################################################################
@@ -890,13 +923,18 @@ def GetErrores():
 
 ################################################################
 def GetInstrucciones(tokens):
-    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves,templistatokens, listatokens
+    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves,templistatokens, listatokens, listaRegistros,templistaRegistros,templista
     listaSintactico = []
     listaErroresSintactico = []
     listatokens = []
     listaClaves = []
     templistaClaves = []
     templistatokens = []
+    listaRegistros = []
+    templistaRegistros = []
+    templista = []
+
+    
 
     #Evaluar tokens
     evaluartokens(tokens)
