@@ -1,0 +1,3 @@
+Registros = [ 
+		{"hola","uno","2.50","6"}
+ 	    ]
