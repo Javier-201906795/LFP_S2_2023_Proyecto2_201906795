@@ -133,12 +133,20 @@ def obtenertextoentrecomillasLista(c):
             elif listatokens[c][1] == ',':
                 if listatokens[c+1][1] == '"':
                     c = obtenertextoentrecomillasLista(c+1)
+                else:
+                    c = fininstruccion(c+1,'"')  
             else:
                 # c = fininstruccion(c,',')
                 return c
         else:
             c = ErrorAFDTextoentrecomillas(c+1,'"')
-            c = fininstruccion(c,',|]')  
+            #Validar si es el ultimo dato de la fila
+            token = listatokens[c-1][1]
+            if token == ']':
+                c = c
+            else:
+                # c = fininstruccion(c,']')  
+                c = c
     else:
         c = fininstruccion(c,'"')
     return c
@@ -183,7 +191,8 @@ def ErrorAFDTextoentrecomillas(a,tokenesperado):
     maxiteraciones = len(listatokens)
     while a < maxiteraciones:
         token = listatokens[a][1]
-        if token == ')' or token == ';' or token == '\n':
+        #Salida
+        if token == ')' or token == ';' or token == '\n' or token == ']' or token == ',':
             a += 1
             #Agregar a errores
             listaErroresSintactico.append([listatokens[a-1][1],str(tokenesperado),listatokens[a-1][2],listatokens[a-2][3],'error Sintactico',listatokens[a-1][2],listatokens[a-1][3]])
@@ -211,7 +220,8 @@ def AFDTextoentrecomillas(c):
         while c < maxiteraciones:
             #Token
             token = listatokens[c][1]
-            if token == ')' or token == ';' or token == '\n':
+            #Salida
+            if token == ')' or token == ';' or token == '\n' or token == ']' or token == ',':
                 return False
             elif token == '"':
                 estado = 5
@@ -398,7 +408,7 @@ def GramaticatokenC(c):
                                 if listatokens[c+7][1] == '[':
                                     if listatokens[c+8][1] == '"':
                                         c = obtenertextoentrecomillasLista(c+8)
-                                        if listatokens[c][1] == ']':
+                                        if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
                                             c +=1
                                             print('\n Claves',templistaClaves,'\n')
                                             #Almacenar Claves
