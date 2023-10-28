@@ -381,11 +381,7 @@ def Gramaticatokeni(c):
 def GramaticatokenC(c):
     global listaSintactico, listatokens, listaClaves, templistaClaves
 
-    #AFD
-    # bandera = AFDListaTexto(c+7)
-
-
-    #Remover espacios y saltos de linea
+    #Remover espacios, tabulaciones y saltos de linea
     flagsinespacios, fin = quitarespaciosysaltosdelinea(c,']')
     #Nueva lista
     if flagsinespacios == True:
@@ -393,10 +389,7 @@ def GramaticatokenC(c):
         listatokens = templistatokens
         #Cambiar id listas
         enumerarlistatokens()
-    else:
-        print('Falta token simbolo "]"')
-        print(fin)
-        # c = fininstruccion(fin-1,']')
+
     #Evaluar
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
@@ -407,19 +400,6 @@ def GramaticatokenC(c):
                             if listatokens[c+6][1] == '=':
                                 if listatokens[c+7][1] == '[':
                                     c = GramaticaEspecialListadeTextoentrecorchetes(c+7,'Claves')
-                                    # if listatokens[c+8][1] == '"':
-                                    #     c = obtenertextoentrecomillasLista(c+8)
-                                    #     if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
-                                    #         c +=1
-                                    #         print('\n Claves',templistaClaves,'\n')
-                                    #         #Almacenar Claves
-                                    #         listaClaves = templistaClaves
-                                    #         #Agregar a lista instrucciones
-                                    #         listaSintactico.append(['Claves',listaClaves])
-                                    #     else:
-                                    #         c = fininstruccion(c,']')
-                                    # else:
-                                    #     c = fininstruccion(c+8,'"')
                                 else:
                                     c = fininstruccion(c+7,'[')
                             else:
