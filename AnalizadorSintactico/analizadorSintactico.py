@@ -98,7 +98,7 @@ def fininstruccion(a,tokenesperado):
             if a >= maxiteraciones:
                 a -= 1
             #Agregar a errores
-            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
+            listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[a-1][2],listatokens[a-1][3]])
             
     
             return a
