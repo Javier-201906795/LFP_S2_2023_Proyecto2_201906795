@@ -89,6 +89,10 @@ def fininstruccion(a,tokenesperado):
             a += 1
             #Agregar a errores
             listaErroresSintactico.append([listatokens[inicio][1],str(tokenesperado),listatokens[inicio][2],listatokens[inicio][3],'error Sintactico',listatokens[inicio][2],listatokens[a-1][3]])
+            #Validador para que no se salga de lista 
+            if a >= maxiteraciones:
+                a -= 1
+    
             return a
         else:
             a += 1
@@ -123,13 +127,15 @@ def obtenertextoentrecomillasLista(c):
             texto, a = obtenertexto(c+1)
             c = a
             templistaClaves.append(texto)
+            token = listatokens[c][1]
             if listatokens[c][1] == ']':
                 return c
             elif listatokens[c][1] == ',':
                 if listatokens[c+1][1] == '"':
                     c = obtenertextoentrecomillasLista(c+1)
             else:
-                c = fininstruccion(c,',')
+                # c = fininstruccion(c,',')
+                return c
         else:
             c = ErrorAFDTextoentrecomillas(c+1,'"')
             c = fininstruccion(c,',|]')  
@@ -139,8 +145,11 @@ def obtenertextoentrecomillasLista(c):
 
 ################################################################################################################################
 def quitarespaciosysaltosdelinea(c,tokenabuscarparaparar):
-    global listatokens, templistatokens
-    templistatokens = listatokens
+    global templistatokens
+    #Agregar tokens a nueva lista
+    for i in listatokens:
+        templistatokens.append(i)
+    # templistatokens = listatokens
     inicio = c
     fin = 0
     maxiteraciones = len(templistatokens)
@@ -286,7 +295,7 @@ def AFDListaTexto(c):
                         c+=1
                     else:
                         c+=1
-                        
+
         token2 = listatokens[c][1]
         if token2 == ']':
             estado = 7
@@ -363,7 +372,7 @@ def GramaticatokenC(c):
     global listaSintactico, listatokens, listaClaves, templistaClaves
 
     #AFD
-    bandera = AFDListaTexto(c+7)
+    # bandera = AFDListaTexto(c+7)
 
 
     #Remover espacios y saltos de linea
@@ -377,7 +386,7 @@ def GramaticatokenC(c):
     else:
         print('Falta token simbolo "]"')
         print(fin)
-        c = fininstruccion(fin-1,']')
+        # c = fininstruccion(fin-1,']')
     #Evaluar
     if listatokens[c][1] == 'C':
         if listatokens[c+1][1] == 'l':
