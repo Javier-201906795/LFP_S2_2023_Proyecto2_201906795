@@ -737,11 +737,13 @@ def GetErrores():
 
 ################################################################
 def GetInstrucciones(tokens):
-    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves
+    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves,templistatokens, listatokens
     listaSintactico = []
     listaErroresSintactico = []
+    listatokens = []
     listaClaves = []
     templistaClaves = []
+    templistatokens = []
 
     #Evaluar tokens
     evaluartokens(tokens)
