@@ -801,7 +801,6 @@ def Gramaticallaves(c):
     return c
 ################################################################################################################################
 def obtenertextoentrecomillasRegistro(c):
-    global templistaRegistros
     Token = listatokens[c][1]
     texto, a = ['',c]
     if Token == '"':
@@ -829,17 +828,23 @@ def GramaticaEspecialListadeRegistro(c):
     Token = listatokens[c][1]
     #[ CASO 1] [TEXTO ENTRE COMILLAS]##############################################
     if Token == '"':
-        texto, a = obtenertextoentrecomillasRegistro(c+1)
-        a = c
-        if listatokens[c][1] == ']' and listatokens[c-1][1] != ',':
-            c +=1
-            print('\n Claves',templistaClaves,'\n')
-            #Almacenar Claves
-            listaClaves = templistaClaves
-            #Agregar a lista instrucciones
-            listaSintactico.append(['Registros',listaClaves])
-        else:
-            c = fininstruccion(c,']')
+        texto, a = obtenertextoentrecomillasRegistro(c)
+        #Añadir registro
+        templista.append(texto)
+        c = a
+        token3 = listatokens[c][1]
+        #Salida
+        if token3 == '}':   
+            #Añadir registro
+            templistaRegistros.append(templista)
+            #Limpiar
+            templista = []
+        elif token3 == ',':
+            token4 = listatokens[c+1][1]
+            if token4 == '"' or token4 in listanumeros:
+                c = GramaticaEspecialListadeRegistro(c+1)
+            else:
+                c = fininstruccion(c+1,'"|NUMERO')
     #[ CASO 2] [NUMERO] ##############################################
     elif Token in listanumeros:
         token2 = listatokens[c][1]
