@@ -676,19 +676,6 @@ def GramaticatokenR(c):
                                                     listaSintactico.append(['Registros',listaRegistros])
                                                 else:
                                                     c = fininstruccion(c,']')
-                                                # if listatokens[c+11][1] == '{':
-                                                #     c = GramaticaEspecialListadeRegistro(c+12)
-                                                #     if listatokens[c][1] == '}':
-                                                #         if listatokens[c+1][1] == '{':
-                                                #             print('recursividad')
-                                                #         elif listatokens[c+1][1] == ']':
-                                                #             c=c+2
-                                                #         else:
-                                                #             c = fininstruccion(c,'{|]')             
-                                                #     else:
-                                                #         c = fininstruccion(c,'}')        
-                                                # else:
-                                                #     c = fininstruccion(c+11,'{')
                                             else:
                                                 c = fininstruccion(c+10,'[')
                                         else:
@@ -802,9 +789,6 @@ def Gramaticallaves(c):
         else:
             c = fininstruccion(c,'}')        
     
-    # elif listatokens[c][1]=='}':
-    #     #Salida
-    #     c += 1
     else:
         c = fininstruccion(c,'{')
     return c
