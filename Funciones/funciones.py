@@ -101,10 +101,64 @@ def funcion_promedio(filtro):
                 denominador = len(tempLista)
                 #Promedio
                 promedio = numerador / denominador
+                promedio = round(promedio, 2)
                 #Agregar mensaje
                 mensaje += str(promedio)+'\n'
             else:
                 mensaje += '-[ Error promedio ]-'
+
+                
+        else:
+            MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
+
+
+    return mensaje
+
+################################################################
+def funcion_contarsi(informacion):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    filtro, valor = informacion
+    if flagClavesyRegistros == True:
+        mensaje += 'contarsi("'+str(filtro)+'",'+str(valor)+');\n'
+        #Buscar si existe el Filtro en las Claves
+        if filtro in Claves:
+            #Buscar cual fila esta ubicado filtro en la lista Claves
+            c = 0 
+            # for i in Claves:
+            #     if i == filtro:
+            #         break
+            #     c += 1
+            # print(Claves[c] + ': '+ str(c))
+            # #Almacenar registros en lista temporal
+            # for item in Registros:
+            #     tempLista.append(item[c])
+
+            # #Obtener promedio
+            # #formula:   [lista(0)+lista(1)...lista(n)]/n
+            # # Numerador / Denominador
+            # bandera = True
+            # numerador = 0
+            # for i in tempLista:
+            #     numero = 0
+            #     try:
+            #         numero = float(i)
+            #     except:
+            #         bandera = False
+            #         MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
+            #         break
+            #     numerador += numero
+            # if bandera == True:
+            #     #Denominador
+            #     denominador = len(tempLista)
+            #     #Promedio
+            #     promedio = numerador / denominador
+            #     promedio = round(promedio, 2)
+            #     #Agregar mensaje
+            #     mensaje += str(promedio)+'\n'
+            # else:
+            #     mensaje += '-[ Error promedio ]-'
 
                 
         else:
@@ -162,8 +216,7 @@ def evaluarinstrucciones():
             #[ contar si ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'contarsi':
                 print('♦ Contarsi: '+instruccion[1][0]+' valor:'+str(instruccion[1][1]))
-                txtresultado += 'contarsi("'+instruccion[1][0]+'",'+str(instruccion[1][1])+');\n'
-                txtresultado += '2\n'
+                txtresultado += funcion_contarsi(instruccion[1])
             #[ conteo ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'conteo':
                 print('♦ Conteo')
