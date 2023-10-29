@@ -71,7 +71,31 @@ def funcion_promedio(filtro):
         mensaje += 'promedio("'+str(filtro)+'");\n'
         #Buscar si existe el Filtro en las Claves
         if filtro in Claves:
-            pass
+            #Buscar cual fila esta ubicado filtro en la lista Claves
+            c = 0 
+            for i in Claves:
+                if i == filtro:
+                    break
+                c += 1
+            print(Claves[c] + ': '+ str(c))
+            #Almacenar registros en lista temporal
+            for item in Registros:
+                tempLista.append(item[c])
+
+            #Obtener promedio
+            #formula:   [lista(0)+lista(1)...lista(n)]/n
+            # numerador = 0
+            # for i in tempLista:
+            #     numero = 0
+            #     try:
+            #         numero = float(i)
+            #     except:
+            #         MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
+            #     numerador += numero
+            # mensaje += numerador
+
+            mensaje += str(tempLista)
+                
         else:
             MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
 
