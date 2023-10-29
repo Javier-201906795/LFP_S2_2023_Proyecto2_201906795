@@ -53,7 +53,7 @@ def Analizar():
 ########################################################################
 raiz = Tk()
 raiz.title('LFP Proyecto 2 | 201906795')
-raiz.geometry('1150x600')
+raiz.geometry('1250x600')
 
 Label(raiz, pady=0,text='PROYECTO 2 | 201906795', font=("Consolas",14)).place(x=50,y=20)
 Button(raiz,text='Abrir', bg='#DBE6A1', fg='#000000',font=("Consolas",12), command=Abrir).place(x=500,y=20, width=90, height= 35)
@@ -95,7 +95,7 @@ labelnumeracion = Label(raiz, pady=0,text='26.\n27.\n28.\n29.', font=("Consolas"
 labelnumeracion = Label(raiz, pady=0,text='30.\n31.', font=("Consolas",10), bg="#FFFFFF").place(x=12,y=545)
 
 #ConsolaTkinter
-inputconsola = Text(raiz, wrap=WORD, width=55, height=31,)
+inputconsola = Text(raiz, wrap=WORD, width=67, height=31,)
 inputconsola.place(x=700,y=80)
 
 raiz.mainloop()
