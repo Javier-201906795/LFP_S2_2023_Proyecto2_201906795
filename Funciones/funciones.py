@@ -9,7 +9,7 @@ txtresultado = ''
 ################################################################
 Claves = []
 Registros = []
-
+flagClavesyRegistros = False
 
 
 ################################################################
@@ -155,9 +155,17 @@ def evaluarinstrucciones():
 
 ################################################################
 def ejecutar(oldlistainstrucciones):
-    global listainstrucciones, txtresultado
+    global listainstrucciones, txtresultado, Claves, Registros, flagClavesyRegistros
     txtresultado = ''
     listainstrucciones = oldlistainstrucciones
+    
+
+    #Reinicar valores
+    Claves = []
+    Registros = []
+    flagClavesyRegistros = False
+    
+    #Evaluar
     evaluarinstrucciones()
 
 
