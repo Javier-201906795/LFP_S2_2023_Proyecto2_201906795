@@ -85,20 +85,26 @@ def funcion_promedio(filtro):
             #Obtener promedio
             #formula:   [lista(0)+lista(1)...lista(n)]/n
             # Numerador / Denominador
+            bandera = True
             numerador = 0
             for i in tempLista:
                 numero = 0
                 try:
                     numero = float(i)
                 except:
+                    bandera = False
                     MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
+                    break
                 numerador += numero
-            #Denominador
-            denominador = len(tempLista)
-            #Promedio
-            promedio = numerador / denominador
-
-            mensaje += str(promedio)+'\n'
+            if bandera == True:
+                #Denominador
+                denominador = len(tempLista)
+                #Promedio
+                promedio = numerador / denominador
+                #Agregar mensaje
+                mensaje += str(promedio)+'\n'
+            else:
+                mensaje += '-[ Error promedio ]-'
 
                 
         else:
