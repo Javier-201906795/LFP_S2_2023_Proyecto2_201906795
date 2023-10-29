@@ -105,7 +105,7 @@ def funcion_promedio(filtro):
                 #Agregar mensaje
                 mensaje += str(promedio)+'\n'
             else:
-                mensaje += '-[ Error promedio ]-'
+                mensaje += '-[ Error promedio ]-\n'
 
                 
         else:
@@ -188,6 +188,51 @@ def funcion_datos():
 
     return mensaje
 
+################################################################
+def funcion_sumar(filtro):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        mensaje += 'sumar("'+str(filtro)+'");\n'
+        #Buscar si existe el Filtro en las Claves
+        if filtro in Claves:
+            #Buscar cual fila esta ubicado filtro en la lista Claves
+            c = 0 
+            for i in Claves:
+                if i == filtro:
+                    break
+                c += 1
+            print(Claves[c] + ': '+ str(c))
+            #Almacenar registros en lista temporal
+            for item in Registros:
+                tempLista.append(item[c])
+
+            #sumar
+            bandera = True
+            suma = 0
+            for i in tempLista:
+                numero = 0
+                try:
+                    numero = float(i)
+                except:
+                    bandera = False
+                    MessageBox.showerror('Error | sumar','Error al convertir este valor: '+str(i)+' en valor numerico')        
+                    break
+                suma += numero
+            if bandera == True:
+                suma = round(suma, 2)
+                #Agregar mensaje
+                mensaje += str(suma)+'\n'
+            else:
+                mensaje += '-[ Error Suma ]-\n'
+
+                
+        else:
+            MessageBox.showerror('Error | sumar','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar')
+
+
+    return mensaje
 
 
 ################################################################
@@ -278,8 +323,8 @@ def evaluarinstrucciones():
             #[ sumar ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'sumar':
                 print('♦ Sumar("'+instruccion[1]+'")')
-                txtresultado += 'sumar("'+instruccion[1]+'");\n'
-                txtresultado += '12\n'
+                txtresultado += funcion_sumar(instruccion[1])
+                
 
 
             c += 1
