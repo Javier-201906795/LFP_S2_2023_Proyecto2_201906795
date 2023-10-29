@@ -38,6 +38,9 @@ def Abrir():
     
 ########################################################################
 def Analizar():
+    #Desbloquear consola
+    inputconsola.config(state=NORMAL)
+
     print('\n-- [ Analizar ] --')
     texto = str(inputtexto.get("1.0",END))
     txtconsola = analizador.analizadorBizData(texto)
@@ -48,6 +51,8 @@ def Analizar():
     inputconsola.delete('1.0', 'end')
     #Agregar Texto
     inputconsola.insert('1.0', str(txtconsola))
+    #Bloquear consola
+    inputconsola.config(state=DISABLED)
 
 
 ########################################################################
@@ -97,6 +102,8 @@ labelnumeracion = Label(raiz, pady=0,text='30.\n31.', font=("Consolas",10), bg="
 #ConsolaTkinter
 inputconsola = Text(raiz, wrap=WORD, width=67, height=31,)
 inputconsola.place(x=700,y=80)
+# inputconsola.config(state=DISABLED)
+
 
 raiz.mainloop()
 
