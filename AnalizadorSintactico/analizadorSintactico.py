@@ -473,7 +473,25 @@ def Gramaticatokenc(c):
                                                             else:
                                                                 c = fininstruccion(c,')')    
                                                         else:
-                                                            c = fininstruccionPornumero(inicio+1,c,'NUMERO_INVALIDO',c)
+                                                            if listatokens[c][1] == '"':
+                                                                AFDTexto = AFDTextoentrecomillas(c)
+                                                                if AFDTexto == True:
+                                                                    texto2, a = obtenertexto(c+1)
+                                                                    c = a
+                                                                    if listatokens[c][1] == ')':
+                                                                        if listatokens[c+1][1] == ';':
+                                                                            c += 2
+                                                                            print('\nexportarsi○\n')
+                                                                            listaSintactico.append(['contarsi',[texto, texto2]])
+                                                                        else:
+                                                                            c = fininstruccion(c+1,';')
+                                                                    else:
+                                                                        c = fininstruccion(c,')')
+                                                                else:
+                                                                    c = ErrorAFDTextoentrecomillas(c,'"')
+                                                                    c = fininstruccion(c,'"')  
+                                                            
+                                                            # c = fininstruccionPornumero(inicio+1,c,'"|NUMERO',c)
                                                     else:
                                                         c = fininstruccion(c,',')
                                                 else:
