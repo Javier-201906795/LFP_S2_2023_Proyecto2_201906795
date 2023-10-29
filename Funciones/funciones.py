@@ -11,6 +11,7 @@ Claves = []
 Registros = []
 flagClavesyRegistros = False
 tempLista = []
+listaAcciones = []
 
 
 ################################################################
@@ -53,18 +54,19 @@ def agregar_registros(listaregistros):
 
 ################################################################
 def funcion_conteo():
-    global flagClavesyRegistros
+    global flagClavesyRegistros,listaAcciones
     mensaje = ''
     if flagClavesyRegistros == True:
         mensaje += '\nconteo();\n'
         Registrosnumeros = len(Registros)
         mensaje += str(Registrosnumeros)+'\n'
-
+        listaAcciones.append('conteo();<br>'+str(Registrosnumeros))
+    
     return mensaje
 
 ################################################################
 def funcion_promedio(filtro):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -104,6 +106,7 @@ def funcion_promedio(filtro):
                 promedio = round(promedio, 2)
                 #Agregar mensaje
                 mensaje += str(promedio)+'\n'
+                listaAcciones.append('promedio("'+str(filtro)+'");<br>'+str(promedio))
             else:
                 mensaje += '-[ Error promedio ]-\n'
 
@@ -116,7 +119,7 @@ def funcion_promedio(filtro):
 
 ################################################################
 def funcion_contarsi(informacion):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     filtro, valor = informacion
@@ -140,8 +143,10 @@ def funcion_contarsi(informacion):
             for objetivo in tempLista:
                 if  objetivo == valor:
                     contador += 1
-
+            
+            #Resultado
             mensaje += str(contador)+'\n'
+            listaAcciones.append('contarsi("'+str(filtro)+'",'+str(valor)+');<br>'+str(contador))
                 
         else:
             MessageBox.showerror('Error | contar si','NO se encontro el valor -->| '+str(filtro)+' |<-- entre las Claves, por lo tanto no se puede filtrar')
@@ -151,7 +156,7 @@ def funcion_contarsi(informacion):
 
 ################################################################
 def funcion_datos():
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -190,7 +195,7 @@ def funcion_datos():
 
 ################################################################
 def funcion_sumar(filtro):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -224,6 +229,7 @@ def funcion_sumar(filtro):
                 suma = round(suma, 2)
                 #Agregar mensaje
                 mensaje += str(suma)+'\n'
+                listaAcciones.append('sumar("'+str(filtro)+'");<br>'+str(suma))
             else:
                 mensaje += '-[ Error Suma ]-\n'
 
@@ -236,7 +242,7 @@ def funcion_sumar(filtro):
 
 ################################################################
 def funcion_maximo(filtro):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -273,6 +279,7 @@ def funcion_maximo(filtro):
                 
                 #Agregar mensaje
                 mensaje += str(maximo)+'\n'
+                listaAcciones.append('maximo("'+str(filtro)+'");<br>'+str(maximo))
             else:
                 mensaje += '-[ Error maximo ]-\n'
 
@@ -285,7 +292,7 @@ def funcion_maximo(filtro):
 
 ################################################################
 def funcion_minimo(filtro):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -322,6 +329,7 @@ def funcion_minimo(filtro):
                 
                 #Agregar mensaje
                 mensaje += str(minimo)+'\n'
+                listaAcciones.append('minimo("'+str(filtro)+'");<br>'+str(minimo))
             else:
                 mensaje += '-[ Error minimo ]-\n'
 
@@ -334,7 +342,7 @@ def funcion_minimo(filtro):
 
 ################################################################
 def funcion_exportarReporte(nombre):
-    global flagClavesyRegistros, tempLista
+    global flagClavesyRegistros, tempLista, listaAcciones
     tempLista = []
     mensaje = ''
     if flagClavesyRegistros == True:
@@ -342,11 +350,15 @@ def funcion_exportarReporte(nombre):
             nombre = str(nombre)
             #Crear Cuadro HTML
             txthtml = crearTextoHTML(nombre)
-            txthtml = str(txthtml)
-            mensaje = txthtml
-
+                       
             #Crear Archivo HTML
-            #Guardar archivo
+            ruta = 'Reporte_201906795.html'
+            archivo = open(ruta,'w')
+            archivo.write(txthtml)
+            archivo.close()
+
+            mensaje += 'Reporte creado exitosamente...\nReporte_201906795.html'
+            
 
         except Exception as e:
             mensaje += '--[Error al crear Reporte]--'
@@ -359,6 +371,7 @@ def funcion_exportarReporte(nombre):
 
 ################################################################
 def crearTextoHTML(nombre):
+    
     txthtml = ''
     if flagClavesyRegistros == True:
         #Inicio
@@ -412,12 +425,12 @@ def crearTextoHTML(nombre):
         #Funciones
         txthtml += '''<div class="container">'''
 
-        valor = 'contar();<br>4'
-        txthtml += '''<div class="row">
-            <div class="alert alert-secondary col" role="alert">
-                '''+valor+'''
-            </div>
-        </div>'''
+        for accion in listaAcciones:
+            txthtml += '''<div class="row">
+                <div class="alert alert-secondary col" role="alert">
+                    '''+str(accion)+'''
+                </div>
+            </div>'''
 
         txthtml += '''</div>'''
 
@@ -527,7 +540,7 @@ def evaluarinstrucciones():
 
 ################################################################
 def ejecutar(oldlistainstrucciones):
-    global listainstrucciones, txtresultado, Claves, Registros, flagClavesyRegistros, tempLista
+    global listainstrucciones, txtresultado, Claves, Registros, flagClavesyRegistros, tempLista, listaAcciones
     txtresultado = ''
     listainstrucciones = oldlistainstrucciones
     
@@ -537,6 +550,7 @@ def ejecutar(oldlistainstrucciones):
     Registros = []
     flagClavesyRegistros = False
     tempLista = []
+    listaAcciones = []
     
     #Evaluar
     evaluarinstrucciones()
