@@ -28,13 +28,16 @@ def evaluarinstrucciones():
     print('\n##################### [ EVALUANDO... ] #############################')
     while c < maxiteraciones:
         instruccion = listainstrucciones[c] 
-        print('Instruccion: ',instruccion[0], 'Contenido: ', instruccion[1])
+        print('•Instruccion: ',instruccion[0], 'Contenido: ', instruccion[1])
+        #[ imprimir ] ///////////////////////////////////////////////////////////////////////
         if instruccion[0] == 'imprimir':
             print('♦ Imprimir: ', instruccion[1])
             txtresultado +=  instruccion[1] + ' '
+        #[ imprimirln ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'imprimirln':
             print('♦ Imprimirln: ', instruccion[1])
             txtresultado +=  instruccion[1]+' \n'
+        #[ Claves ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'Claves':
             print('♦ Claves=', instruccion[1])
             txtlista = '['
@@ -48,14 +51,17 @@ def evaluarinstrucciones():
 
             txtlista += ']\n'
             txtresultado += 'Claves=' + txtlista
+        #[ contar si ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'contarsi':
             print('♦ Contarsi: '+instruccion[1][0]+' valor:'+str(instruccion[1][1]))
             txtresultado += 'contarsi("'+instruccion[1][0]+'",'+str(instruccion[1][1])+');\n'
             txtresultado += '2\n'
+        #[ conteo ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'conteo':
             print('♦ Conteo')
             txtresultado += 'conteo();\n'
             txtresultado += '15.0\n'
+        #[ datos ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'datos':
             print('♦ Mostrar Datos:')
             txtresultado += '\n' + '-- [ datos(); ] --\n'
@@ -64,27 +70,33 @@ codigo  producto precio_compra precio_venta stock\n
 1       Salsa    10.5          20.0         7
 '''
             txtresultado += '\n------------------------\n'
+        #[ exportarReporte ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'exportarReporte':
             print('♦ ExportarReporte("'+instruccion[1]+'")')
             txtresultado += 'Reporte Exportado: '+instruccion[1]+'.html\n'
+        #[ maximo ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'maximo':
             print('♦ Maximo("'+instruccion[1]+'")')
             txtresultado += 'max("'+instruccion[1]+'");\n'
             txtresultado += '100.0\n'
+        #[ Minimo ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'minimo':
             print('♦ Maximo("'+instruccion[1]+'")')
             txtresultado += 'min("'+instruccion[1]+'");\n'
             txtresultado += '5.0\n'
+        #[ promedio ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'promedio':
             print('♦ Promedio("'+instruccion[1]+'")')
             txtresultado += 'promedio("'+instruccion[1]+'");\n'
             txtresultado += '5.5\n'
+        #[ Registros ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'Registros':
             print('♦Registros=',instruccion[1])
             txtresultado += '\n----[ Registros ]----\n'
             for i in instruccion[1]:
                 txtresultado += str(i)+'\n'
             txtresultado += '\n---------------------\n'
+        #[ sumar ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'sumar':
             print('♦ Sumar("'+instruccion[1]+'")')
             txtresultado += 'sumar("'+instruccion[1]+'");\n'
