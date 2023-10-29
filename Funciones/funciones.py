@@ -156,10 +156,21 @@ def funcion_datos():
     mensaje = ''
     if flagClavesyRegistros == True:
         try:
-            mensaje += '\n' + '-- [ datos(); ] --\n'
+            mensaje += '\n' + '-- [ datos(); ] --\n\n'
             
             #Titulo
+            espaciado = '{:>0}'
+            for i in range(0,len(Claves)):
+                #Obtener tamaño
+                largo = len(Claves[i])
+                #Validar
+                if largo <= 15:
+                    espaciado += "{:>"+str(largo+3)+"}"
+                else:
+                    espaciado += "{:>18}"
+            #Asignar formato
             row_format ="{:>12}" * (len(Claves)+1)
+            row_format = espaciado 
             titular = row_format.format("", *Claves)
             mensaje += str(titular) + '\n'
             #Filas
@@ -172,7 +183,7 @@ def funcion_datos():
             mensaje += '\n------------------------\n'
         
         except Exception:
-            MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
+            MessageBox.showerror('Error | datos()','Error al mostrar los datos();')
 
 
     return mensaje
