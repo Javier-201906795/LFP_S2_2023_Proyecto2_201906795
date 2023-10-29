@@ -10,6 +10,7 @@ txtresultado = ''
 Claves = []
 Registros = []
 flagClavesyRegistros = False
+tempLista = []
 
 
 ################################################################
@@ -26,7 +27,7 @@ def agregar_claves(listaclaves):
 
 ################################################################
 def agregar_registros(listaregistros):
-    global Registros
+    global Registros, flagClavesyRegistros
     #Validar
     if len(Claves) <= 0:
         MessageBox.showerror('Error - instrucciones','No hay claves que evaluar')
@@ -48,6 +49,36 @@ def agregar_registros(listaregistros):
         #Imprimir Resultado
         print('\n---[Registros]---')
         print(Registros)
+        flagClavesyRegistros = True
+
+################################################################
+def funcion_conteo():
+    global flagClavesyRegistros
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        mensaje += '\nconteo();\n'
+        Registrosnumeros = len(Registros)
+        mensaje += str(Registrosnumeros)+'\n'
+
+    return mensaje
+
+################################################################
+def funcion_promedio(filtro):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        mensaje += 'promedio("'+str(filtro)+'");\n'
+        #Buscar si existe el Filtro en las Claves
+        if filtro in Claves:
+            pass
+        else:
+            MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
+
+
+    return mensaje
+
+
 ################################################################
 def imprimir(texto):
     print(texto)
@@ -101,8 +132,8 @@ def evaluarinstrucciones():
             #[ conteo ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'conteo':
                 print('♦ Conteo')
-                txtresultado += 'conteo();\n'
-                txtresultado += '15.0\n'
+                txtresultado += funcion_conteo()
+                
             #[ datos ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'datos':
                 print('♦ Mostrar Datos:')
@@ -129,8 +160,8 @@ def evaluarinstrucciones():
             #[ promedio ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'promedio':
                 print('♦ Promedio("'+instruccion[1]+'")')
-                txtresultado += 'promedio("'+instruccion[1]+'");\n'
-                txtresultado += '5.5\n'
+                txtresultado += funcion_promedio(instruccion[1])
+                
             #[ Registros ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'Registros':
                 print('♦Registros=',instruccion[1])
@@ -155,7 +186,7 @@ def evaluarinstrucciones():
 
 ################################################################
 def ejecutar(oldlistainstrucciones):
-    global listainstrucciones, txtresultado, Claves, Registros, flagClavesyRegistros
+    global listainstrucciones, txtresultado, Claves, Registros, flagClavesyRegistros, tempLista
     txtresultado = ''
     listainstrucciones = oldlistainstrucciones
     
@@ -164,6 +195,7 @@ def ejecutar(oldlistainstrucciones):
     Claves = []
     Registros = []
     flagClavesyRegistros = False
+    tempLista = []
     
     #Evaluar
     evaluarinstrucciones()
