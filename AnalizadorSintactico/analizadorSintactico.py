@@ -26,6 +26,7 @@ def imprimirlistaSintactico():
     print('\n############[ Lista Sintactico | Instrucciones]#################\n')
     for i in listaSintactico:
         print(i)
+    print('\n')
 
 ################################################################
 def enumerarlistatokens():
@@ -921,6 +922,14 @@ def evaluartokens(tokens):
             c = Gramaticatokenp(c)
         #[ p ] ///////////////////////////////////////////////////////////////////////////////
         elif Token == 'R':
+            #Reiniciar valores
+            global templistaClaves, templistatokens, templistaRegistros, templista, frenogramaticaR
+            templistaClaves = []
+            templistatokens = []
+            templistaRegistros = []
+            templista = []
+            frenogramaticaR = False
+            #Evaluar
             c = GramaticatokenR(c)
             #Se actualizo la lista quitando algunos espacios y saltos de linea
             maxiteraciones = len(listatokens)
@@ -939,7 +948,7 @@ def GetErrores():
 
 ################################################################
 def GetInstrucciones(tokens):
-    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves,templistatokens, listatokens, listaRegistros,templistaRegistros,templista
+    global listaSintactico, listaErroresSintactico, listaClaves, templistaClaves,templistatokens, listatokens, listaRegistros,templistaRegistros,templista,frenogramaticaR
     listaSintactico = []
     listaErroresSintactico = []
     listatokens = []
@@ -949,6 +958,8 @@ def GetInstrucciones(tokens):
     listaRegistros = []
     templistaRegistros = []
     templista = []
+    frenogramaticaR = False
+    
 
     
 

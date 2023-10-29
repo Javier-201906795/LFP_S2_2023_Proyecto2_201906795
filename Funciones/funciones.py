@@ -6,9 +6,31 @@
 listainstrucciones = []
 txtresultado = ''
 ################################################################
+Claves = []
+Registros = []
 
 
 
+################################################################
+def agregar_claves(listaclaves):
+    global Claves
+    #Limpiar Clave anteriores
+    Claves = []
+    #Agregar claves
+    for i in listaclaves:
+        Claves.append(i)
+
+################################################################
+def agregar_registros(listaregistros):
+    global Registros
+    #Limpiar
+    Registros = []
+    #Filtrar 
+    templista = []
+    #Obtener elemento lista
+    for registro in listaregistros:
+        #Almacenar registro en variable temporal
+        print(registro)
 
 ################################################################
 def imprimir(texto):
@@ -40,16 +62,19 @@ def evaluarinstrucciones():
         #[ Claves ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'Claves':
             print('♦ Claves=', instruccion[1])
+            #Añadir CLAVES
+            agregar_claves(instruccion[1])
             txtlista = '['
             contador = 0
-            for i in instruccion[1]:
-                if contador < len(instruccion[1]) - 1:
+            for i in Claves:
+                if contador < len(Claves[1]) - 1:
                     txtlista += str(i)+', '
                 else:
                     txtlista += str(i)
                 contador += 1
 
             txtlista += ']\n'
+            
             txtresultado += 'Claves=' + txtlista
         #[ contar si ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'contarsi':
@@ -92,6 +117,7 @@ codigo  producto precio_compra precio_venta stock\n
         #[ Registros ] ///////////////////////////////////////////////////////////////////////
         elif instruccion[0] == 'Registros':
             print('♦Registros=',instruccion[1])
+            agregar_registros(instruccion[1])
             txtresultado += '\n----[ Registros ]----\n'
             for i in instruccion[1]:
                 txtresultado += str(i)+'\n'
