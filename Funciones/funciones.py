@@ -84,17 +84,22 @@ def funcion_promedio(filtro):
 
             #Obtener promedio
             #formula:   [lista(0)+lista(1)...lista(n)]/n
-            # numerador = 0
-            # for i in tempLista:
-            #     numero = 0
-            #     try:
-            #         numero = float(i)
-            #     except:
-            #         MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
-            #     numerador += numero
-            # mensaje += numerador
+            # Numerador / Denominador
+            numerador = 0
+            for i in tempLista:
+                numero = 0
+                try:
+                    numero = float(i)
+                except:
+                    MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
+                numerador += numero
+            #Denominador
+            denominador = len(tempLista)
+            #Promedio
+            promedio = numerador / denominador
 
-            mensaje += str(tempLista)
+            mensaje += str(promedio)+'\n'
+
                 
         else:
             MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
@@ -184,7 +189,7 @@ def evaluarinstrucciones():
             #[ promedio ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'promedio':
                 print('♦ Promedio("'+instruccion[1]+'")')
-                txtresultado += funcion_promedio(instruccion[1])
+                txtresultado += str(funcion_promedio(instruccion[1]))
                 
             #[ Registros ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'Registros':
