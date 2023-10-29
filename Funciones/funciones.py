@@ -126,40 +126,22 @@ def funcion_contarsi(informacion):
         if filtro in Claves:
             #Buscar cual fila esta ubicado filtro en la lista Claves
             c = 0 
-            # for i in Claves:
-            #     if i == filtro:
-            #         break
-            #     c += 1
-            # print(Claves[c] + ': '+ str(c))
-            # #Almacenar registros en lista temporal
-            # for item in Registros:
-            #     tempLista.append(item[c])
+            for i in Claves:
+                if i == filtro:
+                    break
+                c += 1
+            print(Claves[c] + ': '+ str(c))
+            #Almacenar registros en lista temporal
+            for item in Registros:
+                tempLista.append(item[c])
 
-            # #Obtener promedio
-            # #formula:   [lista(0)+lista(1)...lista(n)]/n
-            # # Numerador / Denominador
-            # bandera = True
-            # numerador = 0
-            # for i in tempLista:
-            #     numero = 0
-            #     try:
-            #         numero = float(i)
-            #     except:
-            #         bandera = False
-            #         MessageBox.showerror('Error | promedio','Error al convertir este valor: '+str(i)+' en valor numerico')        
-            #         break
-            #     numerador += numero
-            # if bandera == True:
-            #     #Denominador
-            #     denominador = len(tempLista)
-            #     #Promedio
-            #     promedio = numerador / denominador
-            #     promedio = round(promedio, 2)
-            #     #Agregar mensaje
-            #     mensaje += str(promedio)+'\n'
-            # else:
-            #     mensaje += '-[ Error promedio ]-'
+            #Contar si
+            contador = 0
+            for objetivo in tempLista:
+                if  objetivo == valor:
+                    contador += 1
 
+            mensaje += str(contador)+'\n'
                 
         else:
             MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
