@@ -142,8 +142,9 @@ def evaluarinstrucciones():
 
 
             c += 1
-    except:
-        print("\033[1;31;40m Error: Ocurrio un error al ejecutar alguna funcion \033[0m")
+    except Exception as e:
+        print("\033[1;31;40m Error: Ocurrio un error al ejecutar alguna instruccion \033[0m")
+        print(e)
 
 
 ################################################################
