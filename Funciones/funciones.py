@@ -341,9 +341,9 @@ def funcion_exportarReporte(nombre):
         try:
             nombre = str(nombre)
             #Crear Cuadro HTML
-            txthtml = crearTextoHTML()
+            txthtml = crearTextoHTML(nombre)
             txthtml = str(txthtml)
-            mensaje = txthtml 
+            mensaje = txthtml
 
             #Crear Archivo HTML
             #Guardar archivo
@@ -358,7 +358,7 @@ def funcion_exportarReporte(nombre):
     return mensaje
 
 ################################################################
-def crearTextoHTML():
+def crearTextoHTML(nombre):
     txthtml = ''
     if flagClavesyRegistros == True:
         #Inicio
@@ -372,8 +372,8 @@ def crearTextoHTML():
   </head>
   <body>
     <div class="container">
-        <h1>Reporte BizData</h1>
-        <h3>Javier Yllescas - 201906795</h3>
+        <h1>'''+str(nombre)+'''</h1>
+        <h5>Javier Yllescas - 201906795</h5>
         <br>
     </div>
     <div class="container">
