@@ -15,7 +15,7 @@ def Abrir():
     #Limpiar input
     inputtexto.delete('1.0', 'end')
     #Obtener ruta 
-    rutaarchivo = filedialog.askopenfilename()
+    rutaarchivo = filedialog.askopenfilename(filetypes=[("BizData", ".bizdata"),("Texto",".txt")])
     print('Ruta archivo: "',rutaarchivo,'"')
     #Obtener Texto
     textoarchivo = ''
