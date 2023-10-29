@@ -1,4 +1,5 @@
-
+from tkinter import *
+from tkinter import messagebox as MessageBox
 
 
 
@@ -26,23 +27,27 @@ def agregar_claves(listaclaves):
 ################################################################
 def agregar_registros(listaregistros):
     global Registros
-    #Limpiar
-    Registros = []
-    #Filtrar 
-    templista = []
-    #Obtener elemento lista
-    for registro in listaregistros:
-        #Almacenar registro en variable temporal
-        #Recorrer item por item y almacenar los necesarios
-        for i in range(0,len(Claves)):
-            item = registro[i]
-            templista.append(item)
-        #Se obtubo un nuevo listao agregarlo al registro
-        Registros.append(templista)
+    #Validar
+    if len(Claves) <= 0:
+        MessageBox.showerror('Error - instrucciones','No hay claves que evaluar')
+    else:
+        #Limpiar
+        Registros = []
+        #Filtrar 
         templista = []
-    #Imprimir Resultado
-    print('\n---[Registros]---')
-    print(Registros)
+        #Obtener elemento lista
+        for registro in listaregistros:
+            #Almacenar registro en variable temporal
+            #Recorrer item por item y almacenar los necesarios
+            for i in range(0,len(Claves)):
+                item = registro[i]
+                templista.append(item)
+            #Se obtubo un nuevo listao agregarlo al registro
+            Registros.append(templista)
+            templista = []
+        #Imprimir Resultado
+        print('\n---[Registros]---')
+        print(Registros)
 ################################################################
 def imprimir(texto):
     print(texto)
@@ -144,6 +149,7 @@ def evaluarinstrucciones():
             c += 1
     except Exception as e:
         print("\033[1;31;40m Error: Ocurrio un error al ejecutar alguna instruccion \033[0m")
+        MessageBox.showerror('Error - instrucciones','Ocurrio un error al ejecutar alguna instruccion ver consola CMD')
         print(e)
 
 
