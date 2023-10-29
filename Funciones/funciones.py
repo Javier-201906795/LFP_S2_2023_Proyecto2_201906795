@@ -341,6 +341,9 @@ def funcion_exportarReporte(nombre):
         try:
             nombre = str(nombre)
             #Crear Cuadro HTML
+            txthtml = crearTextoHTML()
+            txthtml = str(txthtml)
+            mensaje = txthtml 
 
             #Crear Archivo HTML
             #Guardar archivo
@@ -380,9 +383,44 @@ def crearTextoHTML():
 
         #----------------------------------------------------------------
         #Titulo Tabla [ CLAVES ]
-        txthtml += '''                <th scope="col">#</th>'''
+        for titulo in Claves:
+            txthtml += '''                <th scope="col">'''+str(titulo)+'''</th>'''
+
         txthtml += '''</tr>
             </thead>'''
+        #----------------------------------------------------------------
+
+
+        #----------------------------------------------------------------
+        #Filas Tabla
+        txthtml += '''<tbody>'''
+        
+        for registro in Registros:
+            txthtml += '''<tr>'''
+            for valor in registro:
+                txthtml += '''<th scope="row">'''+str(valor)+'''</th>'''
+            txthtml += '''</tr>'''
+
+        txthtml += '''</tbody>
+        </table>
+    </div>
+    <br>'''
+        #----------------------------------------------------------------
+
+
+        #----------------------------------------------------------------
+        #Funciones
+        txthtml += '''<div class="container">'''
+
+        valor = 'contar();<br>4'
+        txthtml += '''<div class="row">
+            <div class="alert alert-secondary col" role="alert">
+                '''+valor+'''
+            </div>
+        </div>'''
+
+        txthtml += '''</div>'''
+
         #----------------------------------------------------------------
 
         #Final
@@ -451,7 +489,7 @@ def evaluarinstrucciones():
             #[ exportarReporte ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'exportarReporte':
                 print('♦ ExportarReporte("'+instruccion[1]+'")')
-                txtresultado += 'Reporte Exportado: '+instruccion[1]+'.html\n'
+                txtresultado += funcion_exportarReporte(instruccion[1])
             #[ maximo ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'maximo':
                 print('♦ Maximo("'+instruccion[1]+'")')
