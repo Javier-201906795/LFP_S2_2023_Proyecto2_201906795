@@ -19,6 +19,9 @@ def agregar_claves(listaclaves):
     #Agregar claves
     for i in listaclaves:
         Claves.append(i)
+    #Imprimir Resultado
+    print('\n---[Claves]---')
+    print(Claves,'\n')
 
 ################################################################
 def agregar_registros(listaregistros):
@@ -30,8 +33,16 @@ def agregar_registros(listaregistros):
     #Obtener elemento lista
     for registro in listaregistros:
         #Almacenar registro en variable temporal
-        print(registro)
-
+        #Recorrer item por item y almacenar los necesarios
+        for i in range(0,len(Claves)):
+            item = registro[i]
+            templista.append(item)
+        #Se obtubo un nuevo listao agregarlo al registro
+        Registros.append(templista)
+        templista = []
+    #Imprimir Resultado
+    print('\n---[Registros]---')
+    print(Registros)
 ################################################################
 def imprimir(texto):
     print(texto)
@@ -119,7 +130,7 @@ codigo  producto precio_compra precio_venta stock\n
             print('♦Registros=',instruccion[1])
             agregar_registros(instruccion[1])
             txtresultado += '\n----[ Registros ]----\n'
-            for i in instruccion[1]:
+            for i in Registros:
                 txtresultado += str(i)+'\n'
             txtresultado += '\n---------------------\n'
         #[ sumar ] ///////////////////////////////////////////////////////////////////////
