@@ -158,28 +158,16 @@ def funcion_datos():
         try:
             mensaje += '\n' + '-- [ datos(); ] --\n'
             
-            titular = ''
-            espaciado = ''
-            c =0
-            for titulo in Claves:
-                if c >= len(Claves)-1:
-                    titular += '"'+str(titulo) + '"'
-                else:
-                    titular += '"'+str(titulo) + '",'
-                espaciado += '{'
-                espaciado += ':<10'
-                espaciado += '} '
-                c +=1
-            #Titulos
-            print(espaciado)
-            print(titular)
-            print("{:<10} {:<10} {:<10} {:<10} {:<10}".format("codigo","producto","precio_compra","precio_venta","stock"))
-            print(espaciado.format(titular))
-            mensaje += str(titular)+'\n'
-            # mensaje += str(espaciado)+'\n'
-            # mensaje = "{:<10}".format(Claves)
-            
-                
+            #Titulo
+            row_format ="{:>12}" * (len(Claves)+1)
+            titular = row_format.format("", *Claves)
+            mensaje += str(titular) + '\n'
+            #Filas
+            for i in range(0,len(Registros)):
+                fila = row_format.format("", *Registros[i])
+                mensaje += str(fila) + '\n'
+
+
 
             mensaje += '\n------------------------\n'
         
