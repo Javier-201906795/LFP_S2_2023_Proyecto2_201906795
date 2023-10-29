@@ -824,7 +824,7 @@ def obtenertextoentrecomillasRegistro(c):
             #Validar si es el ultimo dato de la fila
             token = listatokens[c-1][1]
             token2 = listatokens[c][1]
-            c = fininstruccion(c,'"')
+            c = fininstruccion(c,'"|,')
             frenogramaticaR = True
     else:
         c = fininstruccion(c,'"')
@@ -861,12 +861,20 @@ def GramaticaEspecialListadeRegistro(c):
     #[ CASO 2] [NUMERO] ##############################################
     elif Token in listanumeros:
         token2 = listatokens[c][1]
+        inicio = c
         numero, a = obtenernumero(c)
         #Añadir registro
         templista.append(numero)
         c = a
         token3 = listatokens[c][1]
         #Salida
+        if frenogramaticaR == True:
+            return c
+        if numero == None:
+            c = inicio
+            c = fininstruccion(c,'NUMERO_VALIDO')
+            frenogramaticaR = True
+            return c
         if token3 == '}':   
             #Añadir registro
             templistaRegistros.append(templista)
@@ -880,6 +888,7 @@ def GramaticaEspecialListadeRegistro(c):
                 c = fininstruccion(c+1,'"|NUMERO')
 
     else:
+        frenogramaticaR = True
         c = fininstruccion(c+1,'"|NUMERO')
     
     return c
