@@ -332,6 +332,27 @@ def funcion_minimo(filtro):
 
     return mensaje
 
+################################################################
+def funcion_exportarReporte(nombre):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        try:
+            nombre = str(nombre)
+            #Crear Cuadro HTML
+
+            #Crear Archivo HTML
+            #Guardar archivo
+
+        except Exception as e:
+            mensaje += '--[Error al crear Reporte]--'
+            MessageBox.showerror('Error | Reporte','Ocurrio un error al crear el reporte ver CMD.')
+            print('Error:')
+            print(e)
+    else:
+        mensaje += '--[Error al crear Reporte]--'
+    return mensaje
 
 ################################################################
 def imprimir(texto):
