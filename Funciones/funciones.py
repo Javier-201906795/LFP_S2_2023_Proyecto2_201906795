@@ -144,10 +144,51 @@ def funcion_contarsi(informacion):
             mensaje += str(contador)+'\n'
                 
         else:
+            MessageBox.showerror('Error | contar si','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar')
+
+
+    return mensaje
+
+################################################################
+def funcion_datos():
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        try:
+            mensaje += '\n' + '-- [ datos(); ] --\n'
+            
+            titular = ''
+            espaciado = ''
+            c =0
+            for titulo in Claves:
+                if c >= len(Claves)-1:
+                    titular += '"'+str(titulo) + '"'
+                else:
+                    titular += '"'+str(titulo) + '",'
+                espaciado += '{'
+                espaciado += ':<10'
+                espaciado += '} '
+                c +=1
+            #Titulos
+            print(espaciado)
+            print(titular)
+            print("{:<10} {:<10} {:<10} {:<10} {:<10}".format("codigo","producto","precio_compra","precio_venta","stock"))
+            print(espaciado.format(titular))
+            mensaje += str(titular)+'\n'
+            # mensaje += str(espaciado)+'\n'
+            # mensaje = "{:<10}".format(Claves)
+            
+                
+
+            mensaje += '\n------------------------\n'
+        
+        except Exception:
             MessageBox.showerror('Error | promedio','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar y promediar')
 
 
     return mensaje
+
 
 
 ################################################################
@@ -207,12 +248,7 @@ def evaluarinstrucciones():
             #[ datos ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'datos':
                 print('♦ Mostrar Datos:')
-                txtresultado += '\n' + '-- [ datos(); ] --\n'
-                txtresultado += '''
-    codigo  producto precio_compra precio_venta stock\n
-    1       Salsa    10.5          20.0         7
-    '''
-                txtresultado += '\n------------------------\n'
+                txtresultado += funcion_datos()
             #[ exportarReporte ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'exportarReporte':
                 print('♦ ExportarReporte("'+instruccion[1]+'")')
