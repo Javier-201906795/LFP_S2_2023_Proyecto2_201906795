@@ -144,7 +144,7 @@ def funcion_contarsi(informacion):
             mensaje += str(contador)+'\n'
                 
         else:
-            MessageBox.showerror('Error | contar si','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar')
+            MessageBox.showerror('Error | contar si','NO se encontro el valor -->| '+str(filtro)+' |<-- entre las Claves, por lo tanto no se puede filtrar')
 
 
     return mensaje
@@ -229,7 +229,105 @@ def funcion_sumar(filtro):
 
                 
         else:
-            MessageBox.showerror('Error | sumar','NO se encontro el valor '+str(filtro)+' entre las Claves, por lo tanto no se puede filtrar')
+            MessageBox.showerror('Error | sumar','NO se encontro el valor -->| '+str(filtro)+' |<-- entre las Claves, por lo tanto no se puede filtrar')
+
+
+    return mensaje
+
+################################################################
+def funcion_maximo(filtro):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        mensaje += 'maximo("'+str(filtro)+'");\n'
+        #Buscar si existe el Filtro en las Claves
+        if filtro in Claves:
+            #Buscar cual fila esta ubicado filtro en la lista Claves
+            c = 0 
+            for i in Claves:
+                if i == filtro:
+                    break
+                c += 1
+            print(Claves[c] + ': '+ str(c))
+            #Almacenar registros en lista temporal
+            for item in Registros:
+                tempLista.append(item[c])
+
+            #Validar numeros
+            bandera = True
+            suma = 0
+            for i in tempLista:
+                numero = 0
+                try:
+                    numero = float(i)
+                except:
+                    bandera = False
+                    MessageBox.showerror('Error | maximo','Error al convertir este valor: '+str(i)+' en valor numerico')        
+                    break
+                
+            if bandera == True:
+                #Obtener numero maximo
+                maximo = max(tempLista)
+                maximo = round(maximo,2)
+                
+                #Agregar mensaje
+                mensaje += str(maximo)+'\n'
+            else:
+                mensaje += '-[ Error maximo ]-\n'
+
+                
+        else:
+            MessageBox.showerror('Error | maximo','NO se encontro el valor -->| '+str(filtro)+' |<-- entre las Claves, por lo tanto no se puede filtrar')
+
+
+    return mensaje
+
+################################################################
+def funcion_minimo(filtro):
+    global flagClavesyRegistros, tempLista
+    tempLista = []
+    mensaje = ''
+    if flagClavesyRegistros == True:
+        mensaje += 'minimo("'+str(filtro)+'");\n'
+        #Buscar si existe el Filtro en las Claves
+        if filtro in Claves:
+            #Buscar cual fila esta ubicado filtro en la lista Claves
+            c = 0 
+            for i in Claves:
+                if i == filtro:
+                    break
+                c += 1
+            print(Claves[c] + ': '+ str(c))
+            #Almacenar registros en lista temporal
+            for item in Registros:
+                tempLista.append(item[c])
+
+            #Validar numeros
+            bandera = True
+            suma = 0
+            for i in tempLista:
+                numero = 0
+                try:
+                    numero = float(i)
+                except:
+                    bandera = False
+                    MessageBox.showerror('Error | minimo','Error al convertir este valor: '+str(i)+' en valor numerico')        
+                    break
+                
+            if bandera == True:
+                #Obtener numero maximo
+                minimo = min(tempLista)
+                minimo = round(minimo,2)
+                
+                #Agregar mensaje
+                mensaje += str(minimo)+'\n'
+            else:
+                mensaje += '-[ Error minimo ]-\n'
+
+                
+        else:
+            MessageBox.showerror('Error | minimo','NO se encontro el valor -->| '+str(filtro)+' |<-- entre las Claves, por lo tanto no se puede filtrar')
 
 
     return mensaje
@@ -300,13 +398,11 @@ def evaluarinstrucciones():
             #[ maximo ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'maximo':
                 print('♦ Maximo("'+instruccion[1]+'")')
-                txtresultado += 'max("'+instruccion[1]+'");\n'
-                txtresultado += '100.0\n'
+                txtresultado += funcion_maximo(instruccion[1])
             #[ Minimo ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'minimo':
                 print('♦ Maximo("'+instruccion[1]+'")')
-                txtresultado += 'min("'+instruccion[1]+'");\n'
-                txtresultado += '5.0\n'
+                txtresultado += funcion_minimo(instruccion[1])
             #[ promedio ] ///////////////////////////////////////////////////////////////////////
             elif instruccion[0] == 'promedio':
                 print('♦ Promedio("'+instruccion[1]+'")')
