@@ -51,3 +51,20 @@ seleccionarmos Errores y si aparece este cuadro
 y podemos abrir en el navegador
 
 ![ventana](/1_Arbol_JFLAP/paso13.PNG)
+
+para generar reporte de tokens seleccionar esta opcion 
+
+![ventana](/1_Arbol_JFLAP/paso10.PNG)
+
+se desplegara la siguiente listado
+
+![ventana](/1_Arbol_JFLAP/paso11.PNG)
+
+selecciona tokens y se abrirala la siguiente ventana
+
+![ventana](/1_Arbol_JFLAP/paso14.PNG)
+
+y podemos ver el reporte en el navegador
+
+![ventana](/1_Arbol_JFLAP/paso15.PNG)
+
