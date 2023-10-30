@@ -531,6 +531,14 @@ def Gramaticatokend(c):
                                 if listatokens[c+7][1] == ';':
                                     c = c+8
                                     listaSintactico.append(['datos',None])
+                                    #Arbol
+                                    nodoarbol2 = Arbol.agregarnodo('d')
+                                    nodoa = Arbol.agregarnodo('datos')
+                                    nodob = Arbol.agregarnodo('(')
+                                    nodoc = Arbol.agregarnodo(')')
+                                    Arbol.conectarnodo(nodoarbol2,nodoa)
+                                    Arbol.conectarnodo(nodoarbol2,nodob)
+                                    Arbol.conectarnodo(nodoarbol2,nodoc)
                                 else:
                                     c = fininstruccion(c+7,';')
                             else:
@@ -567,6 +575,16 @@ def Gramaticatokene(c):
                                                             if listatokens[c+14][1] == 'e':
                                                                 if listatokens[c+15][1] == '(':
                                                                     c = GramaticaEspecialtextoentreparentesisycomillas(c+15,'exportarReporte')
+                                                                    #Arbol
+                                                                    nodoarbola = Arbol.agregarnodo('e')
+                                                                    nodo1a = Arbol.agregarnodo('exportarReporte')
+                                                                    nodo2a = Arbol.agregarnodo('(')
+                                                                    nodo3a = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-1][1]))
+                                                                    nodo4a = Arbol.agregarnodo(')')
+                                                                    Arbol.conectarnodo(nodoarbola,nodo1a)
+                                                                    Arbol.conectarnodo(nodoarbola,nodo2a)
+                                                                    Arbol.conectarnodo(nodoarbola,nodo3a)
+                                                                    Arbol.conectarnodo(nodoarbola,nodo4a)
                                                                 else:
                                                                     c = fininstruccion(c+8,'(')
                                                             else:
@@ -626,6 +644,16 @@ def Gramaticatokenm(c):
                 if listatokens[c+2][1] == 'n':
                     if listatokens[c+3][1] == '(':
                         c = GramaticaEspecialtextoentreparentesisycomillas(c+3,'minimo')
+                        #Arbol
+                        nodoarbol = Arbol.agregarnodo('m')
+                        nodo1 = Arbol.agregarnodo('min')
+                        nodo2 = Arbol.agregarnodo('(')
+                        nodo3 = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-1][1]))
+                        nodo4 = Arbol.agregarnodo(')')
+                        Arbol.conectarnodo(nodoarbol,nodo1)
+                        Arbol.conectarnodo(nodoarbol,nodo2)
+                        Arbol.conectarnodo(nodoarbol,nodo3)
+                        Arbol.conectarnodo(nodoarbol,nodo4)
                     else:
                         c = fininstruccion(c+3,'(')
                 else:
