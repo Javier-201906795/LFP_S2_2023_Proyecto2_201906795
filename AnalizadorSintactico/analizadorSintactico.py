@@ -1,4 +1,5 @@
 
+from Grafica import *
 
 ################################################################
 listaSintactico = []
@@ -636,6 +637,16 @@ def Gramaticatokenp(c):
                                 if listatokens[c+7][1] == 'o':
                                     if listatokens[c+8][1] == '(':
                                         c = GramaticaEspecialtextoentreparentesisycomillas(c+8,'promedio')
+                                        #Arbol
+                                        nodoarbol = Arbol.agregarnodo('p')
+                                        nodo1 = Arbol.agregarnodo('promedio')
+                                        nodo2 = Arbol.agregarnodo('(')
+                                        nodo3 = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-2][0]))
+                                        nodo4 = Arbol.agregarnodo(')')
+                                        Arbol.conectarnodo(nodoarbol,nodo1)
+                                        Arbol.conectarnodo(nodoarbol,nodo2)
+                                        Arbol.conectarnodo(nodoarbol,nodo3)
+                                        Arbol.conectarnodo(nodoarbol,nodo4)
                                     else:
                                         c = fininstruccion(c+8,'(')
                                 else:

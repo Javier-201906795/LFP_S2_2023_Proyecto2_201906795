@@ -1,6 +1,12 @@
 digraph Grafica {
-	node [fillcolor=white fontcolor=blue shape=circle style=filled]
-	x1 [label=1]
-	x2 [label=1]
+	x1 [label=p]
+	x2 [label=promedio]
+	x3 [label="("]
+	x4 [label=conteo]
+	x5 [label=")"]
 	x1 -> x2
+	x1 -> x3
+	x1 -> x4
+	x1 -> x5
+	node [fillcolor=white fontcolor=blue shape=circle style=filled]
 }

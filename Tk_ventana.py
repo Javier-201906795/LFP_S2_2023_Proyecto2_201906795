@@ -14,10 +14,10 @@ def GraficaArbol():
     print('Arbol')
     configuraciones = {'texto':'Operaciones', 'fondo':'white','fuente':'blue', 'forma':'circle'}
     Arbol.configuraciones(configuraciones)
-    nodo1 = Arbol.agregarnodo('1')
-    nodo2 = Arbol.agregarnodo('1')
+    # nodo1 = Arbol.agregarnodo('1')
+    # nodo2 = Arbol.agregarnodo('1')
 
-    Arbol.conectarnodo(nodo1,nodo2)
+    # Arbol.conectarnodo(nodo1,nodo2)
     Arbol.render()
 
     
@@ -53,6 +53,10 @@ def Abrir():
     
 ########################################################################
 def Analizar():
+    #Crear Arbol
+    Arbol.generagraficaarbol()
+    Arbol.reiniciarvalores()
+    
     #Desbloquear consola
     inputconsola.config(state=NORMAL)
 
@@ -69,9 +73,7 @@ def Analizar():
     #Bloquear consola
     inputconsola.config(state=DISABLED)
 
-    #Crear Arbol
-    Arbol.generagraficaarbol()
-    Arbol.reiniciarvalores()
+    
 
 ########################################################################
 def ReporteErrores():
