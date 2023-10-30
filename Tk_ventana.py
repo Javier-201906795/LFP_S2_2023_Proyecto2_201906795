@@ -74,7 +74,7 @@ def ReporteErrores():
             print('--- [Errores Sintacticos] ---')
             print(ErroresSintactico)
             #Crea archivo HTML
-            txthtml = crearTextoHTML('Reporte Errores',['Token','Fila I.','Columna I.','Fila F.','Columna F.','Tipo de Error'],ErroresLexicos)
+            txthtml = crearTextoHTML('Reporte Errores',['No.','Token','Fila I.','Columna I.','Fila F.','Columna F.','Tipo de Error'],ErroresLexicos)
             #Crear Archivo HTML
             ruta = 'Reporte_Errores_201906795.html'
             archivo = open(ruta,'w')
@@ -127,12 +127,34 @@ def crearTextoHTML(nombre,Titulos,Registros):
     #----------------------------------------------------------------
     #Filas Tabla
     txthtml += '''<tbody>'''
-    
-    for registro in Registros:
+
+    contadorerrores = 0
+    for i in range(0,len(Registros)):
         txthtml += '''<tr>'''
-        for valor in registro:
-            txthtml += '''<th scope="row">'''+str(valor)+'''</th>'''
+        registro = Registros[i]
+        contador = 0
+        for c in range(0,len(registro)+3):
+            
+            if contador == 0:
+                txthtml += '''<th scope="row">'''+str(contadorerrores)+'''</th>'''    
+            elif contador > 0 and contador < len(registro):
+                txthtml += '''<th scope="row">'''+str(registro[contador-1])+'''</th>'''
+            elif contador == 6:
+                txthtml += '''<th scope="row">'''+str(registro[len(registro)-1])+'''</th>'''
+            else:
+                txthtml += '''<th scope="row">'''+str('--')+'''</th>'''
+            contador += 1
+            
+        contadorerrores += 1
+
+
         txthtml += '''</tr>'''
+
+    # for registro in Registros:
+    #     txthtml += '''<tr>'''
+    #     for valor in registro:
+    #         txthtml += '''<th scope="row">'''+str(valor)+'''</th>'''
+    #     txthtml += '''</tr>'''
 
     txthtml += '''</tbody>
     </table>
