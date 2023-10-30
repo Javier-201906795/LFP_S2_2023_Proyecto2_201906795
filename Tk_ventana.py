@@ -64,8 +64,6 @@ def ReporteErrores():
         ErroresSintactico = analizadorSintactico.GetErrores()
 
         
-        
-
         #Validar
         if len(ErroresLexicos) <= 0 and len(ErroresSintactico) <= 0:
             #No hay Errores
@@ -75,12 +73,93 @@ def ReporteErrores():
             print(ErroresLexicos)
             print('--- [Errores Sintacticos] ---')
             print(ErroresSintactico)
-        #Crea archivo HTML
+            #Crea archivo HTML
+            txthtml = crearTextoHTML('Reporte Errores',['Token','Fila I.','Columna I.','Fila F.','Columna F.','Tipo de Error'],ErroresLexicos)
+            #Crear Archivo HTML
+            ruta = 'Reporte_Errores_201906795.html'
+            archivo = open(ruta,'w')
+            archivo.write(txthtml)
+            archivo.close()
+
+            print('Reporte creado exitosamente...\nReporte_Errores_201906795.html')
 
 
         #Mensaje
     except Exception as e:
         print('Error ', e)
+
+
+################################################################
+def crearTextoHTML(nombre,Titulos,Registros):
+    
+    txthtml = ''
+
+    #Inicio
+    txthtml = '''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Proyecto 2</title>
+</head>
+<body>
+<div class="container">
+    <h1>'''+str(nombre)+'''</h1>
+    <h5>Javier Yllescas - 201906795</h5>
+    <br>
+</div>
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>'''
+
+    #----------------------------------------------------------------
+    #Titulo Tabla [ CLAVES ]
+    for titulo in Titulos:
+        txthtml += '''                <th scope="col">'''+str(titulo)+'''</th>'''
+
+    txthtml += '''</tr>
+        </thead>'''
+    #----------------------------------------------------------------
+
+
+    #----------------------------------------------------------------
+    #Filas Tabla
+    txthtml += '''<tbody>'''
+    
+    for registro in Registros:
+        txthtml += '''<tr>'''
+        for valor in registro:
+            txthtml += '''<th scope="row">'''+str(valor)+'''</th>'''
+        txthtml += '''</tr>'''
+
+    txthtml += '''</tbody>
+    </table>
+</div>
+<br>'''
+    #----------------------------------------------------------------
+
+
+    # #----------------------------------------------------------------
+    # #Funciones
+    # txthtml += '''<div class="container">'''
+
+    # for accion in listaAcciones:
+    #     txthtml += '''<div class="row">
+    #         <div class="alert alert-secondary col" role="alert">
+    #             '''+str(accion)+'''
+    #         </div>
+    #     </div>'''
+
+    # txthtml += '''</div>'''
+
+    #----------------------------------------------------------------
+
+    #Final
+    txthtml += '''</body>
+</html>'''
+    return txthtml
 
 
 ########################################################################
