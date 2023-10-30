@@ -57,9 +57,11 @@ i•m•p•r•i•m•i•r•('('•"•Letra+|Numero*|simbolo*)|l•n•'('�
 ### Gramatica Texto entre parentesis y comillas dobles:
 ![ventana](/1_Arbol_JFLAP/Gramatica_Especial_Textoentreparentesisycomillas.PNG)
 
+### Gramatica Listas(Texto|Numeros) entre Corchetes y Llaves:
+![ventana](/1_Arbol_JFLAP/Gramatica_R.png)
 
 # Automata Finito Determinsta (AFD)
-## AFD Texto entre comillas
+# AFD Texto entre comillas
 
 Gramatica Identificadora de TEXTO entre comillas dobles<br>
 SIMBOLOS = {{,},:,[,],",",(,),;,=,",',#,_,-}<br>
@@ -78,3 +80,12 @@ Fin: {q5}<br>
 ![ventana](/1_Arbol_JFLAP/Automata_Finito_Determinista_TEXTO_ARBOL.PNG)
 ![ventana](/1_Arbol_JFLAP/Automata_Finito_Determinista_TEXTO_TABLA.PNG)
 ![ventana](/1_Arbol_JFLAP/Automata_Finito_Determinista_TEXTO_GRAFICA.PNG)
+
+# AFD AUTOMATA [“TEXTO”,”TEXTO2”] 
+
+<br>
+
+![ventana](/1_Arbol_JFLAP/AFD_2.PNG)
+![ventana](/1_Arbol_JFLAP/AFD_2_grafica.PNG)
+![ventana](/1_Arbol_JFLAP/AFD_2_tablas.PNG)
+![ventana](/1_Arbol_JFLAP/AFD_2_AFD.PNG)
