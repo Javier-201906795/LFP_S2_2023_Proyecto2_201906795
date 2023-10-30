@@ -89,3 +89,55 @@ Fin: {q5}<br>
 ![ventana](/1_Arbol_JFLAP/AFD_2_grafica.PNG)
 ![ventana](/1_Arbol_JFLAP/AFD_2_tablas.PNG)
 ![ventana](/1_Arbol_JFLAP/AFD_2_AFD.PNG)
+
+---
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Estructura Proyecto 2 carpetas  y archivos
+
+~~~
+LFP_S2_2023_Proyecto1_201906795
+├── 1_Arbol_JFLAP
+│   └── Imagenes, AFD, Gramaticas para los manuales
+├── Analizador
+│   └── analizador.py
+├── AnalizadorLexico
+│   └── analizadorLexico.py
+├── AnalizadorSintactico
+│   └── analizadorSintactico.py
+├── Funciones
+│   └── funciones.py
+├── z_Archivos_de_Prueba
+│   └── Archivos para probar el programa .txt y .bizdata
+├── Archivo de Prueba 2.bizdata
+├── Manual_tecnico.md
+├── Manual_usuario.md
+├── Reporte_201906795.html
+├── Reporte_Errores_201906795.html
+├── Reporte_Tokens_201906795.html
+└── Tk_ventana.py
+~~~
+
+---
+## Estructura Programa
+
+~~~
+LFP_S2_2023_Proyecto1_201906795
+├── Analizador
+│   └── analizador.py
+├── AnalizadorLexico
+│   └── analizadorLexico.py
+├── AnalizadorSintactico
+│   └── analizadorSintactico.py
+├── Funciones
+│   └── funciones.py
+└── Tk_ventana.py
+~~~
