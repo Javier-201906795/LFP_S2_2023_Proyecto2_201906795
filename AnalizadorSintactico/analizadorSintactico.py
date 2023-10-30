@@ -607,6 +607,16 @@ def Gramaticatokenm(c):
             if listatokens[c+2][1] == 'x':
                 if listatokens[c+3][1] == '(':
                     c = GramaticaEspecialtextoentreparentesisycomillas(c+3,'maximo')
+                    #Arbol
+                    nodoarbol = Arbol.agregarnodo('m')
+                    nodo1 = Arbol.agregarnodo('max')
+                    nodo2 = Arbol.agregarnodo('(')
+                    nodo3 = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-1][1]))
+                    nodo4 = Arbol.agregarnodo(')')
+                    Arbol.conectarnodo(nodoarbol,nodo1)
+                    Arbol.conectarnodo(nodoarbol,nodo2)
+                    Arbol.conectarnodo(nodoarbol,nodo3)
+                    Arbol.conectarnodo(nodoarbol,nodo4)
                 else:
                     c = fininstruccion(c+3,'(')
             else:
@@ -641,7 +651,7 @@ def Gramaticatokenp(c):
                                         nodoarbol = Arbol.agregarnodo('p')
                                         nodo1 = Arbol.agregarnodo('promedio')
                                         nodo2 = Arbol.agregarnodo('(')
-                                        nodo3 = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-2][0]))
+                                        nodo3 = Arbol.agregarnodo(str(listaSintactico[len(listaSintactico)-1][1]))
                                         nodo4 = Arbol.agregarnodo(')')
                                         Arbol.conectarnodo(nodoarbol,nodo1)
                                         Arbol.conectarnodo(nodoarbol,nodo2)
