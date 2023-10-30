@@ -141,3 +141,70 @@ LFP_S2_2023_Proyecto1_201906795
 │   └── funciones.py
 └── Tk_ventana.py
 ~~~
+
+
+## Tk_ventana.py
+
+Interfaz grafica
+
+![ventana](/1_Arbol_JFLAP/paso03.PNG)
+
+Crear Archivos HTML
+
+![ventana](/1_Arbol_JFLAP/paso13.PNG)
+![ventana](/1_Arbol_JFLAP/paso15.PNG)
+
+---
+
+## analizador.py
+
+![ventana](/1_Arbol_JFLAP/codigo01.PNG)
+
+### A) Obtiene el listado de token de analizadorLexico.py
+### B) Pasa los token al analizadorSintactico.py y obtiene informacin de gramaticas
+### C) Ejecuta las instruccione en funciones.py
+### D) Retorna la informacion Filtras a TK_ventana.py para mostrar en consola
+
+---
+
+## analizadorLexico.py
+
+la siguiente funcion recive el texto y lo separa por caracteres
+<br>
+def evaluartexto(texto)
+<br>
+el cual busca en los siguientes listado similitudes y los alamcena
+<br>
+listadocaracteresbuscados = ['{','}',':','[',']',',','(',')',';','=','"',"'",'#','_','-','.']
+<br>
+listaabecedario = ['A','a','B','b','C','c','D','d','E','e','F','f','G','g','H','h','I','i','J','j','K','k','L','l','M','m','N','n','O','o','P','p','Q','q','R','r','S','s','T','t','U','u','V','v','W','w','X','x','Y','y','Z','z','Ñ','ñ']
+<br>
+y numeros
+<br>
+
+---
+
+## analizadorSintactico.py
+
+evalua cada token y si esta en los buscaos activa una gramatica para ver si esta en el lenguaje formal a obtener
+
+![ventana](/1_Arbol_JFLAP/Arbol_1_Central.PNG)
+
+<br>
+
+![ventana](/1_Arbol_JFLAP/codigo02.PNG)
+![ventana](/1_Arbol_JFLAP/codigo03.PNG)
+
+---
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+ejemplo de gramatica
+
+![ventana](/1_Arbol_JFLAP/codigo04.PNG)
+
+<br><br><br><br><br><br><br><br>
+
+## funciones.py
+dependiendo la instruccion activaba la funcion  y devolvia un texto que se agregaba a la consola a Tk_ventan.py
+
+![ventana](/1_Arbol_JFLAP/codigo05.PNG)
