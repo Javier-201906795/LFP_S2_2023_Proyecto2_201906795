@@ -4,7 +4,7 @@ from tkinter import filedialog, messagebox
 
 from Analizador import *
 from AnalizadorLexico import *
-
+from AnalizadorSintactico import *
 
 
 
@@ -54,6 +54,23 @@ def Analizar():
     #Bloquear consola
     inputconsola.config(state=DISABLED)
 
+########################################################################
+def ReporteErrores():
+    try:
+        print('Report Errores')
+        #Obtiene listas errores
+        ErroresLexicos = analizadorLexico.GetErrores()
+        ErroresSintactico = analizadorSintactico.GetErrores()
+
+        print(ErroresLexicos)
+        print(ErroresSintactico)
+        #Crea archivo HTML
+
+
+        #Mensaje
+    except Exception as e:
+        print('Error ', e)
+
 
 ########################################################################
 raiz = Tk()
@@ -74,7 +91,10 @@ def seleccion(event):
     print('Seleccionando ->', listaopciones.get())
     sel = listaopciones.get()
     if sel == 'Errores':
-        print('Errores')
+        try:
+            ReporteErrores()
+        except:
+            print('Error al crear reporte errores')
     elif sel == 'Tokens':
         print('Tokens')
     elif sel == 'Arbol':

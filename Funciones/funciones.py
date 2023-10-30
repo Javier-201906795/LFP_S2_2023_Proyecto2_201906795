@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import messagebox as MessageBox
 
-
+from AnalizadorLexico import *
+from AnalizadorSintactico import *
 
 
 listainstrucciones = []
@@ -555,5 +556,12 @@ def ejecutar(oldlistainstrucciones):
     #Evaluar
     evaluarinstrucciones()
 
+    
+
 
     return txtresultado
+
+################################################################
+
+
+
