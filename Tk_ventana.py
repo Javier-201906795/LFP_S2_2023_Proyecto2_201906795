@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter import filedialog, messagebox
+from tkinter import messagebox as MessageBox
 
 from Analizador import *
 from AnalizadorLexico import *
@@ -62,8 +63,18 @@ def ReporteErrores():
         ErroresLexicos = analizadorLexico.GetErrores()
         ErroresSintactico = analizadorSintactico.GetErrores()
 
-        print(ErroresLexicos)
-        print(ErroresSintactico)
+        
+        
+
+        #Validar
+        if len(ErroresLexicos) <= 0 and len(ErroresSintactico) <= 0:
+            #No hay Errores
+            MessageBox.showinfo('Error | Reporte Errores','No hay errores que mostrar.')
+        else:
+            print('--- [Errores Lexicos] ---')
+            print(ErroresLexicos)
+            print('--- [Errores Sintacticos] ---')
+            print(ErroresSintactico)
         #Crea archivo HTML
 
 
