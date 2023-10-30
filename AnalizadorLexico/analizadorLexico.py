@@ -247,3 +247,7 @@ def GetTokens(texto):
     enumerartokens()
     
     return tokens
+
+################################################################
+def GetTokensFinal():
+    return tokens

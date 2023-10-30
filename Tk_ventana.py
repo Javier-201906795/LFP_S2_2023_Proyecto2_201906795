@@ -89,6 +89,115 @@ def ReporteErrores():
     except Exception as e:
         print('Error ', e)
 
+########################################################################
+def ReporteTokens():
+    try:
+        print('Report Tokens')
+        #Obtiene listas errores
+        Tokens = analizadorLexico.GetTokensFinal()
+
+        
+        #Validar
+        if len(Tokens) <= 0:
+            #No hay Errores
+            MessageBox.showinfo('Error | Reporte Errores','No hay errores que mostrar.')
+        else:
+            print('--- [Tokens] ---')
+            print('Tokens: ',len(Tokens))
+
+            #Crea archivo HTML
+            txthtml = crearTextoHTMLTokens('Reporte Tokens',['No.','--','Token','Fila I.','Columna I.','---.','Tipo de Token'],Tokens)
+            #Crear Archivo HTML
+            ruta = 'Reporte_Tokens_201906795.html'
+            archivo = open(ruta,'w')
+            archivo.write(txthtml)
+            archivo.close()
+
+            print('Reporte creado exitosamente...\nReporte_Tokens_201906795.html')
+            MessageBox.showinfo('Reporte','Reporte creado exitosamente...\nReporte_Tokens_201906795.html')
+
+
+        #Mensaje
+    except Exception as e:
+        print('Error ', e)
+
+################################################################
+def crearTextoHTMLTokens(nombre,Titulos,Registros):
+    
+    txthtml = ''
+
+    #Inicio
+    txthtml = '''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Proyecto 2</title>
+</head>
+<body>
+<div class="container">
+    <h1>'''+str(nombre)+'''</h1>
+    <h5>Javier Yllescas - 201906795</h5>
+    <br>
+</div>
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>'''
+
+    #/////////////////////////////////////////////////////////////////////
+    #----------------------------------------------------------------
+    #Titulo Tabla [ CLAVES ]
+    for titulo in Titulos:
+        txthtml += '''                <th scope="col">'''+str(titulo)+'''</th>'''
+
+    txthtml += '''</tr>
+        </thead>'''
+    #----------------------------------------------------------------
+    #Filas Tabla
+    txthtml += '''<tbody>'''
+
+    contadorerrores = 0
+
+    if len(Registros) > 0:
+        for i in range(0,len(Registros)):
+            txthtml += '''<tr>'''
+            registro = Registros[i]
+            contador = 0
+            for c in range(0,len(registro)+2):
+                
+                if contador == 0:
+                    txthtml += '''<th scope="row">'''+str(contadorerrores)+'''</th>'''    
+                elif contador > 1 and contador < len(registro):
+                    txthtml += '''<th scope="row">'''+str(registro[contador-1])+'''</th>'''
+                elif contador == 6:
+                    txthtml += '''<th scope="row">'''+str(registro[len(registro)-1])+'''</th>'''
+                else:
+                    txthtml += '''<th scope="row">'''+str('--')+'''</th>'''
+                contador += 1
+
+            contadorerrores += 1
+
+
+            txthtml += '''</tr>'''
+
+    txthtml += '''</tbody>
+    </table>
+</div>
+<br><br><br>'''
+    #----------------------------------------------------------------
+    #/////////////////////////////////////////////////////////////////////
+
+
+    
+  
+
+    #Final
+    txthtml += '''</body>
+</html>'''
+    return txthtml
+
 
 ################################################################
 def crearTextoHTML(nombre,Titulos,Registros,Titulos2,Registros2):
@@ -236,7 +345,10 @@ def seleccion(event):
         except:
             print('Error al crear reporte errores')
     elif sel == 'Tokens':
-        print('Tokens')
+        try:
+            ReporteTokens()
+        except:
+            print('Error al crear reporte Tokens')
     elif sel == 'Arbol':
         print('Arbol')
     elif sel == 'Salir':
