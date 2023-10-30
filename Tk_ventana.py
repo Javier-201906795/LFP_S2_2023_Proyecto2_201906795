@@ -7,7 +7,21 @@ from Analizador import *
 from AnalizadorLexico import *
 from AnalizadorSintactico import *
 
+from Grafica import *
 
+################################################################
+def GraficaArbol():
+    print('Arbol')
+    configuraciones = {'texto':'Operaciones', 'fondo':'white','fuente':'blue', 'forma':'circle'}
+    Arbol.configuraciones(configuraciones)
+    nodo1 = Arbol.agregarnodo('1')
+    nodo2 = Arbol.agregarnodo('1')
+
+    Arbol.conectarnodo(nodo1,nodo2)
+    Arbol.render()
+
+    
+    
 
 
 ########################################################################
@@ -54,6 +68,10 @@ def Analizar():
     inputconsola.insert('1.0', str(txtconsola))
     #Bloquear consola
     inputconsola.config(state=DISABLED)
+
+    #Crear Arbol
+    Arbol.generagraficaarbol()
+    Arbol.reiniciarvalores()
 
 ########################################################################
 def ReporteErrores():
@@ -350,7 +368,11 @@ def seleccion(event):
         except:
             print('Error al crear reporte Tokens')
     elif sel == 'Arbol':
-        print('Arbol')
+        try:
+            GraficaArbol()
+        except:
+            print('Error al crear grafica')
+        
     elif sel == 'Salir':
         print('Salir')
 #Ejecuta la opcion cuando cambia de seleccion
