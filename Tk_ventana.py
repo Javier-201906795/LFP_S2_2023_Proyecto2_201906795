@@ -74,7 +74,7 @@ def ReporteErrores():
             print('--- [Errores Sintacticos] ---')
             print(ErroresSintactico)
             #Crea archivo HTML
-            txthtml = crearTextoHTML('Reporte Errores',['No.','Token','Fila I.','Columna I.','Fila F.','Columna F.','Tipo de Error'],ErroresLexicos)
+            txthtml = crearTextoHTML('Reporte Errores',['No.','Token','Fila I.','Columna I.','Fila F.','Columna F.','Tipo de Error'],ErroresLexicos, ['No.','Token Err.','Token Espe.','Fila I.','Columna I.','Tipo de Error','Fila F.','Columan F.'], ErroresSintactico)
             #Crear Archivo HTML
             ruta = 'Reporte_Errores_201906795.html'
             archivo = open(ruta,'w')
@@ -82,6 +82,7 @@ def ReporteErrores():
             archivo.close()
 
             print('Reporte creado exitosamente...\nReporte_Errores_201906795.html')
+            MessageBox.showinfo('Reporte','Reporte creado exitosamente...\nReporte_Errores_201906795.html')
 
 
         #Mensaje
@@ -90,7 +91,7 @@ def ReporteErrores():
 
 
 ################################################################
-def crearTextoHTML(nombre,Titulos,Registros):
+def crearTextoHTML(nombre,Titulos,Registros,Titulos2,Registros2):
     
     txthtml = ''
 
@@ -114,6 +115,7 @@ def crearTextoHTML(nombre,Titulos,Registros):
         <thead class="thead-dark">
         <tr>'''
 
+    #/////////////////////////////////////////////////////////////////////
     #----------------------------------------------------------------
     #Titulo Tabla [ CLAVES ]
     for titulo in Titulos:
@@ -122,61 +124,87 @@ def crearTextoHTML(nombre,Titulos,Registros):
     txthtml += '''</tr>
         </thead>'''
     #----------------------------------------------------------------
-
-
-    #----------------------------------------------------------------
     #Filas Tabla
     txthtml += '''<tbody>'''
 
     contadorerrores = 0
-    for i in range(0,len(Registros)):
-        txthtml += '''<tr>'''
-        registro = Registros[i]
-        contador = 0
-        for c in range(0,len(registro)+3):
-            
-            if contador == 0:
-                txthtml += '''<th scope="row">'''+str(contadorerrores)+'''</th>'''    
-            elif contador > 0 and contador < len(registro):
-                txthtml += '''<th scope="row">'''+str(registro[contador-1])+'''</th>'''
-            elif contador == 6:
-                txthtml += '''<th scope="row">'''+str(registro[len(registro)-1])+'''</th>'''
-            else:
-                txthtml += '''<th scope="row">'''+str('--')+'''</th>'''
-            contador += 1
-            
-        contadorerrores += 1
+
+    if len(Registros) > 0:
+        for i in range(0,len(Registros)):
+            txthtml += '''<tr>'''
+            registro = Registros[i]
+            contador = 0
+            for c in range(0,len(registro)+3):
+                
+                if contador == 0:
+                    txthtml += '''<th scope="row">'''+str(contadorerrores)+'''</th>'''    
+                elif contador > 0 and contador < len(registro):
+                    txthtml += '''<th scope="row">'''+str(registro[contador-1])+'''</th>'''
+                elif contador == 6:
+                    txthtml += '''<th scope="row">'''+str(registro[len(registro)-1])+'''</th>'''
+                else:
+                    txthtml += '''<th scope="row">'''+str('--')+'''</th>'''
+                contador += 1
+
+            contadorerrores += 1
 
 
-        txthtml += '''</tr>'''
-
-    # for registro in Registros:
-    #     txthtml += '''<tr>'''
-    #     for valor in registro:
-    #         txthtml += '''<th scope="row">'''+str(valor)+'''</th>'''
-    #     txthtml += '''</tr>'''
+            txthtml += '''</tr>'''
 
     txthtml += '''</tbody>
     </table>
 </div>
-<br>'''
+<br><br><br>'''
     #----------------------------------------------------------------
+    #/////////////////////////////////////////////////////////////////////
 
 
-    # #----------------------------------------------------------------
-    # #Funciones
-    # txthtml += '''<div class="container">'''
+    #/////////////////////////////////////////////////////////////////////
+    if len(Registros2) > 0:
+        txthtml += '''<table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>'''
+        #----------------------------------------------------------------
+        #Titulo Tabla [ CLAVES ]
+        for titulo in Titulos2:
+            txthtml += '''                <th scope="col">'''+str(titulo)+'''</th>'''
 
-    # for accion in listaAcciones:
-    #     txthtml += '''<div class="row">
-    #         <div class="alert alert-secondary col" role="alert">
-    #             '''+str(accion)+'''
-    #         </div>
-    #     </div>'''
+        txthtml += '''</tr>
+            </thead>'''
+        #----------------------------------------------------------------
+        #Filas Tabla
+        txthtml += '''<tbody>'''
 
-    # txthtml += '''</div>'''
+        contadorerrores = 0
 
-    #----------------------------------------------------------------
+        
+        for i in range(0,len(Registros2)):
+            txthtml += '''<tr>'''
+            registro = Registros2[i]
+            contador = 0
+            for c in range(0,len(registro)+1):
+                
+                if contador == 0:
+                    txthtml += '''<th scope="row">'''+str(contadorerrores)+'''</th>'''    
+                elif contador > 0 and contador < len(registro)+1:
+                    txthtml += '''<th scope="row">'''+str(registro[contador-1])+'''</th>'''
+                else:
+                    txthtml += '''<th scope="row">'''+str('--')+'''</th>'''
+                contador += 1
+
+            contadorerrores += 1
+
+
+            txthtml += '''</tr>'''
+
+        
+
+        txthtml += '''</tbody>
+        </table>
+    </div>
+    <br><br><br>'''
+    #/////////////////////////////////////////////////////////////////////
+  
 
     #Final
     txthtml += '''</body>
